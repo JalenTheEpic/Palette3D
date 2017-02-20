@@ -30,7 +30,9 @@ namespace Palette3D
 
 	Matrix3 Matrix3::operator-(const Matrix3 & other) const
 	{
-		return Matrix3( *this + (-other) );
+		return Matrix3( mMat[0][0] - other.mMat[0][0], mMat[0][1] - other.mMat[0][1], mMat[0][2] - other.mMat[0][2],
+						mMat[1][0] - other.mMat[1][0], mMat[1][1] - other.mMat[1][1], mMat[1][2] - other.mMat[1][2],
+						mMat[2][0] - other.mMat[2][0], mMat[2][1] - other.mMat[2][1], mMat[2][2] - other.mMat[2][2]);
 	}
 
 	Matrix3 Matrix3::operator*(const Matrix3 & o) const
