@@ -11,13 +11,16 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 
 namespace Palette3D 
 {
+	//Here so we can friend Matrix 4
+	class Matrix4;
+
 	class Matrix3
 	{
 	private:
 		float mMatrix[3][3]; //[row] [col]
 
 	public:
-		Matrix3();
+		Matrix3() {}
 
 		Matrix3(float m[3][3])
 		{
@@ -57,10 +60,20 @@ namespace Palette3D
 			delete[] mMatrix;
 		}
 
+		inline const float * operator[] (size_t row) const 
+		{
+			return mMatrix[row];
+		}
+
+		inline  float * operator[] (size_t row) 
+		{
+			return mMatrix[row];
+		}
+
 
 		
 
-
+		friend Matrix4;
 
 	};
 
