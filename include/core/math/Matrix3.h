@@ -3,16 +3,11 @@
 
 namespace Palette3D 
 {
-	class Vec3
+	class Matrix3
 	{
 	public:
-		float mX;
-		float mY;
-		float mZ;
-
-	public:
-		Vec3();
-		~Vec3();
+		Matrix3();
+		~Matrix3();
 
 	};
 
