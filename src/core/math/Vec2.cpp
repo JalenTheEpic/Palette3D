@@ -15,22 +15,20 @@ Palette3D::Vec2::~Vec2()
 
 Palette3D::Vec2 Palette3D::Vec2::operator+(const Vec2& rhs)
 {
-	mX = mX + rhs.mX;
-	mY = mY + rhs.mY;
+	return Vec2(mX + rhs.mX, mY + rhs.mY);
 }
 
 
 Palette3D::Vec2 Palette3D::Vec2::operator-(const Vec2& rhs)
 {
-	mX = mX - rhs.mX;
-	mY = mY - rhs.mY;
+	return Vec2( mX - rhs.mX, mY - rhs.mY);
 }
 
 
 Palette3D::Vec2 Palette3D::Vec2::operator*(const float& rhs)
 {
-	mX = mX * rhs;
-	mY = mY * rhs;
+	return Vec2(mX * rhs, mY * rhs);
+
 }
 
 Palette3D::Vec2 Palette3D::Vec2::cross(const Vec2 & other)
@@ -45,5 +43,5 @@ float Palette3D::Vec2::dot(const Vec2 & other)
 
 float Palette3D::Vec2::magnitude()
 {
-	return sqrt(powf(mX, 2) + powf(mY, 2));;
+	return static_cast<float>(sqrt(powf(mX, 2) + powf(mY, 2)));
 }

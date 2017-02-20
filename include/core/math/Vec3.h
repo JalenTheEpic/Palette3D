@@ -13,8 +13,8 @@ namespace Palette3D
 
 		/// Constructor and Destructor.
 	public:
-		Vec3(const float x = 0.0f, const float y = 0.0f, const float z = 0.0f);
-		~Vec3();
+		Vec3(const float x = 0.0f, const float y = 0.0f, const float z = 0.0f) :mX(x), mY(y) , mZ(z) {}
+		~Vec3() {}
 
 		/// Operator functions.
 	public:

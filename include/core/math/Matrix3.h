@@ -58,7 +58,7 @@ namespace Palette3D
 		
 		~Matrix3()
 		{
-			delete[] mMat;
+			//delete[] mMat;
 		}
 
 		inline const float * operator[] (size_t row) const 
