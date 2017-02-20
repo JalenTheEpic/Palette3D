@@ -139,6 +139,7 @@
     <ClInclude Include="..\..\include\core\math\Vec4.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\core\math\Matrix3.cpp" />
     <ClCompile Include="..\..\src\core\math\Vec2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
