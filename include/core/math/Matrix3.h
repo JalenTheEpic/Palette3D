@@ -1,5 +1,5 @@
 /*
-Palette3d
+Palette3D
 Copyright (c) 2017 Jalen Cureton, William Buell
 Licensed under the terms of the MIT License (see LICENSE.txt)
 */
@@ -86,6 +86,7 @@ namespace Palette3D
 		Vec3 operator* (const Vec3& other) const;
 
 		//need to make !=
+		bool operator!= (const Matrix3& other) const;
 		bool operator== (const Matrix3& other) const;
 
 		Matrix3 transpose() const;
