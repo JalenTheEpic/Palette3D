@@ -110,7 +110,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\core\math\p_vec3.h" />
+    <ClInclude Include="..\..\include\core\math\Matrix3.h" />
+    <ClInclude Include="..\..\include\core\math\vec2.h" />
+    <ClInclude Include="..\..\include\core\math\vec3.h" />
+    <ClInclude Include="..\..\include\core\math\vec4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
