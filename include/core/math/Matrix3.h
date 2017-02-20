@@ -80,10 +80,12 @@ namespace Palette3D
 
 		Matrix3 operator+ (const Matrix3& other) const;
 		Matrix3 operator- (const Matrix3& other) const;
+		//need to add scalar multiplication
 		Matrix3 operator* (const Matrix3& other) const;
 		Matrix3 operator- () const; //unary. can negate matrix 
 		Vec3 operator* (const Vec3& other) const;
 
+		//need to make !=
 		bool operator== (const Matrix3& other) const;
 
 		Matrix3 transpose() const;
