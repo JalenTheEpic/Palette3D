@@ -71,18 +71,25 @@ namespace Palette3D
 			return mMat[row];
 		}
 
-		inline Matrix3 & operator= (const Matrix3& other)
+		inline void operator= (const Matrix3& other) 
 		{
 			memcpy(mMat, other.mMat, 9*sizeof(float));
-			return *this;
-
 		}
 
 		Matrix3 operator+ (const Matrix3& other) const;
+		void operator+= (const Matrix3& other);
+
 		Matrix3 operator- (const Matrix3& other) const;
-		//need to add scalar multiplication
+		void operator-= (const Matrix3& other) ;
+
+		Matrix3 operator* (float scalar) const;
+		void operator*= (float scalar) ;
 		Matrix3 operator* (const Matrix3& other) const;
+		void operator*= (const Matrix3& other) ;
+
 		Matrix3 operator- () const; //unary. can negate matrix 
+
+
 		Vec3 operator* (const Vec3& other) const;
 
 		//need to make !=

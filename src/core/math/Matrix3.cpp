@@ -27,6 +27,11 @@ namespace Palette3D
 						mMat[2][0] + other.mMat[2][0], mMat[2][1] + other.mMat[2][1], mMat[2][2] + other.mMat[2][2]);
 	}
 
+	void Matrix3::operator+=(const Matrix3 & other) 
+	{
+		*this = *this + other;
+	}
+
 
 	Matrix3 Matrix3::operator-(const Matrix3 & other) const
 	{
@@ -34,6 +39,15 @@ namespace Palette3D
 						mMat[1][0] - other.mMat[1][0], mMat[1][1] - other.mMat[1][1], mMat[1][2] - other.mMat[1][2],
 						mMat[2][0] - other.mMat[2][0], mMat[2][1] - other.mMat[2][1], mMat[2][2] - other.mMat[2][2]);
 	}
+
+
+	Matrix3 Matrix3::operator*(float scalar) const
+	{
+		return Matrix3( mMat[0][0] * scalar, mMat[0][1] * scalar, mMat[0][2] * scalar,
+						mMat[1][0] * scalar, mMat[1][1] * scalar, mMat[1][2] * scalar,
+						mMat[2][0] * scalar, mMat[2][1] * scalar, mMat[2][2] * scalar);
+	}
+
 
 	Matrix3 Matrix3::operator*(const Matrix3 & o) const
 	{
@@ -60,10 +74,20 @@ namespace Palette3D
 
 	Vec3 Matrix3::operator*(const Vec3 & other) const
 	{
-		//not implemented
-		return Vec3();
+		Vec3 v;
+		v.mX = mMat[0][0] * v.mX + mMat[0][1] * v.mY + mMat[0][2] * v.mZ;
+		v.mY = mMat[1][0] * v.mX + mMat[1][1] * v.mY + mMat[1][2] * v.mZ;
+		v.mZ = mMat[2][0] * v.mX + mMat[2][1] * v.mY + mMat[2][2] * v.mZ;
+
+		return v;
+
 	}
 
+
+	bool Matrix3::operator!=(const Matrix3 & other) const
+	{
+		return !(*this == other);
+	}
 
 	bool Matrix3::operator==(const Matrix3 & other) const
 	{
