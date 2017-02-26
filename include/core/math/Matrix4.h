@@ -10,13 +10,11 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #include <iostream>
 #include <core/math/Vec3.h>
 #include <core/math/Vec4.h>
-#include <core\math\Matrix4.h>
+
 
 namespace Palette3D
 {
-	//Here so we can friend Matrix 4
 	
-
 	class Matrix4
 	{
 	private:
@@ -101,31 +99,7 @@ namespace Palette3D
 
 		}
 
-		Matrix4 operator+ (const Matrix4& other) const;
-		Matrix4 operator- (const Matrix4& other) const;
-		//need to add scalar multiplication
-		Matrix4 operator* (const Matrix4& other) const;
-		Matrix4 operator- () const; //unary. can negate matrix 
-		Vec4 operator* (const Vec4& other) const;
-
-		//need to make !=
-		bool operator!= (const Matrix4& other) const;
-		bool operator== (const Matrix4& other) const;
-
-		Matrix4 transpose() const;
-		float determinant() const;
-
-		Vec4 getRow(std::size_t row) const;
-		void setRow(std::size_t row, Vec4 v);
-
-		Vec4 getCol(std::size_t col) const;
-		void setCol(std::size_t col, explicit Vec4 v);
-
-
-		friend std::ostream& operator<< (std::ostream& os, const Matrix4& m);
-
-
-		friend Matrix4;
+		
 
 	public:
 		static const Matrix4 ZERO;

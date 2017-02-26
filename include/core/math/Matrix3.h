@@ -17,7 +17,7 @@ namespace Palette3D
 
 	class Matrix3
 	{
-	private:
+	protected:
 		float mMat[3][3]; //[row] [col]
 
 	public:
@@ -92,7 +92,7 @@ namespace Palette3D
 
 		Vec3 operator* (const Vec3& other) const;
 
-		//need to make !=
+		
 		bool operator!= (const Matrix3& other) const;
 		bool operator== (const Matrix3& other) const;
 

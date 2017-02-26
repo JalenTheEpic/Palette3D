@@ -40,12 +40,22 @@ namespace Palette3D
 						mMat[2][0] - other.mMat[2][0], mMat[2][1] - other.mMat[2][1], mMat[2][2] - other.mMat[2][2]);
 	}
 
+	void Matrix3::operator-=(const Matrix3 & other)
+	{
+		*this = *this - other;
+	}
+
 
 	Matrix3 Matrix3::operator*(float scalar) const
 	{
 		return Matrix3( mMat[0][0] * scalar, mMat[0][1] * scalar, mMat[0][2] * scalar,
 						mMat[1][0] * scalar, mMat[1][1] * scalar, mMat[1][2] * scalar,
 						mMat[2][0] * scalar, mMat[2][1] * scalar, mMat[2][2] * scalar);
+	}
+
+	void Matrix3::operator*=(float scalar)
+	{
+		*this = *this * scalar;
 	}
 
 
@@ -61,6 +71,11 @@ namespace Palette3D
 			}
 		}
 		return Matrix3(tmp);
+	}
+
+	void Matrix3::operator*=(const Matrix3 & other)
+	{
+		*this = *this * other;
 	}
 
 
