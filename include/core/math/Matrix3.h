@@ -28,18 +28,7 @@ namespace Palette3D
 			memcpy(mMat, m, 9 * sizeof(float));
 		}
 
-		inline void swap(Matrix3& other)
-		{
-			std::swap(mMat[0][0], other.mMat[0][0]);
-			std::swap(mMat[0][1], other.mMat[0][1]);
-			std::swap(mMat[0][2], other.mMat[0][2]);
-			std::swap(mMat[1][0], other.mMat[1][0]);
-			std::swap(mMat[1][1], other.mMat[1][1]);
-			std::swap(mMat[1][2], other.mMat[1][2]);
-			std::swap(mMat[2][0], other.mMat[2][0]);
-			std::swap(mMat[2][1], other.mMat[2][1]);
-			std::swap(mMat[2][2], other.mMat[2][2]);
-		}
+		
 
 		Matrix3(float e00, float e01, float e02,
 				float e10, float e11, float e12,
@@ -87,7 +76,7 @@ namespace Palette3D
 		Matrix3 operator* (const Matrix3& other) const;
 		void operator*= (const Matrix3& other) ;
 
-		Matrix3 operator- () const; //unary. can negate matrix 
+		Matrix3 operator- () const;
 
 
 		Vec3 operator* (const Vec3& other) const;

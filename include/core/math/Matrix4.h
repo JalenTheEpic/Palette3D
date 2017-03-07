@@ -11,6 +11,7 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #include <core/math/Vec3.h>
 #include <core/math/Vec4.h>
 
+//TODO: Add matrix 3 stuff
 
 namespace Palette3D
 {
@@ -26,29 +27,6 @@ namespace Palette3D
 		Matrix4(float m[4][4])
 		{
 			memcpy(mMat, m, 16 * sizeof(float));
-		}
-
-		inline void swap(Matrix4& other)
-		{
-			std::swap(mMat[0][0], other.mMat[0][0]);
-			std::swap(mMat[0][1], other.mMat[0][1]);
-			std::swap(mMat[0][2], other.mMat[0][2]);
-			std::swap(mMat[0][3], other.mMat[0][3]);
-
-			std::swap(mMat[1][0], other.mMat[1][0]);
-			std::swap(mMat[1][1], other.mMat[1][1]);
-			std::swap(mMat[1][2], other.mMat[1][2]);
-			std::swap(mMat[1][3], other.mMat[1][3]);
-
-			std::swap(mMat[2][0], other.mMat[2][0]);
-			std::swap(mMat[2][1], other.mMat[2][1]);
-			std::swap(mMat[2][2], other.mMat[2][2]);
-			std::swap(mMat[2][3], other.mMat[2][3]);
-
-			std::swap(mMat[3][0], other.mMat[3][0]);
-			std::swap(mMat[3][1], other.mMat[3][1]);
-			std::swap(mMat[3][2], other.mMat[3][2]);
-			std::swap(mMat[3][3], other.mMat[3][3]);
 		}
 
 		Matrix4(float e00, float e01, float e02, float e03,
@@ -98,6 +76,40 @@ namespace Palette3D
 			return *this;
 
 		}
+
+
+
+		Matrix4 operator+ (const Matrix4& other) const;
+		void operator+= (const Matrix4& other);
+
+		Matrix4 operator- (const Matrix4& other) const;
+		void operator-= (const Matrix4& other);
+
+		Matrix4 operator* (float scalar) const;
+		void operator*= (float scalar);
+		Matrix4 operator* (const Matrix4& other) const;
+		void operator*= (const Matrix4& other);
+
+		Matrix4 operator- () const; //unary, negate matrix.
+
+
+		Vec4 operator* (const Vec4& other) const;
+
+
+		bool operator!= (const Matrix4& other) const;
+		bool operator== (const Matrix4& other) const;
+
+		Matrix4 transpose() const;
+		float determinant() const;
+
+		Vec4 getRow(std::size_t row) const;
+		void setRow(std::size_t row, Vec4 v);
+
+		Vec4 getCol(std::size_t col) const;
+		void setCol(std::size_t col, Vec4 v);
+
+
+		friend std::ostream& operator<< (std::ostream& os, const Matrix4& m);
 
 		
 
