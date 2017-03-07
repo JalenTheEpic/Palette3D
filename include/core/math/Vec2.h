@@ -15,23 +15,33 @@ namespace Palette3D
 	public:
 		float mX;
 		float mY;
-
+		
 		/// Constructor and Destructor.
 	public:
-		Vec2(const float x = 0.0f, const float y = 0.0f);
+		inline Vec2(const float x = 0.0f, const float y = 0.0f):mX(x), mY(y) {}
+		inline Vec2(const Vec2& rhs):mX(rhs.mX), mY(rhs.mY) {}
 		~Vec2();
 
 		/// Operator functions.
 	public:
-		Vec2 operator+(const Vec2& rhs);
-		Vec2 operator-(const Vec2& rhs);
-		Vec2 operator*(const float& rhs);
+		Vec2 operator+(const Vec2& rhs) const;
+		Vec2 operator-(const Vec2& rhs) const;
+		Vec2 operator*(const float& rhs) const;
+
+		Vec2 operator+=(const Vec2& rhs);
+		Vec2 operator-=(const Vec2& rhs);
+		Vec2 operator*=(const float& rhs);
+
+		Vec2 operator=(const Vec2& rhs);
 
 		/// Methods.
 	public:
-		Vec2 cross(const Vec2& other);
-		float dot(const Vec2& other);
-		float magnitude();
+		Vec2 cross(const Vec2& other) const;
+		float dot(const Vec2& other) const;
+		float magnitude() const;
+		float squaredMagnitude() const;
+		float distance(const Vec2& other) const;
+		float squaredDistance() const;
 	};
 
 }
