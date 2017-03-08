@@ -18,8 +18,8 @@ namespace Palette3D
 		float mW;
 
 	public:
-		Vec4();
-		~Vec4();
+		Vec4() {};
+		~Vec4() {};
 
 	};
 

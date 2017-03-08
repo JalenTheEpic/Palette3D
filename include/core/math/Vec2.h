@@ -11,6 +11,9 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 
 namespace Palette3D 
 {
+	class Vec3;
+
+
 	class Vec2
 	{
 		/// Member variables.

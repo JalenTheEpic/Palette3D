@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <core\math\Matrix3.h>
+#include <core\math\Vec2.h>
 int main()
 {
 	std::cout << "test" << std::endl;
@@ -14,7 +15,8 @@ int main()
 	
 	int i = 0;
 	m += m;
-	std::cout << m << std::endl;
+	Palette3D::Vec2 v(3.f,4.f);
+	std::cout << v << std::endl;
 
 	while (1)
 	{
