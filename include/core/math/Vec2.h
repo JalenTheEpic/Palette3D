@@ -25,6 +25,8 @@ namespace Palette3D
 	public:
 		inline Vec2(const float x = 0.0f, const float y = 0.0f):mX(x), mY(y) {}
 		inline Vec2(const Vec2& rhs):mX(rhs.mX), mY(rhs.mY) {}
+
+
 		~Vec2();
 
 		/// Operator functions.

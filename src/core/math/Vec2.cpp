@@ -38,11 +38,11 @@ namespace Palette3D
 
 	float Vec2::magnitude() const
 	{
-		return static_cast<float>(sqrt(powf(mX, 2) + powf(mY, 2)));
+		return static_cast<float>(sqrt(mX*mX + mY*mY));
 	}
 	float Vec2::squaredMagnitude() const
 	{
-		return static_cast<float>((powf(mX, 2) + powf(mY, 2)));
+		return mX*mX + mY*mY;
 	}
 	float Vec2::distance(const Vec2 & other) const
 	{

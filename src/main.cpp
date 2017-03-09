@@ -2,6 +2,7 @@
 #include <string>
 #include <core\math\Matrix3.h>
 #include <core\math\Vec2.h>
+#include <core\math\Vec3.h>
 int main()
 {
 	std::cout << "test" << std::endl;
@@ -10,14 +11,16 @@ int main()
 						 7, 8, 9);
 
 	Palette3D::Matrix3 m2(6, 24.5, 120,
-						 17, 42, 66,
-						 .3f, 0, 9);
+						  17, 42, 66,
+						  .3f, 0, 9);
 	
 	int i = 0;
 	m += m;
 	Palette3D::Vec2 v(3.f,4.f);
-	std::cout << v << std::endl;
 
+	Palette3D::Vec3 v2= Palette3D::Vec3(v);
+	
+	std::cout <<v2 << std::endl;
 	while (1)
 	{
 		;
