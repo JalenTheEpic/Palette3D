@@ -1,5 +1,5 @@
 /*
-Palette3d
+Palette3D
 Copyright (c) 2017 Jalen Cureton, William Buell
 Licensed under the terms of the MIT License (see LICENSE.txt)
 */
@@ -17,7 +17,7 @@ namespace Palette3D
 
 	class Matrix3
 	{
-	private:
+	protected:
 		float mMat[3][3]; //[row] [col]
 
 	public:
@@ -28,18 +28,7 @@ namespace Palette3D
 			memcpy(mMat, m, 9 * sizeof(float));
 		}
 
-		inline void swap(Matrix3& other)
-		{
-			std::swap(mMat[0][0], other.mMat[0][0]);
-			std::swap(mMat[0][1], other.mMat[0][1]);
-			std::swap(mMat[0][2], other.mMat[0][2]);
-			std::swap(mMat[1][0], other.mMat[1][0]);
-			std::swap(mMat[1][1], other.mMat[1][1]);
-			std::swap(mMat[1][2], other.mMat[1][2]);
-			std::swap(mMat[2][0], other.mMat[2][0]);
-			std::swap(mMat[2][1], other.mMat[2][1]);
-			std::swap(mMat[2][2], other.mMat[2][2]);
-		}
+		
 
 		Matrix3(float e00, float e01, float e02,
 				float e10, float e11, float e12,
@@ -71,21 +60,29 @@ namespace Palette3D
 			return mMat[row];
 		}
 
-		inline Matrix3 & operator= (const Matrix3& other)
+		inline void operator= (const Matrix3& other) 
 		{
 			memcpy(mMat, other.mMat, 9*sizeof(float));
-			return *this;
-
 		}
 
 		Matrix3 operator+ (const Matrix3& other) const;
+		void operator+= (const Matrix3& other);
+
 		Matrix3 operator- (const Matrix3& other) const;
-		//need to add scalar multiplication
+		void operator-= (const Matrix3& other) ;
+
+		Matrix3 operator* (float scalar) const;
+		void operator*= (float scalar) ;
 		Matrix3 operator* (const Matrix3& other) const;
-		Matrix3 operator- () const; //unary. can negate matrix 
+		void operator*= (const Matrix3& other) ;
+
+		Matrix3 operator- () const;
+
+
 		Vec3 operator* (const Vec3& other) const;
 
-		//need to make !=
+		
+		bool operator!= (const Matrix3& other) const;
 		bool operator== (const Matrix3& other) const;
 
 		Matrix3 transpose() const;
