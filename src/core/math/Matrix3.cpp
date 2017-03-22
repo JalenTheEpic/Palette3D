@@ -61,16 +61,16 @@ namespace Palette3D
 
 	Matrix3 Matrix3::operator*(const Matrix3 & o) const
 	{
-		//could use vector dot products but this is faster
-		float tmp[3][3];
+		//too lazy to write this out
+		Matrix3 tmp;
 		for (int i = 0; i<3;i++)
 		{
 			for (int j = 0; j<3; j++)
 			{
-				tmp[i][j] = mMat[i][0] * o.mMat[0][j] + mMat[i][1] * o.mMat[1][j] + mMat[i][2] * o.mMat[2][j];
+				tmp.mMat[i][j] = mMat[i][0] * o.mMat[0][j] + mMat[i][1] * o.mMat[1][j] + mMat[i][2] * o.mMat[2][j];
 			}
 		}
-		return Matrix3(tmp);
+		return tmp;
 	}
 
 	void Matrix3::operator*=(const Matrix3 & other)
