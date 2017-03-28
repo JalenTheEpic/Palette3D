@@ -19,6 +19,12 @@
     <Filter Include="Header Files\Core\Math">
       <UniqueIdentifier>{35158e45-832c-43f7-a439-b9fb15adf1da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{d2cb56ba-4ab4-42a8-8e65-09fa0b3b77bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Math">
+      <UniqueIdentifier>{8e297783-7424-4d6f-872e-c51a68096d33}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\core\math\Matrix3.h">
@@ -36,25 +42,31 @@
     <ClInclude Include="..\..\include\core\math\Matrix4.h">
       <Filter>Header Files\Core\Math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\core\Core.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\core\math\Math.h">
+      <Filter>Header Files\Core\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\core\math\Vec2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\math\Matrix3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\core\math\Matrix3.cpp">
+      <Filter>Source Files\Core\Math</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\core\math\Matrix4.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\math\Vec2.cpp">
+      <Filter>Source Files\Core\Math</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\core\math\Vec3.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Core\Math</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\core\math\Vec4.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Core\Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

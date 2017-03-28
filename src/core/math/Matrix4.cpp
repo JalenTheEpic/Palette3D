@@ -137,6 +137,8 @@ namespace Palette3D
 			
 
 	}
+
+
 	Vec4 Matrix4::getRow(std::size_t row) const
 	{
 		return Vec4();

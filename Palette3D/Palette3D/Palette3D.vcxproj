@@ -143,6 +143,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\core\Core.h" />
+    <ClInclude Include="..\..\include\core\math\Math.h" />
     <ClInclude Include="..\..\include\core\math\Matrix3.h" />
     <ClInclude Include="..\..\include\core\math\Matrix4.h" />
     <ClInclude Include="..\..\include\core\math\Vec2.h" />

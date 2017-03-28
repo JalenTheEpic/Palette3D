@@ -1,9 +1,6 @@
 #include <iostream>
 #include <string>
-#include <core\math\Matrix3.h>
-#include <core\math\Matrix4.h>
-#include <core\math\Vec2.h>
-#include <core\math\Vec3.h>
+#include <core\core.h>
 int main()
 {
 	std::cout << "test" << std::endl;
