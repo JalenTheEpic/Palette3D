@@ -25,6 +25,15 @@
     <Filter Include="Source Files\Core\Math">
       <UniqueIdentifier>{8e297783-7424-4d6f-872e-c51a68096d33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Render">
+      <UniqueIdentifier>{3e9f0075-519e-4e59-a9f1-b61dba282a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Templates">
+      <UniqueIdentifier>{692192b4-a6ac-48b4-900a-54de695eb03f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Render">
+      <UniqueIdentifier>{99b114cf-a231-481a-a439-692cce9c42af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\core\math\Matrix3.h">
@@ -47,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\core\math\Math.h">
       <Filter>Header Files\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Header Files\Templates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
