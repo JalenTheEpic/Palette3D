@@ -1,35 +1,34 @@
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
+
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#include <core\Core.h>
+
 #include <iostream>
-#include <string>
-#include <core\core.h>
-int main()
-{
-	std::cout << "test" << std::endl;
-	Palette3D::Matrix3 m(1, 2, 3, 
-						 4, 5, 6, 
-						 7, 8, 9);
 
-	Palette3D::Matrix3 m2(6, 24.5, 120,
-						  17, 42, 66,
-						  .3f, 0, 9);
+int main() {
+	glfwInit();
 
-	Palette3D::Matrix4 m4( 8,  11, 2,  8,
-						   0,  -7, 2, -1,
-						  -3,  -7, 2,  1,
-						   1,   1, 2,  4);
-	
-	int i = 0;
-	m += m;
-	Palette3D::Vec2 v(3.f,4.f);
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	GLFWwindow* window = glfwCreateWindow(800, 600, "Vulkan window", nullptr, nullptr);
 
-	Palette3D::Vec3 v2= Palette3D::Vec3(v);
-	
-	std::cout <<m4.determinant() << std::endl;
-	while (1)
-	{
-		;
+	uint32_t extensionCount = 0;
+	vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+
+	std::cout << extensionCount << " extensions supported" << std::endl;
+
+	Palette3D::Matrix4 matrix;
+	Palette3D::Vec4 vec;
+	auto test = matrix * vec;
+
+	while (!glfwWindowShouldClose(window)) {
+		glfwPollEvents();
 	}
 
+	glfwDestroyWindow(window);
+
+	glfwTerminate();
+
 	return 0;
-	
-	
 }
