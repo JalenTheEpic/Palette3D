@@ -9,10 +9,18 @@ namespace Palette3D
 {
 
 	enum class ExceptionType {
-		InvalidOperation, ArgumentException, ArgumentNull,
-		ArgumentOutOfRange, NullReference, IndexOutOfRange, AccessViolation,
-		StackOverflow, OutOfMemory, OutOfVRam, FileNotFound
-	};
+		InvalidOperation, 
+		ArgumentException, 
+		ArgumentNull,
+		ArgumentOutOfRange, 
+		NullReference, 
+		IndexOutOfRange,
+		AccessViolation,
+		StackOverflow, 
+		OutOfMemory, 
+		OutOfVRam, 
+		FileNotFound
+		};
 	/// A general purpose exception class to indicate ssurge-related errors
 	class Exception
 	{
