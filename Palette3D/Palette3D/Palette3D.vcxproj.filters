@@ -57,7 +57,7 @@
     <ClInclude Include="..\..\include\core\math\Math.h">
       <Filter>Header Files\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Singleton.h">
+    <ClInclude Include="..\..\include\templates\Singleton.h">
       <Filter>Header Files\Templates</Filter>
     </ClInclude>
   </ItemGroup>
