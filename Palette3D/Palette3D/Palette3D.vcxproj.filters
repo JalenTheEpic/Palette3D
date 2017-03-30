@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Core\Render">
       <UniqueIdentifier>{99b114cf-a231-481a-a439-692cce9c42af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Debug">
+      <UniqueIdentifier>{315228f5-11a9-46bb-8ba4-dbfa93c2c7f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\core\math\Matrix3.h">
@@ -59,6 +62,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\templates\Singleton.h">
       <Filter>Header Files\Templates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\debug\Exception.h">
+      <Filter>Header Files\Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

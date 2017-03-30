@@ -8,9 +8,9 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #ifndef _TEMPLATES_SINGLETON_H_
 #define _TEMPLATES_SINGLETON_H_
 
+#include <debug\Exception.h>
 
-
-namespace ssuge
+namespace Palette3D
 {
 	/// Any class that wished to be a Singleton should derive itself
 	/// from this class.  Warning: the derived class must provide a 
