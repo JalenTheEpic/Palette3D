@@ -3,29 +3,10 @@
 
 namespace Palette3D
 {
-	
-
-	Vec2::~Vec2()
+	std::ostream & operator<<(std::ostream & os, const Vec2 & v)
 	{
-
+		return os << "Vector2(" << v.mX << ", " << v.mY << ")" << std::endl;
 	}
-
-
-	void Vec2::operator+=(const Vec2 & rhs)
-	{
-		*this = *this + rhs;
-	}
-
-	void Vec2::operator-=(const Vec2 & rhs)
-	{
-		*this = *this - rhs;
-	}
-
-	void Vec2::operator*=(const float & rhs)
-	{
-		*this = *this * rhs;
-	}
-
 	Vec2 Vec2::cross(const Vec2 & other) const
 	{
 		return Vec2(mX * other.mY, mY * other.mX);
@@ -51,9 +32,5 @@ namespace Palette3D
 	float Vec2::squaredDistance(const Vec2& other) const
 	{
 		return static_cast<float>(powf(other.mX - mX, 2) + powf(other.mY - mY, 2));;
-	}
-	std::ostream & operator<<(std::ostream & os, const Vec2 & v)
-	{
-		return os << "Vector2(" << v.mX << ", " << v.mY <<")"<<std::endl;
 	}
 }
