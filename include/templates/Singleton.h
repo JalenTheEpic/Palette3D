@@ -8,7 +8,7 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #ifndef _TEMPLATES_SINGLETON_H_
 #define _TEMPLATES_SINGLETON_H_
 
-#include <debug\Exception.h>
+#include <debugging\Exception.h>
 
 namespace Palette3D
 {
@@ -30,7 +30,7 @@ namespace Palette3D
 		explicit Singleton()
 		{
 			if (msInstance != nullptr)
-				THROW_EXCEPTION("Singleton already exists!");
+				THROW_EXCEPTION("Singleton already exists!", ExceptionType::InvalidOperation);
 			msInstance = static_cast<T*>(this);
 		}
 
@@ -46,7 +46,7 @@ namespace Palette3D
 		static T * getInstance()
 		{
 			if (msInstance == nullptr)
-				THROW_EXCEPTION("Singleton does not exist!");
+				THROW_EXCEPTION("Singleton does not exist!", ExceptionType::NullReference);
 			return msInstance;
 		}
 
