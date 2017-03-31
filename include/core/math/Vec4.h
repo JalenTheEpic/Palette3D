@@ -11,9 +11,6 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 
 namespace Palette3D
 {
-	class Vec2;
-	class Vec3;
-
 	class Vec4
 	{
 		/// Member variables.
@@ -39,9 +36,12 @@ namespace Palette3D
 
 		inline void operator=(const Vec4& rhs) { mX = rhs.mX; mY = rhs.mY; mZ = rhs.mZ; mW = rhs.mW; }
 
-		void operator+=(const Vec4& rhs) { mX += rhs.mX; mY += rhs.mY; mZ += rhs.mZ; mW += rhs.mW; }
-		void operator-=(const Vec4& rhs) { mX -= rhs.mX; mY -= rhs.mY; mZ -= rhs.mZ; mW -= rhs.mW; }
-		void operator*=(const float& rhs) { mX *= rhs; mY *= rhs; mZ *= rhs; mW *= rhs; }
+		inline void operator+=(const Vec4& rhs) { mX += rhs.mX; mY += rhs.mY; mZ += rhs.mZ; mW += rhs.mW; }
+		inline void operator-=(const Vec4& rhs) { mX -= rhs.mX; mY -= rhs.mY; mZ -= rhs.mZ; mW -= rhs.mW; }
+		inline void operator*=(const float& rhs) { mX *= rhs; mY *= rhs; mZ *= rhs; mW *= rhs; }
+
+		inline float operator[](const int i) { if (i == 0) return mX; else if (i == 1) return mY; else if (i == 2) return mZ; else if (i == 3) return mW; else throw; }
+		inline Vec4 operator-() const { return Vec4(-mX, -mY, -mZ, -mW); }
 
 		friend std::ostream & operator<<(std::ostream & os, const Vec4 & v);
 
@@ -54,9 +54,8 @@ namespace Palette3D
 		float distance(const Vec4& other) const;
 		float squaredDistance(const Vec4& other) const;
 
-
-		friend Vec2;
-		friend Vec3;
+		inline Vec2 xy() { return Vec2(mX, mY); }
+		inline Vec3 xyz() { return Vec3(mX, mY, mZ); }
 	};
 
 }

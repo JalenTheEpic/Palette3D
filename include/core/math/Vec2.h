@@ -9,7 +9,6 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 
 #include <iostream>
 
-
 namespace Palette3D 
 {
 	class Vec2
@@ -36,6 +35,9 @@ namespace Palette3D
 		inline void operator+=(const Vec2& rhs) { mX += rhs.mX; mY += rhs.mY; }
 		inline void operator-=(const Vec2& rhs) { mX -= rhs.mX; mY -= rhs.mY; }
 		inline void operator*=(const float& rhs) { mX *= rhs; mY *= rhs; }
+
+		inline float operator[](const int i) const { if (i == 0) return mX; else if (i == 1) return mY; else throw; }
+		inline Vec2 operator-() const { return Vec2(-mX, -mY); }
 
 		friend std::ostream& operator<< (std::ostream& os, const Vec2& v);
 		/// Methods.

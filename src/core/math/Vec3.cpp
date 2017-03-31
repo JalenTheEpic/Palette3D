@@ -8,7 +8,7 @@ namespace Palette3D
 	}
 	Vec3 Vec3::cross(const Vec3 & other)
 	{
-		return Vec3();
+		return Vec3((mY*other.mZ - mZ*other.mY), (mZ*other.mX - mX*other.mZ), (mX*other.mY - mY*other.mX));
 	}
 	float Vec3::dot(const Vec3 & other)
 	{

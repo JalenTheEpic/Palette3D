@@ -32,9 +32,12 @@ namespace Palette3D
 
 		inline void operator=(const Vec3& rhs) { mX = rhs.mX; mY = rhs.mY; mZ = rhs.mZ; }
 
-		void operator+=(const Vec3& rhs) { mX += rhs.mX; mY += rhs.mY; mZ += rhs.mZ; }
-		void operator-=(const Vec3& rhs) { mX -= rhs.mX; mY -= rhs.mY; mZ -= rhs.mZ; }
-		void operator*=(const float& rhs) { mX *= rhs; mY *= rhs; mZ *= rhs; }
+		inline void operator+=(const Vec3& rhs) { mX += rhs.mX; mY += rhs.mY; mZ += rhs.mZ; }
+		inline void operator-=(const Vec3& rhs) { mX -= rhs.mX; mY -= rhs.mY; mZ -= rhs.mZ; }
+		inline void operator*=(const float& rhs) { mX *= rhs; mY *= rhs; mZ *= rhs; }
+
+		inline float operator[](const int i) { if (i == 0) return mX; else if (i == 1) return mY; else if (i == 2) return mZ; else throw; }
+		inline Vec3 operator-() const { return Vec3(-mX, -mY, -mZ); }
 
 		friend std::ostream & operator<<(std::ostream & os, const Vec3 & v);
 
@@ -47,7 +50,7 @@ namespace Palette3D
 		float distance(const Vec3& other) const;
 		float squaredDistance(const Vec3& other) const;
 
-		
+		inline Vec2 xy() { return Vec2(mX, mY); }
 	};
 
 }
