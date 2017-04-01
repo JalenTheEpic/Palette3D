@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\core\atomic\Types.h" />
     <ClInclude Include="..\..\include\core\Core.h" />
     <ClInclude Include="..\..\include\core\math\Math.h" />
     <ClInclude Include="..\..\include\core\math\Matrix3.h" />
@@ -162,6 +163,8 @@
     <ClInclude Include="..\..\include\core\math\Vec2.h" />
     <ClInclude Include="..\..\include\core\math\Vec3.h" />
     <ClInclude Include="..\..\include\core\math\Vec4.h" />
+    <ClInclude Include="..\..\include\core\render\RenderManager.h" />
+    <ClInclude Include="..\..\include\core\render\vkRenderSubsystem.h" />
     <ClInclude Include="..\..\include\debugging\Exception.h" />
     <ClInclude Include="..\..\include\templates\Singleton.h" />
   </ItemGroup>
@@ -171,6 +174,8 @@
     <ClCompile Include="..\..\src\core\math\Vec2.cpp" />
     <ClCompile Include="..\..\src\core\math\Vec3.cpp" />
     <ClCompile Include="..\..\src\core\math\Vec4.cpp" />
+    <ClCompile Include="..\..\src\core\render\RenderManager.cpp" />
+    <ClCompile Include="..\..\src\core\render\vkRenderSubsystem.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

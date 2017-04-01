@@ -37,6 +37,15 @@
     <Filter Include="Header Files\Debugging">
       <UniqueIdentifier>{315228f5-11a9-46bb-8ba4-dbfa93c2c7f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Memory">
+      <UniqueIdentifier>{80e784a6-9b14-4946-86ca-43804f734277}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Memory">
+      <UniqueIdentifier>{7d6add75-cf92-4eb8-b971-02da3bcbb91b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Atomic">
+      <UniqueIdentifier>{2a4c32c0-5477-4624-bc89-5b5b6254b7fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\core\math\Matrix3.h">
@@ -66,6 +75,15 @@
     <ClInclude Include="..\..\include\debugging\Exception.h">
       <Filter>Header Files\Debugging</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\core\render\RenderManager.h">
+      <Filter>Header Files\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\core\render\vkRenderSubsystem.h">
+      <Filter>Header Files\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\core\atomic\Types.h">
+      <Filter>Header Files\Core\Atomic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -85,6 +103,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\core\math\Vec4.cpp">
       <Filter>Source Files\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\render\RenderManager.cpp">
+      <Filter>Source Files\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\render\vkRenderSubsystem.cpp">
+      <Filter>Source Files\Core\Render</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
