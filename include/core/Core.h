@@ -8,5 +8,6 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #define _CORE_CORE_
 
 #include <core\math\Math.h>
+#include <core\render\Render.h>
 
 #endif

@@ -10,4 +10,10 @@ namespace Palette3D
 
 
 
+	void VkRenderSubSystem::initVulkan()
+	{
+
+
+	}
+
 }
