@@ -30,11 +30,6 @@ namespace Palette3D
 
 
 	
-	template<typename T>
-	class VkDeleter{
-
-	};
-
 }
 
 #endif // !_CORE_RENDER_VKRENDERSUBSYSTEM_

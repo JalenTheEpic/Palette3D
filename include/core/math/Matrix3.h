@@ -15,14 +15,21 @@ namespace Palette3D
 	//Here so we can friend Matrix 4
 	class Matrix4;
 
+	/// <summary> 
+	/// Class for Matrix 3.
+	/// </summary> 
 	class Matrix3
 	{
 	protected:
 		float mMat[3][3]; //[row] [col]
 
 	public:
+		///<summary>
+		///Default Consturctor for Matrix 3. Values are not initialized.
+		///</summary>
 		Matrix3() {}
 
+		/// <param name="m">2D float array with values to fill matrix</param> 
 		Matrix3(float m[3][3])
 		{
 			memcpy(mMat, m, 9 * sizeof(float));

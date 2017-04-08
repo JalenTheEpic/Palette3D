@@ -84,6 +84,12 @@
     <ClInclude Include="..\..\include\core\atomic\Types.h">
       <Filter>Header Files\Core\Atomic</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\core\render\glRenderSubsystem.h">
+      <Filter>Header Files\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\core\render\Render.h">
+      <Filter>Header Files\Core\Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -108,6 +114,9 @@
       <Filter>Source Files\Core\Render</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\core\render\vkRenderSubsystem.cpp">
+      <Filter>Source Files\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\render\glRenderSubsystem.cpp">
       <Filter>Source Files\Core\Render</Filter>
     </ClCompile>
   </ItemGroup>
