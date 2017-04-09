@@ -18,7 +18,7 @@ namespace Palette3D
 		AccessViolation,
 		StackOverflow, 
 		OutOfMemory, 
-		OutOfVRam, 
+		Failure, 
 		FileNotFound
 		};
 	/// A general purpose exception class to indicate ssurge-related errors
