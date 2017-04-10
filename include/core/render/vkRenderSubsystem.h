@@ -25,6 +25,7 @@ namespace Palette3D
 	private:
 		
 		VkInstance mVkInstance;
+		VkDevice mGpu;
 		//Initializes Vulkan. May be split into more functions later.
 		void initVulkan();
 	public:

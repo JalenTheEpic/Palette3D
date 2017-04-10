@@ -96,7 +96,7 @@ namespace Palette3D
 		case VK_SUCCESS:
 			break;
 		}
-#pragma endregion vkInstanceInit
+#pragma endregion 
 	
 
 #pragma region vkDeviceEnumerate
@@ -131,7 +131,7 @@ namespace Palette3D
 
 #endif
 		}
-#pragma endregion vkDeviceEnumerate
+#pragma endregion 
 
 		
 #pragma region Get_QueueFamilies_Support
@@ -161,11 +161,38 @@ namespace Palette3D
 		//minImageTransferGranularity 
 
 
-#pragma endregion Get_QueueFamilies_Support
+#pragma endregion
 
 
 #pragma region create_logical_device
 
+		//////////////////////////////////////////////////////////////Finish me
+		std::vector<VkDeviceQueueCreateInfo> deviceQueueCreateInfo(4);
+		for (auto info:deviceQueueCreateInfo)
+		{
+			info.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+			info.flags = 0;
+			
+		}
+
+
+
+		///////////////////FINISH  ME/////////////////////////////
+		VkDeviceCreateInfo deviceCreateInfo = {};
+		deviceCreateInfo.enabledExtensionCount = 0;
+		//deviceCreateInfo.enabledLayerCount = 0;
+		deviceCreateInfo.flags = 0;
+		deviceCreateInfo.pEnabledFeatures = nullptr; //ptr to a VkPhysicalDeviceFeatures struct
+		deviceCreateInfo.pNext = nullptr;
+		//deviceCreateInfo.ppEnabledExtensionNames = {}; UNUSED
+		deviceCreateInfo.ppEnabledLayerNames = {};
+		deviceCreateInfo.pQueueCreateInfos = {};
+		deviceCreateInfo.queueCreateInfoCount = {};
+		deviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+		//////////////////////////////////////////////////////////
+
+
+		vkCreateDevice(physicalDevices[0], &deviceCreateInfo,nullptr, &mGpu);
 
 #pragma endregion
 	}
