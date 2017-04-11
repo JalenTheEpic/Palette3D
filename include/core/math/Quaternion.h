@@ -18,7 +18,7 @@ namespace Palette3D
 		/// Operator functions.
 	public:
 
-		friend std::ostream & operator<<(std::ostream & os, const Vec4 & v);
+		friend std::ostream & operator<<(std::ostream & os, const Quaternion & v);
 
 		/// Methods.
 	public:

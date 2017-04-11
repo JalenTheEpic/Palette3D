@@ -31,16 +31,22 @@ namespace Palette3D
 
 		// !----------INIT FUNCTIONS----------!
 		//Initializes Vulkan. Calls other functions in this section
+		void initWindow();
 		void initVulkan();
 		void initVkInstance();
 		void checkValidationLayers();
 		void choosePhysicalDevice();
 		void initLogicalDevice();
+		
 
 		// !----------UTILITY FUNCTIONS----------!
 		//checks if the device has the functionality we want
 		//TODO:: FINISH THIS
 		bool checkPhysicalDevice(VkPhysicalDevice &device);
+
+	public:
+		GLFWwindow* mWindow;
+
 
 	public:
 		// !----------CONSTRUCTORS/DESTRUCTORS----------!
