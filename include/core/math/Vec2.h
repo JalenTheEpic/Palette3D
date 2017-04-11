@@ -20,7 +20,7 @@ namespace Palette3D
 		
 		/// Constructor and Destructor.
 	public:
-		inline Vec2(const float x = 0.0f, const float y = 0.0f):mX(x), mY(y) {}
+		inline Vec2(const float x = 0.0f, const float y = 0.0f) : mX(x), mY(y) {}
 		inline Vec2(const Vec2& rhs):mX(rhs.mX), mY(rhs.mY) {}
 		inline ~Vec2() {}
 
@@ -40,6 +40,7 @@ namespace Palette3D
 		inline Vec2 operator-() const { return Vec2(-mX, -mY); }
 
 		friend std::ostream& operator<< (std::ostream& os, const Vec2& v);
+
 		/// Methods.
 	public:
 		Vec2 cross(const Vec2& other) const;

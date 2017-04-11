@@ -160,6 +160,7 @@
     <ClInclude Include="..\..\include\core\math\Math.h" />
     <ClInclude Include="..\..\include\core\math\Matrix3.h" />
     <ClInclude Include="..\..\include\core\math\Matrix4.h" />
+    <ClInclude Include="..\..\include\core\math\Quaternion.h" />
     <ClInclude Include="..\..\include\core\math\Vec2.h" />
     <ClInclude Include="..\..\include\core\math\Vec3.h" />
     <ClInclude Include="..\..\include\core\math\Vec4.h" />
@@ -171,6 +172,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\core\math\Matrix3.cpp" />
     <ClCompile Include="..\..\src\core\math\Matrix4.cpp" />
+    <ClCompile Include="..\..\src\core\math\Quaternion.cpp" />
     <ClCompile Include="..\..\src\core\math\Vec2.cpp" />
     <ClCompile Include="..\..\src\core\math\Vec3.cpp" />
     <ClCompile Include="..\..\src\core\math\Vec4.cpp" />

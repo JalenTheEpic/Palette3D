@@ -22,7 +22,7 @@ namespace Palette3D
 
 		/// Constructor and Destructor.
 	public:
-		inline Vec4(const float x = 0.0f, const float y = 0.0f, const float z = 0.0f, const float w = 0.0f) :mX(x), mY(y), mZ(z), mW(w) {}
+		inline Vec4(const float x = 0.0f, const float y = 0.0f, const float z = 0.0f, const float w = 0.0f) : mX(x), mY(y), mZ(z), mW(w) {}
 		inline Vec4(const Vec4& v) : mX(v.mX), mY(v.mY), mZ(v.mZ), mW(v.mW) {}
 		inline Vec4(const Vec3& v) : mX(v.mX), mY(v.mY), mZ(v.mZ), mW(0) {}
 		inline Vec4(const Vec2& v) : mX(v.mX), mY(v.mY), mZ(0), mW(0) {}
@@ -47,7 +47,7 @@ namespace Palette3D
 
 		/// Methods.
 	public:
-		Vec3 cross(const Vec4& other);
+		Vec4 cross(const Vec4& other);
 		float dot(const Vec4& other);
 		float magnitude() const;
 		float squaredMagnitude() const;

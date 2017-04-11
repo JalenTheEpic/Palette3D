@@ -19,7 +19,7 @@ namespace Palette3D
 
 		/// Constructor and Destructor.
 	public:
-		inline Vec3(const float x = 0.0f, const float y = 0.0f, const float z = 0.0f) :mX(x), mY(y) , mZ(z) {}
+		inline Vec3(const float x = 0.0f, const float y = 0.0f, const float z = 0.0f) : mX(x), mY(y) , mZ(z) {}
 		inline Vec3(const Vec3& v):mX(v.mX), mY(v.mY), mZ(v.mZ) {}
 		inline Vec3(const Vec2& v):mX(v.mX), mY(v.mY), mZ(0) {}
 		inline ~Vec3() {}

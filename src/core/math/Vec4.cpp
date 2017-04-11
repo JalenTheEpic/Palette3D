@@ -6,9 +6,9 @@ namespace Palette3D
 	{
 		return os << "Vector4(" << v.mX << ", " << v.mY << "," << v.mZ << "," << v.mW << ")" << std::endl;
 	}
-	Vec3 Vec4::cross(const Vec4 & other)
+	Vec4 Vec4::cross(const Vec4 & other)
 	{
-		return Vec3();
+		return Vec4();
 	}
 	float Vec4::dot(const Vec4 & other)
 	{
