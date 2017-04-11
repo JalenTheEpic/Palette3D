@@ -84,8 +84,16 @@
     <ClInclude Include="..\..\include\core\atomic\Types.h">
       <Filter>Header Files\Core\Atomic</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\..\include\core\math\Quaternion.h">
       <Filter>Header Files\Core\Math</Filter>
+=======
+    <ClInclude Include="..\..\include\core\render\glRenderSubsystem.h">
+      <Filter>Header Files\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\core\render\Render.h">
+      <Filter>Header Files\Core\Render</Filter>
+>>>>>>> b38dca1a794bf86c6c3132625ad96409d5a54973
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,8 +121,13 @@
     <ClCompile Include="..\..\src\core\render\vkRenderSubsystem.cpp">
       <Filter>Source Files\Core\Render</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\..\src\core\math\Quaternion.cpp">
       <Filter>Source Files\Core\Math</Filter>
+=======
+    <ClCompile Include="..\..\src\core\render\glRenderSubsystem.cpp">
+      <Filter>Source Files\Core\Render</Filter>
+>>>>>>> b38dca1a794bf86c6c3132625ad96409d5a54973
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -10,4 +10,26 @@ namespace Palette3D
 
 
 
+	void RenderManager::initWindow()
+	{
+#ifdef P3DVULKAN
+
+#endif // P3DVULKAN
+
+#ifdef P3DOPENGL
+
+#endif // P3DOPENGL
+	}
+
+	void RenderManager::initRenderingSubsystem()
+	{
+#ifdef P3DVULKAN
+
+#endif // P3DVULKAN
+
+#ifdef P3DOPENGL
+
+#endif // P3DOPENGL
+	}
+
 }

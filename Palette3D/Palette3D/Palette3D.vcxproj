@@ -99,6 +99,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)..\include\;$(SolutionDir)..\dependencies\GLFW\include\x86\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EntryPointSymbol>
@@ -131,6 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)..\include\;$(SolutionDir)..\dependencies\GLFW\include\x86\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -164,6 +167,8 @@
     <ClInclude Include="..\..\include\core\math\Vec2.h" />
     <ClInclude Include="..\..\include\core\math\Vec3.h" />
     <ClInclude Include="..\..\include\core\math\Vec4.h" />
+    <ClInclude Include="..\..\include\core\render\glRenderSubsystem.h" />
+    <ClInclude Include="..\..\include\core\render\Render.h" />
     <ClInclude Include="..\..\include\core\render\RenderManager.h" />
     <ClInclude Include="..\..\include\core\render\vkRenderSubsystem.h" />
     <ClInclude Include="..\..\include\debugging\Exception.h" />
@@ -176,6 +181,7 @@
     <ClCompile Include="..\..\src\core\math\Vec2.cpp" />
     <ClCompile Include="..\..\src\core\math\Vec3.cpp" />
     <ClCompile Include="..\..\src\core\math\Vec4.cpp" />
+    <ClCompile Include="..\..\src\core\render\glRenderSubsystem.cpp" />
     <ClCompile Include="..\..\src\core\render\RenderManager.cpp" />
     <ClCompile Include="..\..\src\core\render\vkRenderSubsystem.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
