@@ -10,24 +10,24 @@ namespace Palette3D
 	{
 		return Vec4();
 	}
-	float Vec4::dot(const Vec4 & other)
+	F32 Vec4::dot(const Vec4 & other)
 	{
 		return mX * other.mX + mY * other.mY + mZ * other.mZ + mW * other.mW;
 	}
-	float Vec4::magnitude() const
+	F32 Vec4::magnitude() const
 	{
-		return static_cast<float>(sqrt(mX*mX + mY*mY + mZ*mZ + mW*mW));
+		return static_cast<F32>(sqrt(mX*mX + mY*mY + mZ*mZ + mW*mW));
 	}
-	float Vec4::squaredMagnitude() const
+	F32 Vec4::squaredMagnitude() const
 	{
 		return mX*mX + mY*mY + mZ*mZ + mW*mW;
 	}
-	float Vec4::distance(const Vec4 & other) const
+	F32 Vec4::distance(const Vec4 & other) const
 	{
-		return static_cast<float>(sqrt(powf(other.mX - mX, 2) + powf(other.mY - mY, 2) + powf(other.mZ - mZ, 2) + powf(other.mW - mW, 2)));
+		return static_cast<F32>(sqrt(powf(other.mX - mX, 2) + powf(other.mY - mY, 2) + powf(other.mZ - mZ, 2) + powf(other.mW - mW, 2)));
 	}
-	float Vec4::squaredDistance(const Vec4 & other) const
+	F32 Vec4::squaredDistance(const Vec4 & other) const
 	{
-		return static_cast<float>(powf(other.mX - mX, 2) + powf(other.mY - mY, 2) + powf(other.mZ - mZ, 2) + powf(other.mW - mW, 2));;
+		return static_cast<F32>(powf(other.mX - mX, 2) + powf(other.mY - mY, 2) + powf(other.mZ - mZ, 2) + powf(other.mW - mW, 2));;
 	}
 }

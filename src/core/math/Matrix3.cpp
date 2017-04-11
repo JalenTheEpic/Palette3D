@@ -46,14 +46,14 @@ namespace Palette3D
 	}
 
 
-	Matrix3 Matrix3::operator*(float scalar) const
+	Matrix3 Matrix3::operator*(F32 scalar) const
 	{
 		return Matrix3( mMat[0][0] * scalar, mMat[0][1] * scalar, mMat[0][2] * scalar,
 						mMat[1][0] * scalar, mMat[1][1] * scalar, mMat[1][2] * scalar,
 						mMat[2][0] * scalar, mMat[2][1] * scalar, mMat[2][2] * scalar);
 	}
 
-	void Matrix3::operator*=(float scalar)
+	void Matrix3::operator*=(F32 scalar)
 	{
 		*this = *this * scalar;
 	}
@@ -122,7 +122,7 @@ namespace Palette3D
 
 	Matrix3 Matrix3::transpose() const
 	{
-		float tmp[3][3];
+		F32 tmp[3][3];
 		for (int i = 0; i<3; i++)
 		{
 			for (int j = 0; j < 3; j++)
@@ -134,7 +134,7 @@ namespace Palette3D
 	}
 
 
-	float Matrix3::determinant() const
+	F32 Matrix3::determinant() const
 	{
 		/*
 			 -------
@@ -143,7 +143,7 @@ namespace Palette3D
 			|g  h  i|
 			 -------
 		*/
-		float det = 0.0f;
+		F32 det = 0.0f;
 		det += mMat[0][0] * mMat[1][1] * mMat[2][2];//aei
 		det += mMat[0][1] * mMat[1][2] * mMat[2][0];//+bfg
 		det += mMat[0][2] * mMat[1][0] * mMat[2][1];//+cdh

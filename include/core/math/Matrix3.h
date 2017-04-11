@@ -21,7 +21,7 @@ namespace Palette3D
 	class Matrix3
 	{
 	protected:
-		float mMat[3][3]; //[row] [col]
+		F32 mMat[3][3]; //[row] [col]
 
 	public:
 		///<summary>
@@ -29,17 +29,17 @@ namespace Palette3D
 		///</summary>
 		Matrix3() {}
 
-		/// <param name="m">2D float array with values to fill matrix</param> 
-		Matrix3(float m[3][3])
+		/// <param name="m">2D F32 array with values to fill matrix</param> 
+		Matrix3(F32 m[3][3])
 		{
-			memcpy(mMat, m, 9 * sizeof(float));
+			memcpy(mMat, m, 9 * sizeof(F32));
 		}
 
 		
 
-		Matrix3(float e00, float e01, float e02,
-				float e10, float e11, float e12,
-				float e20, float e21, float e22) 
+		Matrix3(F32 e00, F32 e01, F32 e02,
+				F32 e10, F32 e11, F32 e12,
+				F32 e20, F32 e21, F32 e22) 
 		{
 			mMat[0][0] = e00;
 			mMat[0][1] = e01;
@@ -57,19 +57,19 @@ namespace Palette3D
 			//delete[] mMat;
 		}
 
-		inline const float * operator[] (size_t row) const 
+		inline const F32 * operator[] (size_t row) const 
 		{
 			return mMat[row];
 		}
 
-		inline  float * operator[] (size_t row) 
+		inline  F32 * operator[] (size_t row) 
 		{
 			return mMat[row];
 		}
 
 		inline void operator= (const Matrix3& other) 
 		{
-			memcpy(mMat, other.mMat, 9*sizeof(float));
+			memcpy(mMat, other.mMat, 9*sizeof(F32));
 		}
 
 		Matrix3 operator+ (const Matrix3& other) const;
@@ -78,8 +78,8 @@ namespace Palette3D
 		Matrix3 operator- (const Matrix3& other) const;
 		void operator-= (const Matrix3& other) ;
 
-		Matrix3 operator* (float scalar) const;
-		void operator*= (float scalar) ;
+		Matrix3 operator* (F32 scalar) const;
+		void operator*= (F32 scalar) ;
 		Matrix3 operator* (const Matrix3& other) const;
 		void operator*= (const Matrix3& other) ;
 
@@ -93,7 +93,7 @@ namespace Palette3D
 		bool operator== (const Matrix3& other) const;
 
 		Matrix3 transpose() const;
-		float determinant() const;
+		F32 determinant() const;
 
 		Vec3 getRow(std::size_t row) const;
 		void setRow(std::size_t row, Vec3 v);

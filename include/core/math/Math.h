@@ -12,5 +12,6 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #include <core\math\Vec2.h>
 #include <core\math\Vec3.h>
 #include <core\math\Vec4.h>
+#include <core\math\Quaternion.h>
 
 #endif

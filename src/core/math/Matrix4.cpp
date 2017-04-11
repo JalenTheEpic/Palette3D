@@ -35,7 +35,7 @@ namespace Palette3D
 	{
 		*this = *this - other;
 	}
-	Matrix4 Matrix4::operator*(float scalar) const
+	Matrix4 Matrix4::operator*(F32 scalar) const
 	{
 		return Matrix4
 			(mMat[0][0] * scalar, mMat[0][1] * scalar, mMat[0][2] * scalar, mMat[0][3] * scalar,
@@ -43,7 +43,7 @@ namespace Palette3D
 			 mMat[2][0] * scalar, mMat[2][1] * scalar, mMat[2][2] * scalar, mMat[2][3] * scalar,
 			 mMat[3][0] * scalar, mMat[3][1] * scalar, mMat[3][2] * scalar, mMat[3][3] * scalar);
 	}
-	void Matrix4::operator*=(float scalar)
+	void Matrix4::operator*=(F32 scalar)
 	{
 		*this = *this * scalar;
 	}
@@ -102,7 +102,7 @@ namespace Palette3D
 	{
 		return Matrix4();
 	}
-	float Matrix4::determinant() const
+	F32 Matrix4::determinant() const
 	{
 		/*
 		----------------------------------

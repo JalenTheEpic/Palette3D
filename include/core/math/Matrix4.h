@@ -19,20 +19,20 @@ namespace Palette3D
 	class Matrix4
 	{
 	private:
-		float mMat[4][4]; //[row] [col]
+		F32 mMat[4][4]; //[row] [col]
 
 	public:
 		Matrix4() {}
 
-		Matrix4(float m[4][4])
+		Matrix4(F32 m[4][4])
 		{
-			memcpy(mMat, m, 16 * sizeof(float));
+			memcpy(mMat, m, 16 * sizeof(F32));
 		}
 
-		Matrix4(float e00, float e01, float e02, float e03,
-				float e10, float e11, float e12, float e13,
-				float e20, float e21, float e22, float e23,
-				float e30, float e31, float e32, float e33)
+		Matrix4(F32 e00, F32 e01, F32 e02, F32 e03,
+				F32 e10, F32 e11, F32 e12, F32 e13,
+				F32 e20, F32 e21, F32 e22, F32 e23,
+				F32 e30, F32 e31, F32 e32, F32 e33)
 		{
 			mMat[0][0] = e00;
 			mMat[0][1] = e01;
@@ -60,19 +60,19 @@ namespace Palette3D
 			//delete[] mMat;
 		}
 
-		inline const float * operator[] (size_t row) const
+		inline const F32 * operator[] (size_t row) const
 		{
 			return mMat[row];
 		}
 
-		inline  float * operator[] (size_t row)
+		inline  F32 * operator[] (size_t row)
 		{
 			return mMat[row];
 		}
 
 		inline Matrix4 & operator= (const Matrix4& other)
 		{
-			memcpy(mMat, other.mMat, 16 * sizeof(float));
+			memcpy(mMat, other.mMat, 16 * sizeof(F32));
 			return *this;
 
 		}
@@ -85,8 +85,8 @@ namespace Palette3D
 		Matrix4 operator- (const Matrix4& other) const;
 		void operator-= (const Matrix4& other);
 
-		Matrix4 operator* (float scalar) const;
-		void operator*= (float scalar);
+		Matrix4 operator* (F32 scalar) const;
+		void operator*= (F32 scalar);
 		Matrix4 operator* (const Matrix4& other) const;
 		void operator*= (const Matrix4& other);
 
@@ -100,7 +100,7 @@ namespace Palette3D
 		bool operator== (const Matrix4& other) const;
 
 		Matrix4 transpose() const;
-		float determinant() const;
+		F32 determinant() const;
 
 		Vec4 getRow(std::size_t row) const;
 		void setRow(std::size_t row, Vec4 v);

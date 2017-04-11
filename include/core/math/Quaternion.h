@@ -12,7 +12,7 @@ namespace Palette3D
 
 		/// Constructor and Destructor.
 	public:
-		inline Quaternion(const float w, const float x, const float y, const float z) : vec(Vec4(x, y, z, w)) {};
+		inline Quaternion(const F32 w, const F32 x, const F32 y, const F32 z) : vec(Vec4(x, y, z, w)) {};
 		~Quaternion() {}
 
 		/// Operator functions.
