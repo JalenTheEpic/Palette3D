@@ -25,10 +25,25 @@ namespace Palette3D
 	private:
 		
 		VkInstance mVkInstance;
-		VkDevice mGpu;
-		//Initializes Vulkan. May be split into more functions later.
+		VkPhysicalDevice mPhysicalDevice;
+		VkDevice mLogicalDevice;
+		VkQueue graphicsQueue;
+
+		// !----------INIT FUNCTIONS----------!
+		//Initializes Vulkan. Calls other functions in this section
 		void initVulkan();
+		void initVkInstance();
+		void checkValidationLayers();
+		void choosePhysicalDevice();
+		void initLogicalDevice();
+
+		// !----------UTILITY FUNCTIONS----------!
+		//checks if the device has the functionality we want
+		//TODO:: FINISH THIS
+		bool checkPhysicalDevice(VkPhysicalDevice &device);
+
 	public:
+		// !----------CONSTRUCTORS/DESTRUCTORS----------!
 		VkRenderSubSystem();
 		~VkRenderSubSystem();
 

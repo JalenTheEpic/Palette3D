@@ -9,12 +9,24 @@ namespace Palette3D
 {
 
 
-	
+	// !----------INIT FUNCTIONS----------!
+
 	void VkRenderSubSystem::initVulkan()
 	{
 
 
-#pragma region vkInstanceInit
+		initVkInstance();
+	
+		choosePhysicalDevice();
+		initLogicalDevice();
+
+
+
+	}
+
+	void VkRenderSubSystem::initVkInstance()
+	{
+
 		//Information about the application.
 		//needed to init the vkInstance
 		VkApplicationInfo appInfo = {};
@@ -27,7 +39,7 @@ namespace Palette3D
 		appInfo.apiVersion = VK_API_VERSION_1_0;
 
 
-	/////////////////////FINISH ME/////////////////////////////////////////////////////
+		/////////////////////FINISH ME/////////////////////////////////////////////////////
 		////getting layer info
 
 		//U32 instanceLayerCount = 0;
@@ -35,7 +47,7 @@ namespace Palette3D
 		//vkEnumerateInstanceLayerProperties(&instanceLayerCount, nullptr);
 		//VkLayerProperties layerProperty;
 		//vkEnumerateInstanceLayerProperties(&instanceLayerCount, &layerProperty);
-	//////////////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////
 
 
 		//Creation info. 
@@ -61,16 +73,16 @@ namespace Palette3D
 
 		createInfo.enabledLayerCount = 0;
 		createInfo.ppEnabledLayerNames = {};
-		
-	
-		
+
+
+
 
 		//Will create the vk instance and store it in the vk instance pointer provided as the 3rd arg
 		//2nd arg is null because we are currently not doing our own memory allocation
-		switch (vkCreateInstance(&createInfo,nullptr,&mVkInstance)) //change this to use assertions?
+		switch (vkCreateInstance(&createInfo, nullptr, &mVkInstance)) //change this to use assertions?
 		{
 		case VK_ERROR_OUT_OF_HOST_MEMORY:
-			THROW_EXCEPTION("Error: Out of host memory",ExceptionType::OutOfMemory);
+			THROW_EXCEPTION("Error: Out of host memory", ExceptionType::OutOfMemory);
 			break;
 
 		case VK_ERROR_OUT_OF_DEVICE_MEMORY:
@@ -96,107 +108,116 @@ namespace Palette3D
 		case VK_SUCCESS:
 			break;
 		}
-#pragma endregion 
-	
 
-#pragma region vkDeviceEnumerate
+	}
+
+	void VkRenderSubSystem::choosePhysicalDevice()
+	{
+		//see how many vulkan supported devices we have
 		U32 deviceCount = 0;
-		VkResult result = vkEnumeratePhysicalDevices(mVkInstance,&deviceCount,nullptr);
+		VkResult result = vkEnumeratePhysicalDevices(mVkInstance, &deviceCount, nullptr);
 		assert(result == VK_SUCCESS);
 		assert(deviceCount >= 1);
 
-
+		//gets handles to the physical devices supported by vulkan
 		std::vector<VkPhysicalDevice> physicalDevices(deviceCount);
 		result = vkEnumeratePhysicalDevices(mVkInstance, &deviceCount, physicalDevices.data());
 		assert(result == VK_SUCCESS);
-		
-
-		VkPhysicalDeviceProperties physicalProperties = {};
-
-		for (U32 i = 0; i < deviceCount; i++)
-		{
-
-
-			vkGetPhysicalDeviceProperties(physicalDevices[i], &physicalProperties);
-#if _DEBUG
-			fprintf(stdout, "%d Device(s)\n", deviceCount);
-			fprintf(stdout, "Device Name:    %s\n", physicalProperties.deviceName);
-			fprintf(stdout, "Device Type:    %d\n", physicalProperties.deviceType);
-			fprintf(stdout, "Driver Version: %d\n", physicalProperties.driverVersion);
-
-			fprintf(stdout, "API Version:    %d.%d.%d\n",
-				VK_VERSION_MAJOR(physicalProperties.apiVersion),
-				VK_VERSION_MINOR(physicalProperties.apiVersion),
-				VK_VERSION_PATCH(physicalProperties.apiVersion));
-
-#endif
-		}
-#pragma endregion 
 
 		
-#pragma region Get_QueueFamilies_Support
-		//Not sure if this is needed right now. Will revisit
-#if _DEBUG
+
+		//for now since my computer only has 1 gpu we'll just hard code this in
+		mPhysicalDevice = physicalDevices[0];
+
+
+	
+	}
+
+	void VkRenderSubSystem::initLogicalDevice()
+	{
+#pragma region Queue_Create
+		
+		//Split into a function when more queues will be used
+		//currently only enables the grapics queue
 		U32 queueFamilyPropertyCount = 0;
-		vkGetPhysicalDeviceQueueFamilyProperties(physicalDevices[0],&queueFamilyPropertyCount, nullptr);
+		vkGetPhysicalDeviceQueueFamilyProperties(mPhysicalDevice, &queueFamilyPropertyCount, nullptr);
 		fprintf(stdout, "%d QueueFamilyPropertyCount(s)\n", queueFamilyPropertyCount);
 
 
 		std::vector<VkQueueFamilyProperties> queueFamilyProps(queueFamilyPropertyCount);
-		vkGetPhysicalDeviceQueueFamilyProperties(physicalDevices[0], &queueFamilyPropertyCount, queueFamilyProps.data());
-
-		/* at least one queue family of at least one physical device exposed by the implementation MUST support both graphics and compute operations.*/
-		for (VkQueueFamilyProperties q:queueFamilyProps)
-		{
-			std::bitset<4> y(q.queueFlags);
-			
-			std::cout <<"Queue Flag: " << y <<std::endl;
-
-			std::cout << "MinImageGran(" << q.minImageTransferGranularity.width << ",";
-			std::cout<< q.minImageTransferGranularity.height << "," <<q.minImageTransferGranularity.depth << ")" <<std::endl;
-			
+		vkGetPhysicalDeviceQueueFamilyProperties(mPhysicalDevice, &queueFamilyPropertyCount, queueFamilyProps.data());
+		
+		U16 graphicsQueueIndex = 0;
+		for (auto queue: queueFamilyProps)
+		{	
+			if (queue.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+			{
+				break;
+			}
+			graphicsQueueIndex++;
+			if (graphicsQueueIndex > queueFamilyPropertyCount)
+				THROW_EXCEPTION("NO GRAPHICS QUEUE FOUND",ExceptionType::IndexOutOfRange);
 		}
 
-#endif
-		//minImageTransferGranularity 
+		//Creating a single graphics queue family
+		VkDeviceQueueCreateInfo queueCreateInfo = {};
+		queueCreateInfo.flags = 0;
+		queueCreateInfo.pNext = nullptr;
+		queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+		queueCreateInfo.queueFamilyIndex = graphicsQueueIndex;
+		queueCreateInfo.queueCount = 1;
+		F32 priority = 1.f;
+		queueCreateInfo.pQueuePriorities = &priority;
+#pragma endregion
 
+#pragma region REVISIT
+
+		//COME BACK TO ME WHEN WE DO CRAZY STUFF
+		VkPhysicalDeviceFeatures deviceFeatures = {};
 
 #pragma endregion
 
-
-#pragma region create_logical_device
-
-		//////////////////////////////////////////////////////////////Finish me
-		std::vector<VkDeviceQueueCreateInfo> deviceQueueCreateInfo(4);
-		for (auto info:deviceQueueCreateInfo)
-		{
-			info.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-			info.flags = 0;
-			
-		}
-
-
-
-		///////////////////FINISH  ME/////////////////////////////
 		VkDeviceCreateInfo deviceCreateInfo = {};
 		deviceCreateInfo.enabledExtensionCount = 0;
 		//deviceCreateInfo.enabledLayerCount = 0;
 		deviceCreateInfo.flags = 0;
-		deviceCreateInfo.pEnabledFeatures = nullptr; //ptr to a VkPhysicalDeviceFeatures struct
+		deviceCreateInfo.pEnabledFeatures = &deviceFeatures; //ptr to a VkPhysicalDeviceFeatures struct
 		deviceCreateInfo.pNext = nullptr;
-		//deviceCreateInfo.ppEnabledExtensionNames = {}; UNUSED
-		deviceCreateInfo.ppEnabledLayerNames = {};
-		deviceCreateInfo.pQueueCreateInfos = {};
-		deviceCreateInfo.queueCreateInfoCount = {};
+
+		deviceCreateInfo.ppEnabledLayerNames = {}; //will use later for debugging
+		deviceCreateInfo.pQueueCreateInfos = &queueCreateInfo;
+		deviceCreateInfo.queueCreateInfoCount = 1;
 		deviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-		//////////////////////////////////////////////////////////
+	
 
 
-		vkCreateDevice(physicalDevices[0], &deviceCreateInfo,nullptr, &mGpu);
+		 
+		 VkResult result = vkCreateDevice(mPhysicalDevice, &deviceCreateInfo,nullptr, &mLogicalDevice);
+		 assert(result == VK_SUCCESS);
 
-#pragma endregion
+		 vkGetDeviceQueue(mLogicalDevice,0,0,&graphicsQueue);
+		
 	}
 
+
+	// !----------UTILITY FUNCTIONS----------!
+	bool VkRenderSubSystem::checkPhysicalDevice(VkPhysicalDevice &device)
+	{
+
+		VkPhysicalDeviceProperties deviceProperties;
+		VkPhysicalDeviceFeatures deviceFeatures;
+		vkGetPhysicalDeviceProperties(device, &deviceProperties);
+		vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
+
+		return true;
+	}
+
+
+
+
+
+
+	// !----------CONSTRUCTORS/DESTRUCTORS----------!
 	VkRenderSubSystem::VkRenderSubSystem()
 	{
 		initVulkan();
@@ -204,7 +225,9 @@ namespace Palette3D
 
 	VkRenderSubSystem::~VkRenderSubSystem()
 	{
-		//vkDestroyInstance(mVkInstance, nullptr);
+		vkDestroyDevice(mLogicalDevice, nullptr);
+		vkDestroyInstance(mVkInstance, nullptr);
+		
 	}
 
 }
