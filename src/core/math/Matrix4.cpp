@@ -73,10 +73,10 @@ namespace Palette3D
 	Vec4 Matrix4::operator*(const Vec4 & other) const
 	{
 		Vec4 v;
-		v.mX = mMat[0][0] * v.mX + mMat[0][1] * v.mY + mMat[0][2] * v.mZ + mMat[0][3] * v.mW;
-		v.mY = mMat[1][0] * v.mX + mMat[1][1] * v.mY + mMat[1][2] * v.mZ + mMat[1][3] * v.mW;
-		v.mZ = mMat[2][0] * v.mX + mMat[2][1] * v.mY + mMat[2][2] * v.mZ + mMat[2][3] * v.mW;
-		v.mW = mMat[2][0] * v.mX + mMat[2][1] * v.mY + mMat[2][2] * v.mZ + mMat[3][3] * v.mW;
+		v.x = mMat[0][0] * v.x + mMat[0][1] * v.y + mMat[0][2] * v.z + mMat[0][3] * v.w;
+		v.y = mMat[1][0] * v.x + mMat[1][1] * v.y + mMat[1][2] * v.z + mMat[1][3] * v.w;
+		v.z = mMat[2][0] * v.x + mMat[2][1] * v.y + mMat[2][2] * v.z + mMat[2][3] * v.w;
+		v.w = mMat[2][0] * v.x + mMat[2][1] * v.y + mMat[2][2] * v.z + mMat[3][3] * v.w;
 
 		return v;
 	}

@@ -90,9 +90,9 @@ namespace Palette3D
 	Vec3 Matrix3::operator*(const Vec3 & other) const
 	{
 		Vec3 v;
-		v.mX = mMat[0][0] * v.mX + mMat[0][1] * v.mY + mMat[0][2] * v.mZ;
-		v.mY = mMat[1][0] * v.mX + mMat[1][1] * v.mY + mMat[1][2] * v.mZ;
-		v.mZ = mMat[2][0] * v.mX + mMat[2][1] * v.mY + mMat[2][2] * v.mZ;
+		v.x = mMat[0][0] * v.x + mMat[0][1] * v.y + mMat[0][2] * v.z;
+		v.y = mMat[1][0] * v.x + mMat[1][1] * v.y + mMat[1][2] * v.z;
+		v.z = mMat[2][0] * v.x + mMat[2][1] * v.y + mMat[2][2] * v.z;
 
 		return v;
 
@@ -164,9 +164,9 @@ namespace Palette3D
 
 	void Matrix3::setRow(std::size_t row, Vec3 v)
 	{
-		mMat[row][0] = v.mX;
-		mMat[row][1] = v.mY;
-		mMat[row][2] = v.mZ;
+		mMat[row][0] = v.x;
+		mMat[row][1] = v.y;
+		mMat[row][2] = v.z;
 	}
 
 
@@ -178,8 +178,8 @@ namespace Palette3D
 
 	void Matrix3::setCol(std::size_t col, Vec3 v)
 	{
-		mMat[0][col] = v.mX;
-		mMat[1][col] = v.mY;
-		mMat[2][col] = v.mZ;
+		mMat[0][col] = v.x;
+		mMat[1][col] = v.y;
+		mMat[2][col] = v.z;
 	}
 }
