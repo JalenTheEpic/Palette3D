@@ -4,6 +4,6 @@ namespace Palette3D
 {
 	std::ostream & operator<<(std::ostream & os, const Quaternion & v)
 	{
-		return os << "Quaternion(" << v.vec.mX << ", " << v.vec.mY << "," << v.vec.mZ << "," << v.vec.mW << ")" << std::endl;
+		return os << "Quaternion(" << v.w << ", " << v.x << "," << v.y << "," << v.z << ")" << std::endl;
 	}
 }

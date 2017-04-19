@@ -7,12 +7,18 @@ namespace Palette3D
 	class Quaternion
 	{
 		/// Member variables.
-	private:
-		Vec4 vec;
+	public:
+		F32 w;
+		F32 x;
+		F32 y;
+		F32 z;
 
 		/// Constructor and Destructor.
 	public:
-		inline Quaternion(const F32 w, const F32 x, const F32 y, const F32 z) : vec(Vec4(x, y, z, w)) {};
+		inline Quaternion(const F32 w, const F32 x, const F32 y, const F32 z) : w(w), x(x), y(y), z(z) {}
+		inline Quaternion(const Vec4& v) : x(v.x), y(v.y), z(v.z), w(v.w) {}
+		inline Quaternion(const Vec3& v) : x(v.x), y(v.y), z(v.z), w(0) {}
+		inline Quaternion(const Vec2& v) : x(v.x), y(v.y), z(0), w(0) {}
 		~Quaternion() {}
 
 		/// Operator functions.
@@ -22,7 +28,6 @@ namespace Palette3D
 
 		/// Methods.
 	public:
-
 	};
 }
 

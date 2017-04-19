@@ -13,31 +13,31 @@ namespace Palette3D
 	{
 		/// Member variables.
 	public:
-		F32 mX;
-		F32 mY;
-		F32 mZ;
+		F32 x;
+		F32 y;
+		F32 z;
 
 		/// Constructor and Destructor.
 	public:
-		inline Vec3(const F32 x = 0.0f, const F32 y = 0.0f, const F32 z = 0.0f) : mX(x), mY(y) , mZ(z) {}
-		inline Vec3(const Vec3& v):mX(v.mX), mY(v.mY), mZ(v.mZ) {}
-		inline Vec3(const Vec2& v):mX(v.mX), mY(v.mY), mZ(0) {}
+		inline Vec3(const F32 x = 0.0f, const F32 y = 0.0f, const F32 z = 0.0f) : x(x), y(y) , z(z) {}
+		inline Vec3(const Vec3& v) : x(v.x), y(v.y), z(v.z) {}
+		inline Vec3(const Vec2& v) : x(v.x), y(v.y), z(0) {}
 		inline ~Vec3() {}
 
 		/// Operator functions.
 	public:
-		inline Vec3 operator+(const Vec3& rhs) const { return Vec3(mX + rhs.mX, mY + rhs.mY, mZ + rhs.mZ); }
-		inline Vec3 operator-(const Vec3& rhs) const { return Vec3(mX - rhs.mX, mY - rhs.mY, mZ - rhs.mZ); }
-		inline Vec3 operator*(const F32& rhs) const { return Vec3(mX * rhs, mY * rhs, mZ * rhs); }
+		inline Vec3 operator+(const Vec3& rhs) const { return Vec3(this->x + rhs.x, this->y + rhs.y, this->z + rhs.z); }
+		inline Vec3 operator-(const Vec3& rhs) const { return Vec3(this->x - rhs.x, this->y - rhs.y, this->z - rhs.z); }
+		inline Vec3 operator*(const F32& rhs) const { return Vec3(this->x * rhs, this->y * rhs, this->z * rhs); }
 
-		inline void operator=(const Vec3& rhs) { mX = rhs.mX; mY = rhs.mY; mZ = rhs.mZ; }
+		inline void operator=(const Vec3& rhs) { this->x = rhs.x; this->y = rhs.y; this->z = rhs.z; }
 
-		inline void operator+=(const Vec3& rhs) { mX += rhs.mX; mY += rhs.mY; mZ += rhs.mZ; }
-		inline void operator-=(const Vec3& rhs) { mX -= rhs.mX; mY -= rhs.mY; mZ -= rhs.mZ; }
-		inline void operator*=(const F32& rhs) { mX *= rhs; mY *= rhs; mZ *= rhs; }
+		inline void operator+=(const Vec3& rhs) { this->x += rhs.x; this->y += rhs.y; this->z += rhs.z; }
+		inline void operator-=(const Vec3& rhs) { this->x -= rhs.x; this->y -= rhs.y; this->z -= rhs.z; }
+		inline void operator*=(const F32& rhs) { this->x *= rhs; this->y *= rhs; this->z *= rhs; }
 
-		inline F32 operator[](const int i) { if (i == 0) return mX; else if (i == 1) return mY; else if (i == 2) return mZ; else throw; }
-		inline Vec3 operator-() const { return Vec3(-mX, -mY, -mZ); }
+		inline F32 operator[](const int i) { if (i == 0) return this->x; else if (i == 1) return this->y; else if (i == 2) return this->z; else throw; }
+		inline Vec3 operator-() const { return Vec3(-this->x, -this->y, -this->z); }
 
 		friend std::ostream & operator<<(std::ostream & os, const Vec3 & v);
 
@@ -50,7 +50,7 @@ namespace Palette3D
 		F32 distance(const Vec3& other) const;
 		F32 squaredDistance(const Vec3& other) const;
 
-		inline Vec2 xy() { return Vec2(mX, mY); }
+		inline Vec2 xy() { return Vec2(this->x, this->y); }
 	};
 
 }

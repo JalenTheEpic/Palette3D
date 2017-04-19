@@ -16,29 +16,29 @@ namespace Palette3D
 	{
 		/// Member variables.
 	public:
-		F32 mX;
-		F32 mY;
+		F32 x;
+		F32 y;
 		
 		/// Constructor and Destructor.
 	public:
-		inline Vec2(const F32 x = 0.0f, const F32 y = 0.0f) : mX(x), mY(y) {}
-		inline Vec2(const Vec2& rhs):mX(rhs.mX), mY(rhs.mY) {}
+		inline Vec2(const F32 x = 0.0f, const F32 y = 0.0f) : x(x), y(y) {}
+		inline Vec2(const Vec2& rhs):x(rhs.x), y(rhs.y) {}
 		inline ~Vec2() {}
 
 		/// Operator functions.
 	public:
-		inline Vec2 operator+(const Vec2& rhs) const { return Vec2(mX + rhs.mX, mY + rhs.mY); }
-		inline Vec2 operator-(const Vec2& rhs) const { return Vec2(mX - rhs.mX, mY -  rhs.mY); }
-		inline Vec2 operator*(const F32& rhs) const { return Vec2(mX * rhs, mY * rhs); }
+		inline Vec2 operator+(const Vec2& rhs) const { return Vec2(this->x + rhs.x, this->y + rhs.y); }
+		inline Vec2 operator-(const Vec2& rhs) const { return Vec2(this->x - rhs.x, this->y -  rhs.y); }
+		inline Vec2 operator*(const F32& rhs) const { return Vec2(this->x * rhs, this->y * rhs); }
 
-		inline void operator=(const Vec2& rhs) { mX = rhs.mX; mY = rhs.mY; }
+		inline void operator=(const Vec2& rhs) { this->x = rhs.x; this->y = rhs.y; }
 
-		inline void operator+=(const Vec2& rhs) { mX += rhs.mX; mY += rhs.mY; }
-		inline void operator-=(const Vec2& rhs) { mX -= rhs.mX; mY -= rhs.mY; }
-		inline void operator*=(const F32& rhs) { mX *= rhs; mY *= rhs; }
+		inline void operator+=(const Vec2& rhs) { this->x += rhs.x; this->y += rhs.y; }
+		inline void operator-=(const Vec2& rhs) { this->x -= rhs.x; this->y -= rhs.y; }
+		inline void operator*=(const F32& rhs) { this->x *= rhs; this->y *= rhs; }
 
-		inline F32 operator[](const int i) const { if (i == 0) return mX; else if (i == 1) return mY; else throw; }
-		inline Vec2 operator-() const { return Vec2(-mX, -mY); }
+		inline F32 operator[](const int i) const { if (i == 0) return this->x; else if (i == 1) return this->y; else throw; }
+		inline Vec2 operator-() const { return Vec2(-this->x, -this->y); }
 
 		friend std::ostream& operator<< (std::ostream& os, const Vec2& v);
 
