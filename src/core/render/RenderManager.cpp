@@ -7,7 +7,7 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 
 namespace Palette3D
 {
-
+	template<> RenderManager * Singleton<RenderManager>::mspInstance = nullptr;
 
 
 	void RenderManager::initWindow()

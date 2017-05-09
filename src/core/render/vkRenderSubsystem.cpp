@@ -5,6 +5,7 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 */
 #include <core\render\vkRenderSubsystem.h>
 
+
 namespace Palette3D
 {
 
@@ -24,9 +25,14 @@ namespace Palette3D
 
 		initWindow();
 		initVkInstance();
+
+		initVkSurface();
+		bindWindow();
 	
 		choosePhysicalDevice();
 		initLogicalDevice();
+
+		
 
 
 
@@ -119,6 +125,10 @@ namespace Palette3D
 
 	}
 
+	void VkRenderSubSystem::initDebugCallback()
+	{
+	}
+
 	void VkRenderSubSystem::choosePhysicalDevice()
 	{
 		//see how many vulkan supported devices we have
@@ -203,8 +213,22 @@ namespace Palette3D
 		 VkResult result = vkCreateDevice(mPhysicalDevice, &deviceCreateInfo,nullptr, &mLogicalDevice);
 		 assert(result == VK_SUCCESS);
 
-		 vkGetDeviceQueue(mLogicalDevice,0,0,&graphicsQueue);
+		 vkGetDeviceQueue(mLogicalDevice,0,0,&mGraphicsQueue);
 		
+	}
+
+	void VkRenderSubSystem::initVkSurface()
+	{
+		
+	}
+
+	void VkRenderSubSystem::bindWindow()
+	{
+
+
+	
+
+
 	}
 
 

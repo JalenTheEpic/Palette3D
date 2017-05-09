@@ -171,6 +171,9 @@
     <ClInclude Include="..\..\include\core\render\Render.h" />
     <ClInclude Include="..\..\include\core\render\RenderManager.h" />
     <ClInclude Include="..\..\include\core\render\vkRenderSubsystem.h" />
+    <ClInclude Include="..\..\include\core\render\vulkan\VulkanDevice.h" />
+    <ClInclude Include="..\..\include\core\render\vulkan\VulkanInstance.h" />
+    <ClInclude Include="..\..\include\core\render\vulkan\VulkanLayerAndExtension.h" />
     <ClInclude Include="..\..\include\debugging\Exception.h" />
     <ClInclude Include="..\..\include\templates\Singleton.h" />
   </ItemGroup>
@@ -184,6 +187,9 @@
     <ClCompile Include="..\..\src\core\render\glRenderSubsystem.cpp" />
     <ClCompile Include="..\..\src\core\render\RenderManager.cpp" />
     <ClCompile Include="..\..\src\core\render\vkRenderSubsystem.cpp" />
+    <ClCompile Include="..\..\src\core\render\vulkan\VulkanDevice.cpp" />
+    <ClCompile Include="..\..\src\core\render\vulkan\VulkanInstance.cpp" />
+    <ClCompile Include="..\..\src\core\render\vulkan\VulkanLayerAndExtension.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

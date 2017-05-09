@@ -27,18 +27,22 @@ namespace Palette3D
 		VkInstance mVkInstance;
 		VkPhysicalDevice mPhysicalDevice;
 		VkDevice mLogicalDevice;
-		VkQueue graphicsQueue;
+		VkQueue mGraphicsQueue;
+		VkSurfaceKHR mSurface;
 
 		// !----------INIT FUNCTIONS----------!
 		//Initializes Vulkan. Calls other functions in this section
 		void initWindow();
 		void initVulkan();
 		void initVkInstance();
+		void initDebugCallback();
 		void checkValidationLayers();
 		void choosePhysicalDevice();
 		void initLogicalDevice();
 		
-
+		void initCommandBuffer();
+		void initVkSurface();
+		void bindWindow();
 		// !----------UTILITY FUNCTIONS----------!
 		//checks if the device has the functionality we want
 		//TODO:: FINISH THIS

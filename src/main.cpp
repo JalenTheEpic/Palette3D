@@ -3,20 +3,10 @@
 
 #include <iostream>
 
-int main() {
+int main() 
+{
 	
 	
-
-
-	Palette3D::VkRenderSubSystem renderer;
-
-	Palette3D::Matrix4 matrix;
-	Palette3D::Vec4 vec;
-	auto test = matrix * vec;
-
-	while (!glfwWindowShouldClose(renderer.mWindow)) {
-		glfwPollEvents();
-	}
 
 
 

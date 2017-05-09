@@ -22,22 +22,22 @@ namespace Palette3D
 		// @@@@@ ATTRIBUTES @@@@@ //
 	protected:
 		/// The pointer to the singleton
-		static T * msInstance;
+		static T * mspInstance;
 
 		// @@@@@ CONSTRUCTOR / DESTRUCTOR @@@@@ //
 	public:
 		/// The default constructor
 		explicit Singleton()
 		{
-			if (msInstance != nullptr)
+			if (mspInstance != nullptr)
 				THROW_EXCEPTION("Singleton already exists!", ExceptionType::InvalidOperation);
-			msInstance = static_cast<T*>(this);
+			mspInstance = static_cast<T*>(this);
 		}
 
 		/// The destructor.  
 		virtual ~Singleton()
 		{
-			msInstance = nullptr;
+			mspInstance = nullptr;
 		}
 
 		// @@@@@ METHODS @@@@@ //
@@ -45,9 +45,9 @@ namespace Palette3D
 		/// Returns a pointer to the one-and-only singleton (throws a ssurge::Exception if no singleton).
 		static T * getInstance()
 		{
-			if (msInstance == nullptr)
+			if (mspInstance == nullptr)
 				THROW_EXCEPTION("Singleton does not exist!", ExceptionType::NullReference);
-			return msInstance;
+			return mspInstance;
 		}
 
 	};
