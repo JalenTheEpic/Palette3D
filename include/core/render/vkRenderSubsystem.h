@@ -49,7 +49,7 @@ namespace Palette3D
 		bool checkPhysicalDevice(VkPhysicalDevice &device);
 
 	public:
-		GLFWwindow* mWindow;
+		GLFWwindow* mpWindow;
 
 
 	public:
