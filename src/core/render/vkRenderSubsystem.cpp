@@ -17,23 +17,11 @@ namespace Palette3D
 		glfwInit();
 
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-		mWindow = glfwCreateWindow(800, 600, "Vulkan window", nullptr, nullptr);
+		mpWindow = glfwCreateWindow(800, 600, "Vulkan window", nullptr, nullptr);
 	}
 
 	void VkRenderSubSystem::initVulkan()
 	{
-
-		initWindow();
-		initVkInstance();
-
-		initVkSurface();
-		bindWindow();
-	
-		choosePhysicalDevice();
-		initLogicalDevice();
-
-		
-
 
 
 	}
@@ -252,7 +240,14 @@ namespace Palette3D
 	// !----------CONSTRUCTORS/DESTRUCTORS----------!
 	VkRenderSubSystem::VkRenderSubSystem()
 	{
-		initVulkan();
+		initWindow();
+		initVkInstance();
+
+		initVkSurface();
+		bindWindow();
+
+		choosePhysicalDevice();
+		initLogicalDevice();
 	}
 
 	VkRenderSubSystem::~VkRenderSubSystem()
@@ -260,7 +255,7 @@ namespace Palette3D
 		
 		vkDestroyDevice(mLogicalDevice, nullptr);
 		vkDestroyInstance(mVkInstance, nullptr);
-		glfwDestroyWindow(mWindow);
+		glfwDestroyWindow(mpWindow);
 
 		glfwTerminate();
 	}

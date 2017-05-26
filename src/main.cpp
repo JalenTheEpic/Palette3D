@@ -8,7 +8,8 @@ int main()
 	
 	
 
-
+	Palette3D::VkRenderSubSystem r;
+	r.debugRun();
 
 	return 0;
 }

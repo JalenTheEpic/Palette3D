@@ -1,3 +1,9 @@
+/*
+Palette3D
+Copyright (c) 2017 Jalen Cureton
+Licensed under the terms of the MIT License (see LICENSE.txt)
+*/
+
 #ifndef _CORE_ATOMIC_TYPES_
 #define _CORE_ATOMIC_TYPES_
 

@@ -1,6 +1,6 @@
 /*
 Palette3D
-Copyright (c) 2017 Jalen Cureton, William Buell
+Copyright (c) 2017 Jalen Cureton
 Licensed under the terms of the MIT License (see LICENSE.txt)
 */
 
@@ -21,6 +21,7 @@ namespace Palette3D
 	class Matrix3
 	{
 	protected:
+
 		F32 mMat[3][3]; //[row] [col]
 
 	public:
@@ -35,8 +36,26 @@ namespace Palette3D
 			memcpy(mMat, m, 9 * sizeof(F32));
 		}
 
+		//the following comment is more for testing than it is to be actually useful
 		
-
+		/// <summary>
+		/// Constructor for Matrix 3 that takes in 9 float values
+		/// </summary>
+		/// <example> 
+		/// This sample shows how to call the Matrix 3 constructor.
+		/// <code>
+		/// class TestClass 
+		/// {
+		///     static int Main() 
+		///     {
+		///         Palette3D::Matrix3 m(1.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 1.f);
+		///			//|1, 0, 0|
+		///			//|0, 1, 0|
+		///			//|0, 0, 1|
+		///     }
+		/// }
+		/// </code>
+		/// </example>
 		Matrix3(F32 e00, F32 e01, F32 e02,
 				F32 e10, F32 e11, F32 e12,
 				F32 e20, F32 e21, F32 e22) 
@@ -56,16 +75,23 @@ namespace Palette3D
 		{
 			//delete[] mMat;
 		}
-
+		
+		/// <summary>
+		/// Returns a pointer to a specified row. This is the const overide.
+		/// </summary>
 		inline const F32 * operator[] (size_t row) const 
 		{
 			return mMat[row];
 		}
 
+		/// <summary>
+		/// Returns a pointer to a specified row. 
+		/// </summary>
 		inline  F32 * operator[] (size_t row) 
 		{
 			return mMat[row];
 		}
+
 
 		inline void operator= (const Matrix3& other) 
 		{
@@ -91,17 +117,44 @@ namespace Palette3D
 		
 		bool operator!= (const Matrix3& other) const;
 		bool operator== (const Matrix3& other) const;
-
+		
+		
+		/// <summary>
+		/// Returns the transposed version of this matrix 
+		/// </summary>
 		Matrix3 transpose() const;
+
+		/// <summary>
+		/// Returns the determinant of this matrix
+		/// </summary>
 		F32 determinant() const;
 
+		/// <summary>
+		/// Returns the a vector 3 of the row
+		/// </summary>
 		Vec3 getRow(std::size_t row) const;
+
+
+		/// <summary>
+		/// Returns the a vector 3 of the row
+		/// </summary>
+		Vec3 getCol(std::size_t col) const;
+
+		/// <summary>
+		/// Sets the specified row of this matrix to the contents of the vector
+		/// </summary>
 		void setRow(std::size_t row, Vec3 v);
 
-		Vec3 getCol(std::size_t col) const;
+		
+
+		/// <summary>
+		/// Sets the specified column of this matrix to the contents of the vector 
+		/// </summary>
 		void setCol(std::size_t col, Vec3 v);
 
-
+		/// <summary>
+		///  << Override to allow matrix to be printed through std::cout
+		/// </summary>
 		friend std::ostream& operator<< (std::ostream& os, const Matrix3& m);
 		
 
