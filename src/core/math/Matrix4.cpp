@@ -100,7 +100,15 @@ namespace Palette3D
 	}
 	Matrix4 Matrix4::transpose() const
 	{
-		return Matrix4();
+		F32 tmp[4][4];
+		for (int i = 0; i<4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				tmp[i][j] = mMat[j][i];
+			}
+		}
+		return Matrix4(tmp);
 	}
 	F32 Matrix4::determinant() const
 	{
@@ -141,18 +149,84 @@ namespace Palette3D
 
 	Vec4 Matrix4::getRow(std::size_t row) const
 	{
-		return Vec4();
+		return Vec4(mMat[row][0], mMat[row][1], mMat[row][2], mMat[row][3]);
 	}
-	void Matrix4::setRow(std::size_t row, Vec4 v)
+	void Matrix4::setRow(std::size_t row, const Vec4 & v)
 	{
+		mMat[row][0] = v.x;
+		mMat[row][1] = v.y;
+		mMat[row][2] = v.z;
+		mMat[row][3] = v.w;
 	}
 	
 	Vec4 Matrix4::getCol(std::size_t col) const
 	{
-		return Vec4();
+		return Vec4(mMat[0][col], mMat[1][col], mMat[2][col], mMat[3][col]);
 	}
-	void Matrix4::setCol(std::size_t col, Vec4 v)
+	void Matrix4::setCol(std::size_t col, const Vec4 &  v)
 	{
+	}
+	Matrix4 Matrix4::translate(F32 x, F32 y, F32 z)
+	{
+		return Matrix4(
+			1.f, 0.f, 0.f, x,
+			0.f, 1.f, 0.f, y,
+			0.f, 0.f, 1.f, z,
+			0.f, 0.f, 0.f, 1.f);
+	}
+	Matrix4 Matrix4::scale(F32 x, F32 y, F32 z)
+	{
+		return Matrix4(
+			x, 0.f, 0.f, 0.f,
+			0.f, y, 0.f, 0.f,
+			0.f, 0.f, z, 0.f,
+			0.f, 0.f, 0.f, 1.f);
+	}
+	Matrix4 Matrix4::rotateX(F32 angle)
+	{
+		return Matrix4(
+			1.f, 0.f, 0.f, 0.f,
+			0.f, cos(angle), -sin(angle), 0.f,
+			0.f, sin(angle), cos(angle), 0.f,
+			0.f, 0.f, 0.f, 1.f);
+	}
+	Matrix4 Matrix4::rotateY(F32 angle)
+	{
+		return Matrix4(
+			cos(angle), 0.f, sin(angle), 0.f,
+			0.f, 1.f, 0.f, 0.f,
+			-sin(angle), 0.f, cos(angle), 0.f,
+			0.f, 0.f, 0.f, 1.f);
+	}
+	Matrix4 Matrix4::rotateZ(F32 angle)
+	{
+		return Matrix4(
+			cos(angle), -sin(angle), 0.f, 0.f,
+			sin(angle), cos(angle), 0.f, 0.f,
+			0.f, 0.f, 1.f, 0.f,
+			0.f, 0.f, 0.f, 1.f);
+	}
+	Matrix4 Matrix4::rotation(F32 xrot, F32 yrot, F32 zrot)
+	{
+		Matrix4 tmp = Matrix4::IDENTITY;
+		
+		if (xrot)
+		{
+			tmp *= Matrix4::rotateX(xrot);
+		}
+		
+		if (yrot)
+		{
+			tmp *= Matrix4::rotateY(yrot);
+		}
+		
+		if (zrot)
+		{
+			tmp *= Matrix4::rotateZ(zrot);
+		}
+
+		return tmp;
+
 	}
 	std::ostream & operator<<(std::ostream & os, const Matrix4 & m)
 	{

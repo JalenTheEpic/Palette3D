@@ -103,11 +103,12 @@ namespace Palette3D
 		F32 determinant() const;
 
 		Vec4 getRow(std::size_t row) const;
-		void setRow(std::size_t row, Vec4 v);
+		void setRow(std::size_t row, const Vec4 &  v);
 
 		Vec4 getCol(std::size_t col) const;
-		void setCol(std::size_t col, Vec4 v);
+		void setCol(std::size_t col, const Vec4 &  v);
 
+		
 
 		friend std::ostream& operator<< (std::ostream& os, const Matrix4& m);
 
@@ -116,6 +117,22 @@ namespace Palette3D
 	public:
 		static const Matrix4 ZERO;
 		static const Matrix4 IDENTITY;
+
+		static Matrix4 translate(F32 x = 0.f, F32 y = 0.f, F32 z = 0.f);
+
+		static Matrix4 scale(F32 x=1.f, F32 y=1.f, F32 z=1.f);
+
+		static Matrix4 rotateX(F32 angle);
+
+		static Matrix4 rotateY(F32 angle);
+
+		static Matrix4 rotateZ(F32 angle);
+
+		static Matrix4 rotation(F32 xrot, F32 yrot, F32 zrot);
+		
+		
+
+		static Matrix4 projection();
 
 
 	};
