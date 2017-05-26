@@ -52,6 +52,12 @@
     <Filter Include="Source Files\Core\Render\Vulkan">
       <UniqueIdentifier>{f34a82c7-8482-4a98-a4b0-d7eaa38d2b7d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Render\GL">
+      <UniqueIdentifier>{83733306-0992-43fd-b089-879a512ca986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Render\GL">
+      <UniqueIdentifier>{a4e4faad-98bf-4f34-aa48-c4e95fd94833}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\core\math\Matrix3.h">
@@ -90,9 +96,6 @@
     <ClInclude Include="..\..\include\core\atomic\Types.h">
       <Filter>Header Files\Core\Atomic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\core\render\glRenderSubsystem.h">
-      <Filter>Header Files\Core\Render</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\core\render\Render.h">
       <Filter>Header Files\Core\Render</Filter>
     </ClInclude>
@@ -107,6 +110,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\core\render\vulkan\VulkanDevice.h">
       <Filter>Header Files\Core\Render\Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\core\window\WindowManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\core\render\gl\glRenderSubsystem.h">
+      <Filter>Header Files\Core\Render\GL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +146,6 @@
     <ClCompile Include="..\..\src\core\math\Quaternion.cpp">
       <Filter>Source Files\Core\Math</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\render\glRenderSubsystem.cpp">
-      <Filter>Source Files\Core\Render</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\core\render\vulkan\VulkanDevice.cpp">
       <Filter>Source Files\Core\Render\Vulkan</Filter>
     </ClCompile>
@@ -148,6 +154,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\core\render\vulkan\VulkanLayerAndExtension.cpp">
       <Filter>Source Files\Core\Render\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\window\WindowManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\render\glRenderSubsystem.cpp">
+      <Filter>Source Files\Core\Render\GL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
