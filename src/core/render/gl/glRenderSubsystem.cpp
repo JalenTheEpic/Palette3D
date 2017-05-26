@@ -50,69 +50,7 @@ namespace Palette3D
 		//This allows us to handle inputs 
 		glfwSetKeyCallback(window, key_callback);
 
-		//Vertex shader compilation 
-		const GLchar* vs =
-			"#version 330 core \n"
-
-			"layout(location = 0) in vec3 position;\n"
-
-			"void main()\n"
-			"{\n"
-			"gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
-			"};\n\0";
-
-		GLuint vertexShader;
-		vertexShader = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vertexShader, 1, &vs, NULL);
-		glCompileShader(vertexShader);
-		GLint success;
-		GLchar log[512];
-		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
-			glGetShaderInfoLog(vertexShader, 512, NULL, log);
-			std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << log << std::endl;
-		}
-
-
-		//Fragment shader compilation
-		const GLchar* fs =
-			"#version 330 core\n"
-
-			"out vec4 color;\n"
-
-			"void main()\n"
-			"{\n"
-			"	color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-			"};\n\0";
-
-		GLuint fragmentShader;
-		fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fragmentShader, 1, &fs, NULL);
-		glCompileShader(fragmentShader);
-		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
-			glGetShaderInfoLog(fragmentShader, 512, NULL, log);
-			std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << log << std::endl;
-		}
-
-		//Making a program to link compiled shaders
-		GLuint shaderProgram;
-		shaderProgram = glCreateProgram();
-		glAttachShader(shaderProgram, vertexShader);
-		glAttachShader(shaderProgram, fragmentShader);
-		glLinkProgram(shaderProgram);
-		glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-		if (!success) {
-			glGetProgramInfoLog(shaderProgram, 512, NULL, log);
-			std::cout << "ERROR::SHADER::LINKING::FAILED\n" << log << std::endl;
-		}
-
-		glDeleteShader(vertexShader);
-		glDeleteShader(fragmentShader);
-
-		
+		Program prog("..\\..\\Shaders\\test.vert","..\\..\\Shaders\\test.frag");
 
 		GLfloat vertices[] = {
 			0.5f,  0.5f, 0.0f,  // Top Right
@@ -165,8 +103,7 @@ namespace Palette3D
 		//Enables Vertex arribute 0
 		glEnableVertexAttribArray(0);
 
-		glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
-		
+		glBindBuffer(GL_ARRAY_BUFFER, 0);		
 		
 		
 		//unbind VAO
@@ -183,10 +120,10 @@ namespace Palette3D
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			// Draw our first triangle
-			glUseProgram(shaderProgram);
+			
+			prog.use();
 			glBindVertexArray(VAO);
-			//glDrawArrays(GL_TRIANGLES, 0, 6);
+			
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 			glBindVertexArray(0);
 

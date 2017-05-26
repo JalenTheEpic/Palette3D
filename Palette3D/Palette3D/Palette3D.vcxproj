@@ -176,22 +176,26 @@
     <ClInclude Include="..\..\include\core\render\vulkan\VulkanLayerAndExtension.h" />
     <ClInclude Include="..\..\include\core\window\WindowManager.h" />
     <ClInclude Include="..\..\include\debugging\Exception.h" />
+    <ClInclude Include="..\..\include\game\camera\Camera.h" />
     <ClInclude Include="..\..\include\templates\Singleton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\include\core\render\gl\Program.h" />
     <ClCompile Include="..\..\src\core\math\Matrix3.cpp" />
     <ClCompile Include="..\..\src\core\math\Matrix4.cpp" />
     <ClCompile Include="..\..\src\core\math\Quaternion.cpp" />
     <ClCompile Include="..\..\src\core\math\Vec2.cpp" />
     <ClCompile Include="..\..\src\core\math\Vec3.cpp" />
     <ClCompile Include="..\..\src\core\math\Vec4.cpp" />
-    <ClCompile Include="..\..\src\core\render\glRenderSubsystem.cpp" />
+    <ClCompile Include="..\..\src\core\render\gl\glRenderSubsystem.cpp" />
+    <ClCompile Include="..\..\src\core\render\gl\Program.cpp" />
     <ClCompile Include="..\..\src\core\render\RenderManager.cpp" />
-    <ClCompile Include="..\..\src\core\render\vkRenderSubsystem.cpp" />
+    <ClCompile Include="..\..\src\core\render\vulkan\vkRenderSubsystem.cpp" />
     <ClCompile Include="..\..\src\core\render\vulkan\VulkanDevice.cpp" />
     <ClCompile Include="..\..\src\core\render\vulkan\VulkanInstance.cpp" />
     <ClCompile Include="..\..\src\core\render\vulkan\VulkanLayerAndExtension.cpp" />
     <ClCompile Include="..\..\src\core\window\WindowManager.cpp" />
+    <ClCompile Include="..\..\src\game\camera\Camera.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

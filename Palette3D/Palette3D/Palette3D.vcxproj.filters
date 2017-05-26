@@ -58,6 +58,18 @@
     <Filter Include="Source Files\Core\Render\GL">
       <UniqueIdentifier>{a4e4faad-98bf-4f34-aa48-c4e95fd94833}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{72b09a4d-2edd-44ed-94e7-2e35bd27eb12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Camera">
+      <UniqueIdentifier>{019c3d3f-28c5-471e-b589-ee39dec5864e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{cdf033e7-6349-4f05-bfec-29d1ead23c5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Camera">
+      <UniqueIdentifier>{b877453f-7db9-4a9c-ac5d-90cf34b6a655}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\core\math\Matrix3.h">
@@ -117,6 +129,9 @@
     <ClInclude Include="..\..\include\core\render\gl\glRenderSubsystem.h">
       <Filter>Header Files\Core\Render\GL</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\game\camera\Camera.h">
+      <Filter>Header Files\Game\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -140,9 +155,6 @@
     <ClCompile Include="..\..\src\core\render\RenderManager.cpp">
       <Filter>Source Files\Core\Render</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\render\vkRenderSubsystem.cpp">
-      <Filter>Source Files\Core\Render</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\core\math\Quaternion.cpp">
       <Filter>Source Files\Core\Math</Filter>
     </ClCompile>
@@ -158,7 +170,19 @@
     <ClCompile Include="..\..\src\core\window\WindowManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\render\glRenderSubsystem.cpp">
+    <ClCompile Include="..\..\src\game\camera\Camera.cpp">
+      <Filter>Source Files\Game\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\core\render\gl\Program.h">
+      <Filter>Header Files\Core\Render\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\render\gl\Program.cpp">
+      <Filter>Source Files\Core\Render\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\render\vulkan\vkRenderSubsystem.cpp">
+      <Filter>Source Files\Core\Render\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\render\gl\glRenderSubsystem.cpp">
       <Filter>Source Files\Core\Render\GL</Filter>
     </ClCompile>
   </ItemGroup>

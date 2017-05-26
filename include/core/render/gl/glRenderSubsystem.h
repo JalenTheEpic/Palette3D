@@ -5,8 +5,8 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 */
 
 
-#ifndef _CORE_RENDER_GLRENDERSUBSYSTEM_
-#define _CORE_RENDER_GLRENDERSUBSYSTEM_
+#ifndef _CORE_RENDER_GL_GLRENDERSUBSYSTEM_
+#define _CORE_RENDER_GL_GLRENDERSUBSYSTEM_
 #define GLEW_STATIC
 #define GLFW_DLL
 #define GLM_FORCE_RADIANS
@@ -14,6 +14,7 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <core\render\gl\Program.h>
 
 
 #include <iostream>
@@ -36,4 +37,4 @@ namespace Palette3D
 
 }
 
-#endif // !_CORE_RENDER_GLRENDERSUBSYSTEM_
+#endif // !_CORE_RENDER_GL_GLRENDERSUBSYSTEM_
