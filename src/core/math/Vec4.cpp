@@ -6,7 +6,7 @@ namespace Palette3D
 	{
 		return os << "Vector4(" << v.x << ", " << v.y << "," << v.z << "," << v.w << ")" << std::endl;
 	}
-	Vec4 Vec4::operator*(const Matrix4 & rhs) const
+	/*Vec4 Vec4::operator*(const Matrix4 & rhs) const
 	{
 		return Vec4(
 			this->x * rhs[0][0] + this->y * rhs[0][1] + this->z * rhs[0][2] + this->w * rhs[0][3],
@@ -14,7 +14,7 @@ namespace Palette3D
 			this->x * rhs[2][0] + this->y * rhs[2][1] + this->z * rhs[2][2] + this->w * rhs[2][3],
 			this->x * rhs[3][0] + this->y * rhs[3][1] + this->z * rhs[3][2] + this->w * rhs[3][3]
 		);
-	}
+	}*/
 	
 	Vec4 Vec4::cross(const Vec4 & o)
 	{

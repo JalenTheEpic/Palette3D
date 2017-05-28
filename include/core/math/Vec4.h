@@ -8,7 +8,7 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #define _CORE_MATH_VEC4_
 #include <core\math\Vec3.h>
 #include <iostream>
-#include <core\math\Matrix4.h>
+
 namespace Palette3D
 {
 	class Vec4
@@ -33,14 +33,12 @@ namespace Palette3D
 		inline Vec4 operator+(const Vec4& rhs) const { return Vec4(this->x + rhs.x, this->y + rhs.y, this->z + rhs.z, this->w + rhs.w); }
 		inline Vec4 operator-(const Vec4& rhs) const { return Vec4(this->x - rhs.x, this->y - rhs.y, this->z - rhs.z, this->w - rhs.w); }
 		inline Vec4 operator*(const F32& rhs) const { return Vec4(this->x * rhs, this->y * rhs, this->z * rhs, this->w * rhs); }
-		Vec4 operator*(const Matrix4& rhs) const;
+
 		inline void operator=(const Vec4& rhs) { this->x = rhs.x; this->y = rhs.y; this->z = rhs.z; this->w = rhs.w; }
 
 		inline void operator+=(const Vec4& rhs) { this->x += rhs.x; this->y += rhs.y; this->z += rhs.z; this->w += rhs.w; }
 		inline void operator-=(const Vec4& rhs) { this->x -= rhs.x; this->y -= rhs.y; this->z -= rhs.z; this->w -= rhs.w; }
 		inline void operator*=(const F32& rhs) { this->x *= rhs; this->y *= rhs; this->z *= rhs; this->w *= rhs; }
-
-		inline void operator*=(const Matrix4& rhs) { *this = *this*rhs}
 
 		inline F32 operator[](const int i) { if (i == 0) return this->x; else if (i == 1) return this->y; else if (i == 2) return this->z; else if (i == 3) return this->w; else throw; }
 		inline Vec4 operator-() const { return Vec4(-this->x, -this->y, -this->z, -this->w); }

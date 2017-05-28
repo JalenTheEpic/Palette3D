@@ -129,10 +129,7 @@ namespace Palette3D
 		static Matrix4 rotateZ(F32 angle);
 
 		static Matrix4 rotation(F32 xrot, F32 yrot, F32 zrot);
-		
-		
-
-		static Matrix4 projection();
+	
 
 
 	};
