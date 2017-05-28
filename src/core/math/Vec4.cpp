@@ -6,9 +6,25 @@ namespace Palette3D
 	{
 		return os << "Vector4(" << v.x << ", " << v.y << "," << v.z << "," << v.w << ")" << std::endl;
 	}
-	Vec4 Vec4::cross(const Vec4 & other)
+	Vec4 Vec4::operator*(const Matrix4 & rhs) const
 	{
-		return Vec4();
+		return Vec4(
+			this->x * rhs[0][0] + this->y * rhs[0][1] + this->z * rhs[0][2] + this->w * rhs[0][3],
+			this->x * rhs[1][0] + this->y * rhs[1][1] + this->z * rhs[1][2] + this->w * rhs[1][3],
+			this->x * rhs[2][0] + this->y * rhs[2][1] + this->z * rhs[2][2] + this->w * rhs[2][3],
+			this->x * rhs[3][0] + this->y * rhs[3][1] + this->z * rhs[3][2] + this->w * rhs[3][3]
+		);
+	}
+	
+	Vec4 Vec4::cross(const Vec4 & o)
+	{
+		if (this->w != 0 || o.w != 0)
+			//should we error here?
+		return  Vec4(
+			this->y*o.z - o.y*this->z,
+			o.x*this->z - this->x*o.z,
+			this->x*o.y - o.x*this->y,
+			0.0f);
 	}
 	F32 Vec4::dot(const Vec4 & other)
 	{

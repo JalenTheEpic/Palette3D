@@ -6,13 +6,15 @@ namespace Palette3D
 	{
 		return os << "Vector3(" << v.x << ", " << v.y <<"," << v.z << ")" << std::endl;
 	}
-	Vec3 Vec3::cross(const Vec3 & other)
+	Vec3 Vec3::cross(const Vec3 & o)
 	{
-		return Vec3((this->y*other.z - this->z*other.y), (this->z*other.x - this->x*other.z), (this->x*other.y - this->y*other.x));
+		return Vec3((this->y*o.z - this->z*o.y), 
+			(this->z*o.x - this->x*o.z), 
+			(this->x*o.y - this->y*o.x));
 	}
-	F32 Vec3::dot(const Vec3 & other)
+	F32 Vec3::dot(const Vec3 & o)
 	{
-		return this->x * other.x + this->y * other.y + this->z * other.z;
+		return this->x * o.x + this->y * o.y + this->z * o.z;
 	}
 	F32 Vec3::magnitude() const
 	{
@@ -22,13 +24,13 @@ namespace Palette3D
 	{
 		return this->x*this->x + this->y*this->y + this->z*this->z;
 	}
-	F32 Vec3::distance(const Vec3 & other) const
+	F32 Vec3::distance(const Vec3 & o) const
 	{
-		return static_cast<F32>(sqrt(powf(other.x - this->x, 2) + powf(other.y - this->y, 2) + powf(other.z - this->z, 2)));
+		return static_cast<F32>(sqrt(powf(o.x - this->x, 2) + powf(o.y - this->y, 2) + powf(o.z - this->z, 2)));
 	}
-	F32 Vec3::squaredDistance(const Vec3 & other) const
+	F32 Vec3::squaredDistance(const Vec3 & o) const
 	{
-		return static_cast<F32>(powf(other.x - this->x, 2) + powf(other.y - this->y, 2) + powf(other.z - this->z, 2));;
+		return static_cast<F32>(powf(o.x - this->x, 2) + powf(o.y - this->y, 2) + powf(o.z - this->z, 2));;
 	}
 }
 

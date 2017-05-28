@@ -79,6 +79,8 @@ namespace Palette3D
 			std::cout << "ERROR::SHADER::LINKING::FAILED\n" << log << std::endl;
 		}
 
+
+
 		glDeleteShader(vertexShader);
 		glDeleteShader(fragmentShader);
 	}
