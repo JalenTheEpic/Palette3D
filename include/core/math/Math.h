@@ -6,6 +6,7 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #ifndef _CORE_MATH_MATH_
 #define _CORE_MATH_MATH_
 
+
 #include <core\math\Matrix3.h>
 #include <core\math\Matrix4.h>
 #include <core\math\Vec2.h>

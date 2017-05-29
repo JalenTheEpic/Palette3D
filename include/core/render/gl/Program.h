@@ -5,6 +5,7 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 
 #ifndef _CORE_RENDER_GL_PROGRAM_
 #define _CORE_RENDER_GL_PROGRAM_
+
 #include <GL\glew.h>
 #include <iostream>
 #include <map>
@@ -52,22 +53,12 @@ namespace Palette3D
 					x++;
 				}
 			}
-			glUniformMatrix3fv(mUniforms[name], 1, false, mgl);
+			glUniformMatrix3fv(mUniforms[name], 1, GL_FALSE, mgl);
 		};
 		inline void setUniform(GLchar * name, Matrix4 m) 
 		{
 			check();
-			GLfloat mgl[16];
-			size_t x = 0;
-			for (size_t i = 0; i < 4; i++)
-			{
-				for (size_t j = 0; j < 4; j++)
-				{
-					mgl[x] = m.get(j,i);
-					x++;
-				}
-			}
-			glUniformMatrix3fv(mUniforms[name], 1, false, mgl);
+			glUniformMatrix4fv(mUniforms[name], 1, GL_FALSE, m.mMat);
 		
 		
 		

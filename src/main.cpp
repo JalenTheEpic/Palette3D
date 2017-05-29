@@ -10,8 +10,8 @@ int main()
 	
 	//Palette3D::VkRenderSubSystem r;
 	//r.debugRun();
-	Vec4 v(4,4,4,4);
-	Matrix4 m = Matrix4::IDENTITY;
+	Vec4 v(1,0,0,1);
+	Matrix4 m = Matrix4::rotateZ(90);
 
 	
 	std::cout << m * v <<std::endl << std::endl;

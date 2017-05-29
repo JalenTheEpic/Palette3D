@@ -1,5 +1,15 @@
 #include <core\render\gl\glRenderSubsystem.h>
+
+#define GLFW_DLL
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <core\render\gl\Program.h>
 #include <core\render\gl\square.h>
+
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	
@@ -23,6 +33,7 @@ namespace Palette3D
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
+
 		//Making the window
 		GLFWwindow* window = glfwCreateWindow(800, 600, "Palette3D", nullptr, nullptr);
 		if (window == nullptr)
@@ -41,6 +52,8 @@ namespace Palette3D
 			//error
 		}
 
+		glEnable(GL_DEPTH_TEST);
+
 		//Retrieves the size of the framebuffer of the window.
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
@@ -54,6 +67,7 @@ namespace Palette3D
 		Program prog("..\\..\\Shaders\\test.vert","..\\..\\Shaders\\test.frag");
 
 		prog.addUniform("ourTexture");
+		prog.addUniform("transform");
 		UnitSquare square;
 
 
@@ -67,11 +81,9 @@ namespace Palette3D
 
 			//Draw phase
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
-
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			
-			prog.use();
-			square.draw();
+			square.draw(prog);
 			// Swap the buffers
 			glfwSwapBuffers(window);
 		}

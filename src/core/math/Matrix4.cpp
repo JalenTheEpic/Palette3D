@@ -1,4 +1,5 @@
 #include <core\math\Matrix4.h>
+#define PI 3.14159265358979323846f
 namespace Palette3D 
 {
 	const Matrix4 Matrix4::IDENTITY(1.f, 0.f, 0.f,0.f,
@@ -233,26 +234,26 @@ namespace Palette3D
 	}
 	Matrix4 Matrix4::rotateX(F32 angle)
 	{
-		angle = (F32) angle * 3.14159265358979 / 180.0;
+		angle = (F32) angle * PI / 180.0f;
 		
 		return Matrix4(
 			1.f, 0.f, 0.f, 0.f,
-			0.f, cos(angle), sin(angle), 0.f,
-			0.f, -sin(angle), cos(angle), 0.f,
+			0.f, cos(angle), -sin(angle), 0.f,
+			0.f, sin(angle), cos(angle), 0.f,
 			0.f, 0.f, 0.f, 1.f);
 	}
 	Matrix4 Matrix4::rotateY(F32 angle)
 	{
-		angle = (F32)angle * 3.14159265358979 / 180.0;
+		angle = (F32)angle * PI / 180.0f;
 		return Matrix4(
-			cos(angle), 0.f, -sin(angle), 0.f,
+			cos(angle), 0.f, sin(angle), 0.f,
 			0.f, 1.f, 0.f, 0.f,
-			sin(angle), 0.f, cos(angle), 0.f,
+			-sin(angle), 0.f, cos(angle), 0.f,
 			0.f, 0.f, 0.f, 1.f);
 	}
 	Matrix4 Matrix4::rotateZ(F32 angle)
 	{
-		angle = (F32)angle * 3.14159265358979 / 180.0;
+		angle = (F32)angle * PI / 180.0f;
 		return Matrix4(
 			cos(angle), -sin(angle), 0.f, 0.f,
 			sin(angle), cos(angle), 0.f, 0.f,

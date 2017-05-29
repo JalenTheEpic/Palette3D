@@ -14,6 +14,7 @@ namespace Palette3D
 		GLuint VBO; //Vertex buffer object
 		GLuint EBO;
 		GlTexture tex = GlTexture("..\\..\\Media\\container.jpg");
+		Matrix4 trans = Matrix4::translate(0,0,0);
 		UnitSquare() 
 		{
 
@@ -97,11 +98,13 @@ namespace Palette3D
 
 
 
-		void draw()
+		void draw(Program & p)
 		{
+			p.use();
+			p.setUniform("transform", trans);
 			tex.bind();
 			glBindVertexArray(VAO);
-
+			trans *= Matrix4::rotation(1,1,1);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 			glBindVertexArray(0);
 

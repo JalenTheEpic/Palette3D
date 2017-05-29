@@ -10,18 +10,19 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #include <core/math/Vec3.h>
 #include <core/math/Vec4.h>
 
-//TODO: Add matrix 3 stuff
+
 
 namespace Palette3D
 {
 	
 	class Matrix4
 	{
-	private:
+	
 		
-		F32 mMat[16];
+		
 
 	public:
+		F32 mMat[16];
 		Matrix4() {}
 
 		Matrix4(F32 m[4][4])
