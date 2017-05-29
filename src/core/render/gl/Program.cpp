@@ -4,6 +4,7 @@ namespace Palette3D
 {
 
 	
+	const Program * Program::mspActive = nullptr;
 
 	Program::Program(std::string vsloc, std::string fsloc)
 	{
@@ -90,9 +91,9 @@ namespace Palette3D
 		glDeleteProgram(mProg);
 	}
 
-	void Program::use()
+	void Program::use() const
 	{
-		//mspActive = this;
+		mspActive = this;
 		glUseProgram(mProg);
 	}
 

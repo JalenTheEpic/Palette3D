@@ -26,7 +26,7 @@ namespace Palette3D
 		Program(std::string vsloc, std::string fsloc);
 		~Program();
 
-		void use();
+		void use() const;
 		void addUniform(GLchar * name, UniformType type);
 		
 		
