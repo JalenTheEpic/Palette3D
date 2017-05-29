@@ -70,6 +70,9 @@
     <Filter Include="Source Files\Game\Camera">
       <UniqueIdentifier>{b877453f-7db9-4a9c-ac5d-90cf34b6a655}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Depend">
+      <UniqueIdentifier>{878a0b36-0418-4865-910c-52b321203979}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\core\math\Matrix3.h">
@@ -131,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\game\camera\Camera.h">
       <Filter>Header Files\Game\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\depend\stb_image.h">
+      <Filter>Header Files\Depend</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

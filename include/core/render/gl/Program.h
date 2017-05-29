@@ -53,7 +53,7 @@ namespace Palette3D
 					x++;
 				}
 			}
-			glUniformMatrix3fv(mUniforms[name], 1, true, mgl);
+			glUniformMatrix3fv(mUniforms[name], 1, false, mgl);
 		};
 		inline void setUniform(GLchar * name, Matrix4 m) 
 		{
@@ -68,7 +68,7 @@ namespace Palette3D
 					x++;
 				}
 			}
-			glUniformMatrix3fv(mUniforms[name], 1, true, mgl);
+			glUniformMatrix3fv(mUniforms[name], 1, false, mgl);
 		
 		
 		

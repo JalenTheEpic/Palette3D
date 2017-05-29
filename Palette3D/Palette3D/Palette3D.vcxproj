@@ -179,6 +179,7 @@
     <ClInclude Include="..\..\include\core\render\vulkan\VulkanLayerAndExtension.h" />
     <ClInclude Include="..\..\include\core\window\WindowManager.h" />
     <ClInclude Include="..\..\include\debugging\Exception.h" />
+    <ClInclude Include="..\..\include\depend\stb_image.h" />
     <ClInclude Include="..\..\include\game\camera\Camera.h" />
     <ClInclude Include="..\..\include\templates\Singleton.h" />
   </ItemGroup>

@@ -93,8 +93,11 @@ namespace Palette3D
 
 	void Program::use() const
 	{
-		mspActive = this;
+		
+		glUseProgram(0);
 		glUseProgram(mProg);
+		mspActive = this;
+		
 	}
 
 	void Program::addUniform(GLchar * name)

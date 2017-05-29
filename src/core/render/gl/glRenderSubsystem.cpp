@@ -1,4 +1,6 @@
 #include <core\render\gl\glRenderSubsystem.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include <depend\stb_image.h>
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	
@@ -109,6 +111,21 @@ namespace Palette3D
 		//unbind VAO
 		glBindVertexArray(0); 
 		
+
+
+
+
+
+
+
+
+		//Texture stuff
+		stbi_io_callbacks
+
+
+
+
+
 		while (!glfwWindowShouldClose(window))
 		{
 			//Proccesses events in queue
