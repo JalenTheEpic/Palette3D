@@ -1,5 +1,5 @@
 #include <core\render\gl\glRenderSubsystem.h>
-#include <core\render\gl\>
+#include <core\render\gl\square.h>
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	
@@ -53,8 +53,8 @@ namespace Palette3D
 
 		Program prog("..\\..\\Shaders\\test.vert","..\\..\\Shaders\\test.frag");
 
-	
-
+		prog.addUniform("ourTexture");
+		UnitSquare square;
 
 
 
@@ -71,8 +71,7 @@ namespace Palette3D
 
 			
 			prog.use();
-			
-
+			square.draw();
 			// Swap the buffers
 			glfwSwapBuffers(window);
 		}

@@ -1,5 +1,6 @@
 #include <core\render\gl\Texture.h>
-
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
 namespace Palette3D
 {
 
@@ -9,10 +10,7 @@ namespace Palette3D
 
 	GlTexture::GlTexture(GLchar * filename)
 	{
-		
-		
-		
-
+	
 		
 		glGenTextures(1, &mTex);
 		glBindTexture(GL_TEXTURE_2D, mTex);

@@ -10,13 +10,13 @@ int main()
 	
 	//Palette3D::VkRenderSubSystem r;
 	//r.debugRun();
-	Vec4 v(1,1,1,1);
-	Matrix4 m = Matrix4::scale(.5,1,1)*Matrix4::translate(3,3,3);
+	Vec4 v(4,4,4,4);
+	Matrix4 m = Matrix4::IDENTITY;
 
 	
-	std::cout << m <<m.getRow(3) <<std::endl << std::endl;
-	while (1) {};
-	//GlRenderSubSystem g;
+	std::cout << m * v <<std::endl << std::endl;
+	
+	GlRenderSubSystem g;
 	
 
 	return 0;
