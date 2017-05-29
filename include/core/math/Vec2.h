@@ -49,6 +49,7 @@ namespace Palette3D
 		F32 squaredMagnitude() const;
 		F32 distance(const Vec2& other) const;
 		F32 squaredDistance(const Vec2& other) const;
+		Vec2 normalize() const;
 	};
 }
 

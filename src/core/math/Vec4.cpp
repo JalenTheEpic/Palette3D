@@ -46,4 +46,9 @@ namespace Palette3D
 	{
 		return static_cast<F32>(powf(other.x - this->x, 2) + powf(other.y - this->y, 2) + powf(other.z - this->z, 2) + powf(other.w - this->w, 2));;
 	}
+	Vec4 Vec4::normalize()
+	{
+		F32 mag = magnitude();
+		return Vec4(x/mag,y/mag,z/mag);
+	}
 }

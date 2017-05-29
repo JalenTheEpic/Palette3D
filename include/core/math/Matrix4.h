@@ -18,8 +18,8 @@ namespace Palette3D
 	class Matrix4
 	{
 	private:
-		F32 mMat[4][4]; //[row] [col]
 		
+		F32 mMat[16];
 
 	public:
 		Matrix4() {}
@@ -29,30 +29,35 @@ namespace Palette3D
 			memcpy(mMat, m, 16 * sizeof(F32));
 		}
 
+		Matrix4(F32 m[16])
+		{
+			memcpy(mMat, m, 16 * sizeof(F32));
+		}
+
 		Matrix4(F32 e00, F32 e01, F32 e02, F32 e03,
 				F32 e10, F32 e11, F32 e12, F32 e13,
 				F32 e20, F32 e21, F32 e22, F32 e23,
 				F32 e30, F32 e31, F32 e32, F32 e33)
 		{
-			mMat[0][0] = e00;
-			mMat[0][1] = e01;
-			mMat[0][2] = e02;
-			mMat[0][3] = e03;
+			mMat[0] = e00;
+			mMat[4] = e01;
+			mMat[8] = e02;
+			mMat[12] = e03;
 
-			mMat[1][0] = e10;
-			mMat[1][1] = e11;
-			mMat[1][2] = e12;
-			mMat[1][3] = e13;
+			mMat[1] = e10;
+			mMat[5] = e11;
+			mMat[9] = e12;
+			mMat[13] = e13;
 
-			mMat[2][0] = e20;
-			mMat[2][1] = e21;
-			mMat[2][2] = e22;
-			mMat[2][3] = e23;
+			mMat[2] = e20;
+			mMat[6] = e21;
+			mMat[10] = e22;
+			mMat[14] = e23;
 
-			mMat[3][0] = e30;
-			mMat[3][1] = e31;
-			mMat[3][2] = e32;
-			mMat[3][3] = e33;
+			mMat[3] = e30;
+			mMat[7] = e31;
+			mMat[11] = e32;
+			mMat[15] = e33;
 		}
 
 		~Matrix4()
@@ -60,14 +65,14 @@ namespace Palette3D
 			//delete[] mMat;
 		}
 
-		inline const F32 * operator[] (size_t row) const
+		inline const F32 operator[] (size_t idx) const
 		{
-			return mMat[row];
+			return mMat[idx];
 		}
 
-		inline  F32 * operator[] (size_t row)
+		inline  F32 operator[] (size_t idx)
 		{
-			return mMat[row];
+			return mMat[idx];
 		}
 
 		inline Matrix4 & operator= (const Matrix4& other)
@@ -76,6 +81,8 @@ namespace Palette3D
 			return *this;
 
 		}
+
+		
 
 
 
@@ -102,6 +109,8 @@ namespace Palette3D
 		Matrix4 transpose() const;
 		F32 determinant() const;
 
+		F32 get(size_t row, size_t col) const;
+		void set(size_t row, size_t col, F32 val);
 		Vec4 getRow(std::size_t row) const;
 		void setRow(std::size_t row, const Vec4 &  v);
 

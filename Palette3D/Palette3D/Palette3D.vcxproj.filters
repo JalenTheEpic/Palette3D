@@ -132,6 +132,9 @@
     <ClInclude Include="..\..\include\game\camera\Camera.h">
       <Filter>Header Files\Game\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\core\render\gl\Texture.h">
+      <Filter>Header Files\Core\Render\GL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -183,6 +186,9 @@
       <Filter>Source Files\Core\Render\Vulkan</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\core\render\gl\glRenderSubsystem.cpp">
+      <Filter>Source Files\Core\Render\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\src\render\gl\Texture.cpp">
       <Filter>Source Files\Core\Render\GL</Filter>
     </ClCompile>
   </ItemGroup>

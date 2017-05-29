@@ -52,7 +52,7 @@ namespace Palette3D
 		F32 squaredMagnitude() const;
 		F32 distance(const Vec4& other) const;
 		F32 squaredDistance(const Vec4& other) const;
-
+		Vec4 normalize();
 		inline Vec2 xy() { return Vec2(this->x, this->y); }
 		inline Vec3 xyz() { return Vec3(this->x, this->y, this->z); }
 	};

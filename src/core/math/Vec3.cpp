@@ -32,5 +32,10 @@ namespace Palette3D
 	{
 		return static_cast<F32>(powf(o.x - this->x, 2) + powf(o.y - this->y, 2) + powf(o.z - this->z, 2));;
 	}
+	Vec3 Vec3::normalize() const
+	{
+		F32 mag = this->magnitude();
+		return Vec3(this->x/mag, this->y/mag, this->z/mag);
+	}
 }
 

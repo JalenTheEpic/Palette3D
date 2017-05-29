@@ -63,7 +63,7 @@ namespace Palette3D
 			{
 				for (size_t j = 0; j < 4; j++)
 				{
-					mgl[x] = m[j][i];
+					mgl[x] = m.get(j,i);
 					x++;
 				}
 			}
