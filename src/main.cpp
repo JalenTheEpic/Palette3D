@@ -14,7 +14,7 @@ int main()
 	Matrix4 m = Matrix4::scale(.5,1,1)*Matrix4::translate(3,3,3);
 
 	
-	std::cout << m * v <<m <<std::endl << std::endl;
+	std::cout << m <<m.getRow(3) <<std::endl << std::endl;
 	while (1) {};
 	//GlRenderSubSystem g;
 	

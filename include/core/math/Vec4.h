@@ -23,8 +23,8 @@ namespace Palette3D
 	public:
 		inline Vec4(const F32 x = 0.0f, const F32 y = 0.0f, const F32 z = 0.0f, const F32 w = 0.0f) : x(x), y(y), z(z), w(w) {}
 		inline Vec4(const Vec4& v) : x(v.x), y(v.y), z(v.z), w(v.w) {}
-		inline Vec4(const Vec3& v) : x(v.x), y(v.y), z(v.z), w(0) {}
-		inline Vec4(const Vec2& v) : x(v.x), y(v.y), z(0), w(0) {}
+		inline Vec4(const Vec3& v) : x(v.x), y(v.y), z(v.z), w(1) {}
+		inline Vec4(const Vec2& v) : x(v.x), y(v.y), z(0), w(1) {}
 		~Vec4() {}
 
 		/// Operator functions.
