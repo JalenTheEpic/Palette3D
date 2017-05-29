@@ -4,7 +4,7 @@ namespace Palette3D
 {
 	std::ostream & operator<<(std::ostream & os, const Vec4 & v)
 	{
-		return os << "Vector4(" << v.x << ", " << v.y << "," << v.z << "," << v.w << ")" << std::endl;
+		return os << "Vector4( " << v.x << ", " << v.y << ", " << v.z << ", " << v.w << " )" << std::endl;
 	}
 	/*Vec4 Vec4::operator*(const Matrix4 & rhs) const
 	{

@@ -87,11 +87,20 @@ namespace Palette3D
 
 	Program::~Program()
 	{
+		glDeleteProgram(mProg);
 	}
 
 	void Program::use()
 	{
+		mspActive = this;
 		glUseProgram(mProg);
 	}
+
+	void Program::addUniform(GLchar * name, UniformType typ)
+	{
+		mUniforms[name] = glGetUniformLocation(mProg, name);
+	}
+
+	
 
 }

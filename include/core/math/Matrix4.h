@@ -20,6 +20,7 @@ namespace Palette3D
 	{
 	private:
 		F32 mMat[4][4]; //[row] [col]
+		
 
 	public:
 		Matrix4() {}
@@ -129,6 +130,7 @@ namespace Palette3D
 		static Matrix4 rotateZ(F32 angle);
 
 		static Matrix4 rotation(F32 xrot, F32 yrot, F32 zrot);
+		
 	
 
 
