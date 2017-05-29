@@ -171,6 +171,7 @@
     <ClInclude Include="..\..\include\core\math\Vec3.h" />
     <ClInclude Include="..\..\include\core\math\Vec4.h" />
     <ClInclude Include="..\..\include\core\render\gl\glRenderSubsystem.h" />
+    <ClInclude Include="..\..\include\core\render\gl\Square.h" />
     <ClInclude Include="..\..\include\core\render\gl\Texture.h" />
     <ClInclude Include="..\..\include\core\render\Render.h" />
     <ClInclude Include="..\..\include\core\render\RenderManager.h" />
@@ -185,7 +186,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\core\render\gl\Program.h" />
-    <ClCompile Include="..\..\include\src\render\gl\Texture.cpp" />
     <ClCompile Include="..\..\src\core\math\Matrix3.cpp" />
     <ClCompile Include="..\..\src\core\math\Matrix4.cpp" />
     <ClCompile Include="..\..\src\core\math\Quaternion.cpp" />
@@ -194,6 +194,7 @@
     <ClCompile Include="..\..\src\core\math\Vec4.cpp" />
     <ClCompile Include="..\..\src\core\render\gl\glRenderSubsystem.cpp" />
     <ClCompile Include="..\..\src\core\render\gl\Program.cpp" />
+    <ClCompile Include="..\..\src\core\render\gl\Texture.cpp" />
     <ClCompile Include="..\..\src\core\render\RenderManager.cpp" />
     <ClCompile Include="..\..\src\core\render\vulkan\vkRenderSubsystem.cpp" />
     <ClCompile Include="..\..\src\core\render\vulkan\VulkanDevice.cpp" />

@@ -10,12 +10,18 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #include <gl\glew.h>
+#include <iostream>
 namespace Palette3D
 {
 
 	class GlTexture
 	{
-		GLuint tex;
+	private:
+		GLuint mTex;
+	public:
+		GlTexture(GLchar * filename);
+		~GlTexture();
+
 	
 	};
 
