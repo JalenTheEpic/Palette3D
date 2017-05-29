@@ -1,6 +1,5 @@
 #include <core\render\gl\glRenderSubsystem.h>
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	
@@ -120,7 +119,7 @@ namespace Palette3D
 
 
 		//Texture stuff
-		stbi_io_callbacks
+		//stbi_set_flip_vertically_on_load(true);
 
 
 
