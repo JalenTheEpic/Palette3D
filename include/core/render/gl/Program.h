@@ -27,21 +27,22 @@ namespace Palette3D
 		~Program();
 
 		void use() const;
-		void addUniform(GLchar * name, UniformType type);
+		void addUniform(GLchar * name);
 		
 		
 		
 		
 		
-
-		inline void setUniform(GLchar * name, Vec2 &v) { glUniform2f(mUniforms[name], v.x, v.y); };
-		inline void setUniform(GLchar * name, Vec3 &v) { glUniform3f(mUniforms[name], v.x, v.y, v.z); };
-		inline void setUniform(GLchar * name, Vec4 &v) { glUniform4f(mUniforms[name], v.x, v.y, v.z, v.w); };
-		inline void setUniform(GLchar * name, F32 n) { glUniform1f(mUniforms[name], n); };
-		inline void setUniform(GLchar * name, I32 n) { glUniform1i(mUniforms[name], n); };
-		inline void setUniform(GLchar * name, U32 n) { glUniform1ui(mUniforms[name], n); };
+		inline void check() {if (mspActive != this) use();}
+		inline void setUniform(GLchar * name, Vec2 &v) { check(); glUniform2f(mUniforms[name], v.x, v.y); };
+		inline void setUniform(GLchar * name, Vec3 &v) { check(); glUniform3f(mUniforms[name], v.x, v.y, v.z); };
+		inline void setUniform(GLchar * name, Vec4 &v) { check(); glUniform4f(mUniforms[name], v.x, v.y, v.z, v.w); };
+		inline void setUniform(GLchar * name, F32 n) { check(); glUniform1f(mUniforms[name], n); };
+		inline void setUniform(GLchar * name, I32 n) { check(); glUniform1i(mUniforms[name], n); };
+		inline void setUniform(GLchar * name, U32 n) { check(); glUniform1ui(mUniforms[name], n); };
 		inline void setUniform(GLchar * name, Matrix3 m) 
 		{ 
+			check();
 			GLfloat mgl[9];
 			size_t x = 0;
 			for (size_t i = 0; i < 3; i++)
@@ -54,7 +55,24 @@ namespace Palette3D
 			}
 			glUniformMatrix3fv(mUniforms[name], 1, true, mgl);
 		};
-		inline void setUniform(GLchar * name, Matrix4 m) {};
+		inline void setUniform(GLchar * name, Matrix4 m) 
+		{
+			check();
+			GLfloat mgl[16];
+			size_t x = 0;
+			for (size_t i = 0; i < 4; i++)
+			{
+				for (size_t j = 0; j < 4; j++)
+				{
+					mgl[x] = m[j][i];
+					x++;
+				}
+			}
+			glUniformMatrix3fv(mUniforms[name], 1, true, mgl);
+		
+		
+		
+		};
 
 
 	private:

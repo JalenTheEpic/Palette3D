@@ -97,7 +97,7 @@ namespace Palette3D
 		glUseProgram(mProg);
 	}
 
-	void Program::addUniform(GLchar * name, UniformType typ)
+	void Program::addUniform(GLchar * name)
 	{
 		mUniforms[name] = glGetUniformLocation(mProg, name);
 	}
