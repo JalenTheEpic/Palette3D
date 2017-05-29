@@ -69,25 +69,25 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\include;$(SolutionDir)..\dependencies\Vulkan\Include;$(SolutionDir)..\dependencies\GLEW\Include;$(IncludePath)</IncludePath>
+    <IncludePath>..\include;$(SolutionDir)..\dependencies\Vulkan\Include;$(SolutionDir)..\dependencies\GLEW\Include;$(SolutionDir)..\dependencies\STB;$(IncludePath)</IncludePath>
     <SourcePath>..\src;$(SourcePath)</SourcePath>
     <LibraryPath>$(SolutionDir)..\dependencies\GLFW\lib\x86\;$(SolutionDir)..\dependencies\Vulkan\Lib\x86\;$(SolutionDir)..\dependencies\GLEW\lib\x86\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\x86\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>..\include;$(SolutionDir)..\dependencies\Vulkan\Include;$(SolutionDir)..\dependencies\GLEW\Include;$(IncludePath)</IncludePath>
+    <IncludePath>..\include;$(SolutionDir)..\dependencies\Vulkan\Include;$(SolutionDir)..\dependencies\GLEW\Include;$(SolutionDir)..\dependencies\STB;$(IncludePath)</IncludePath>
     <SourcePath>..\src;$(SourcePath)</SourcePath>
     <LibraryPath>$(SolutionDir)..\dependencies\GLFW\lib\x86\;$(SolutionDir)..\dependencies\Vulkan\Lib\x86\;$(SolutionDir)..\dependencies\GLEW\lib\x86\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\x86\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\include;$(SolutionDir)..\dependencies\Vulkan\Include;$(SolutionDir)..\dependencies\GLEW\Include;$(IncludePath)</IncludePath>
+    <IncludePath>..\include;$(SolutionDir)..\dependencies\Vulkan\Include;$(SolutionDir)..\dependencies\GLEW\Include;$(SolutionDir)..\dependencies\STB;$(IncludePath)</IncludePath>
     <SourcePath>..\src;$(SourcePath)</SourcePath>
     <LibraryPath>$(SolutionDir)..\dependencies\GLFW\lib\x64\;$(SolutionDir)..\dependencies\Vulkan\Lib\x64\;$(SolutionDir)..\dependencies\GLEW\lib\x64\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>..\include;$(SolutionDir)..\dependencies\Vulkan\Include;$(SolutionDir)..\dependencies\GLEW\Include;$(IncludePath)</IncludePath>
+    <IncludePath>..\include;$(SolutionDir)..\dependencies\Vulkan\Include;$(SolutionDir)..\dependencies\GLEW\Include;$(SolutionDir)..\dependencies\STB;$(IncludePath)</IncludePath>
     <SourcePath>..\src;$(SourcePath)</SourcePath>
     <LibraryPath>$(SolutionDir)..\dependencies\GLFW\lib\x64\;$(SolutionDir)..\dependencies\Vulkan\Lib\x64\;$(SolutionDir)..\dependencies\GLEW\lib\x64\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\$(Platform)\</OutDir>
@@ -179,7 +179,6 @@
     <ClInclude Include="..\..\include\core\render\vulkan\VulkanLayerAndExtension.h" />
     <ClInclude Include="..\..\include\core\window\WindowManager.h" />
     <ClInclude Include="..\..\include\debugging\Exception.h" />
-    <ClInclude Include="..\..\include\depend\stb_image.h" />
     <ClInclude Include="..\..\include\game\camera\Camera.h" />
     <ClInclude Include="..\..\include\templates\Singleton.h" />
   </ItemGroup>
