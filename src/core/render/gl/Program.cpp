@@ -92,7 +92,7 @@ namespace Palette3D
 
 	void Program::use()
 	{
-		mspActive = this;
+		//mspActive = this;
 		glUseProgram(mProg);
 	}
 
