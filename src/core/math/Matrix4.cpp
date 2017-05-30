@@ -217,10 +217,10 @@ namespace Palette3D
 	}
 	void Matrix4::setRow(std::size_t row, const Vec4 & v)
 	{
-		mMat[row * 4] = v.x;
-		mMat[row * 4+1] = v.y;
-		mMat[row * 4+2] = v.z;
-		mMat[row * 4+3] = v.w;
+		mMat[row] = v.x;
+		mMat[4 + row] = v.y;
+		mMat[8 + row] = v.z;
+		mMat[12 + row] = v.w;
 	}
 	
 	Vec4 Matrix4::getCol(std::size_t col) const
@@ -248,10 +248,24 @@ namespace Palette3D
 	}
 	void Matrix4::setCol(std::size_t col, const Vec4 &  v)
 	{
-		mMat[col] = v.x;
-		mMat[4 + col] = v.y;
-		mMat[8 + col] = v.z;
-		mMat[12+ col] = v.w;
+		
+
+		mMat[col * 4] = v.x;
+		mMat[col * 4 + 1] = v.y;
+		mMat[col * 4 + 2] = v.z;
+		mMat[col * 4 + 3] = v.w;
+	}
+	void Matrix4::setPos(F32 x, F32 y, F32 z)
+	{
+		mMat[12] = x;
+		mMat[13] = y;
+		mMat[14] = z;
+	}
+	void Matrix4::setScale(F32 x, F32 y, F32 z)
+	{
+		mMat[0] = x;
+		mMat[5] = y;
+		mMat[10] = z;
 	}
 	Matrix4 Matrix4::translate(F32 a, F32 b, F32 c)
 	{

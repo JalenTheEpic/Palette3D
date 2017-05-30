@@ -75,6 +75,9 @@ namespace Palette3D
 		Vec4 getCol(std::size_t col) const;
 		void setCol(std::size_t col, const Vec4 &  v);
 
+
+		void setPos(F32 x, F32 y, F32 z);
+		void setScale(F32 x, F32 y, F32 z);
 		
 
 		friend std::ostream& operator<< (std::ostream& os, const Matrix4& m);

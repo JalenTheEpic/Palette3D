@@ -1,6 +1,5 @@
 #include <core\render\gl\glRenderSubsystem.h>
-
-
+#include <time.h>
 
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
@@ -8,6 +7,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
+	
 }
 
 
@@ -60,21 +60,32 @@ namespace Palette3D
 		Program prog("..\\..\\Shaders\\test.vert","..\\..\\Shaders\\test.frag");
 
 		prog.addUniform("ourTexture");
-		prog.addUniform("transform");
 		prog.addUniform("projection");
 		prog.addUniform("view");
 		prog.addUniform("model");
 
+		//our temporary "camera"
 		Matrix4 p = Matrix4::perspective(45.0f, (float)800 / (float)600, 0.1f, 100.0f);
-		Matrix4 v = Matrix4::translate(0,0,-3);
+		Matrix4 v = Matrix4::translate(0,0,-5);
 		prog.setUniform("projection", p);
 		prog.setUniform("view", v);
 		UnitSquare square;
 		UnitCube cube;
+		UnitCube cube2;
+		UnitCube cube3;
+		
+		
 
-
+		F32 dt = 0, prevTime= 0, currentTime = 0;
+		
 		while (!glfwWindowShouldClose(window))
 		{
+			
+			// Calculate delta time
+			currentTime = glfwGetTime();
+			dt = currentTime - prevTime;
+			
+			prevTime = currentTime;
 			//Proccesses events in queue
 			glfwPollEvents();
 
@@ -83,10 +94,17 @@ namespace Palette3D
 			//Draw phase
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			
+			cube.update(dt);
 			cube.draw(prog);
+
+			//cube2.update(dt);
+			//cube2.draw(prog);
+
+			//cube3.update(dt);
+			//cube3.draw(prog);
 			// Swap the buffers
 			glfwSwapBuffers(window);
+		
 		}
 
 		

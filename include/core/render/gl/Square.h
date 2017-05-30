@@ -14,7 +14,7 @@ namespace Palette3D
 		GLuint VBO; //Vertex buffer object
 		GLuint EBO;
 		GlTexture tex = GlTexture("..\\..\\Media\\container.jpg");
-		Matrix4 trans = Matrix4::translate(0,0,0);
+		Matrix4 trans = Matrix4::IDENTITY;
 		UnitSquare() 
 		{
 
