@@ -8,7 +8,7 @@
 #include <GLFW/glfw3.h>
 #include <core\render\gl\Program.h>
 #include <core\render\gl\square.h>
-
+#include <core\render\gl\Cube.h>
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
@@ -68,8 +68,16 @@ namespace Palette3D
 
 		prog.addUniform("ourTexture");
 		prog.addUniform("transform");
-		UnitSquare square;
+		prog.addUniform("projection");
+		prog.addUniform("view");
+		prog.addUniform("model");
 
+		Matrix4 p = Matrix4::perspective(45.0f, (float)800 / (float)600, 0.1f, 100.0f);
+		Matrix4 v = Matrix4::translate(0,0,-3);
+		prog.setUniform("projection", p);
+		prog.setUniform("view", v);
+		UnitSquare square;
+		UnitCube cube;
 
 
 		while (!glfwWindowShouldClose(window))
@@ -83,7 +91,7 @@ namespace Palette3D
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			
-			square.draw(prog);
+			cube.draw(prog);
 			// Swap the buffers
 			glfwSwapBuffers(window);
 		}

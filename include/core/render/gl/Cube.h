@@ -1,12 +1,13 @@
-#ifndef _CORE_RENDER_GL_SQUARE_
-#define _CORE_RENDER_GL_SQUARE_
+#ifndef _CORE_RENDER_GL_CUBE_
+#define _CORE_RENDER_GL_CUBE_
 #include <GL\glew.h>
 #include <core\math\Math.h>
 #include <core\render\gl\Texture.h>
+#include <core\render\gl\Program.h>
 namespace Palette3D
 {
 
-	class UnitSquare
+	class UnitCube
 	{
 	public:
 		Vec3 pos = Vec3(0,0,0);
@@ -15,7 +16,7 @@ namespace Palette3D
 		GLuint EBO;
 		GlTexture tex = GlTexture("..\\..\\Media\\container.jpg");
 		Matrix4 trans = Matrix4::translate(0,0,0);
-		UnitSquare() 
+		UnitCube() 
 		{
 
 			//GLfloat vertices[] = {
@@ -24,17 +25,50 @@ namespace Palette3D
 			//	-0.5f, -0.5f, 0.0f,  // Bottom Left
 			//	-0.5f,  0.5f, 0.0f   // Top Left 
 			//};
-			GLuint indices[] = {
-				0, 1, 3,  // First Triangle
-				1, 2, 3   // Second Triangle
-			};
+			
 
-			GLfloat vertices[] = {
-				// positions         // texture coords
-				0.5f,  0.5f, 0.0f,     1.0f, 1.0f,   // top right
-				0.5f, -0.5f, 0.0f,     1.0f, 0.0f,   // bottom right
-				-0.5f, -0.5f, 0.0f,    0.0f, 0.0f,   // bottom left
-				-0.5f,  0.5f, 0.0f,    0.0f, 1.0f    // top left 
+			float vertices[] = {
+				-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+				0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+				0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+				0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+				-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+				-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+				-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+				0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+				0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+				0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+				-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+				-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+				-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+				-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+				-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+				-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+				-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+				-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+				0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+				0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+				0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+				0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+				0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+				0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+				-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+				0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+				0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+				0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+				-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+				-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+				-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+				0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+				0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+				0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+				-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+				-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 			};
 			//Creating a Vertex Array Object
 			
@@ -45,7 +79,7 @@ namespace Palette3D
 			glGenBuffers(1, &VBO);
 
 			
-			glGenBuffers(1, &EBO);
+			
 
 
 			//Bind VAO
@@ -57,9 +91,6 @@ namespace Palette3D
 			//copies data to buffer
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 			/*
 			Parameter 1: Layout location
@@ -104,15 +135,15 @@ namespace Palette3D
 			tex.bind();
 			glBindVertexArray(VAO);
 			trans *= Matrix4::rotation(1,1,1);
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
 			glBindVertexArray(0);
 
 		}
-		~UnitSquare()
+		~UnitCube()
 		{
 			glDeleteVertexArrays(1, &VAO);
 			glDeleteBuffers(1, &VBO);
-			glDeleteBuffers(1, &EBO);
+			
 
 		}
 

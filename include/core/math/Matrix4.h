@@ -25,66 +25,22 @@ namespace Palette3D
 		F32 mMat[16];
 		Matrix4() {}
 
-		Matrix4(F32 m[4][4])
-		{
-			memcpy(mMat, m, 16 * sizeof(F32));
-		}
+		Matrix4(F32 m[4][4]){memcpy(mMat, m, 16 * sizeof(F32));}
 
-		Matrix4(F32 m[16])
-		{
-			memcpy(mMat, m, 16 * sizeof(F32));
-		}
+		Matrix4(F32 m[16]){memcpy(mMat, m, 16 * sizeof(F32));}
 
 		Matrix4(F32 e00, F32 e01, F32 e02, F32 e03,
-				F32 e10, F32 e11, F32 e12, F32 e13,
-				F32 e20, F32 e21, F32 e22, F32 e23,
-				F32 e30, F32 e31, F32 e32, F32 e33)
-		{
-			mMat[0] = e00;
-			mMat[4] = e01;
-			mMat[8] = e02;
-			mMat[12] = e03;
+			F32 e10, F32 e11, F32 e12, F32 e13,
+			F32 e20, F32 e21, F32 e22, F32 e23,
+			F32 e30, F32 e31, F32 e32, F32 e33);
 
-			mMat[1] = e10;
-			mMat[5] = e11;
-			mMat[9] = e12;
-			mMat[13] = e13;
+		~Matrix4() {}
 
-			mMat[2] = e20;
-			mMat[6] = e21;
-			mMat[10] = e22;
-			mMat[14] = e23;
+		inline const F32 operator[] (size_t idx) const{ return mMat[idx]; }
 
-			mMat[3] = e30;
-			mMat[7] = e31;
-			mMat[11] = e32;
-			mMat[15] = e33;
-		}
+		inline  F32 operator[] (size_t idx){ return mMat[idx]; }
 
-		~Matrix4()
-		{
-			//delete[] mMat;
-		}
-
-		inline const F32 operator[] (size_t idx) const
-		{
-			return mMat[idx];
-		}
-
-		inline  F32 operator[] (size_t idx)
-		{
-			return mMat[idx];
-		}
-
-		inline Matrix4 & operator= (const Matrix4& other)
-		{
-			memcpy(mMat, other.mMat, 16 * sizeof(F32));
-			return *this;
-
-		}
-
-		
-
+		inline Matrix4 & operator= (const Matrix4& other){memcpy(mMat, other.mMat, 16 * sizeof(F32)); return *this;}
 
 
 		Matrix4 operator+ (const Matrix4& other) const;
@@ -101,7 +57,8 @@ namespace Palette3D
 		Matrix4 operator- () const; //unary, negate matrix.
 
 
-		Vec4 operator* (const Vec4& other) const;
+		Vec4 operator* (const Vec4& o) const;
+		Vec3 operator* (const Vec3& o) const;
 
 
 		bool operator!= (const Matrix4& other) const;
@@ -139,6 +96,11 @@ namespace Palette3D
 		static Matrix4 rotateZ(F32 angle);
 
 		static Matrix4 rotation(F32 xrot, F32 yrot, F32 zrot);
+
+		static Matrix4 ortho(I32 left, I32 right, I32 bottom,I32 top,F32 near,F32 far);
+
+		static Matrix4 perspective(F32 fov, F32 aspect, F32 near, F32 far);
+
 		
 	
 

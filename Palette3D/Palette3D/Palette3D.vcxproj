@@ -170,6 +170,7 @@
     <ClInclude Include="..\..\include\core\math\Vec2.h" />
     <ClInclude Include="..\..\include\core\math\Vec3.h" />
     <ClInclude Include="..\..\include\core\math\Vec4.h" />
+    <ClInclude Include="..\..\include\core\render\gl\Cube.h" />
     <ClInclude Include="..\..\include\core\render\gl\glRenderSubsystem.h" />
     <ClInclude Include="..\..\include\core\render\gl\Square.h" />
     <ClInclude Include="..\..\include\core\render\gl\Texture.h" />

@@ -1,4 +1,6 @@
 #include <core\math\Matrix4.h>
+#include <assert.h>
+
 #define PI 3.14159265358979323846f
 namespace Palette3D 
 {
@@ -11,6 +13,31 @@ namespace Palette3D
 								0.f, 0.f, 0.f, 0.f,
 								0.f, 0.f, 0.f, 0.f,
 								0.f, 0.f, 0.f, 0.f);
+
+	Matrix4::Matrix4(F32 e00, F32 e01, F32 e02, F32 e03, F32 e10, F32 e11, F32 e12, F32 e13, F32 e20, F32 e21, F32 e22, F32 e23, F32 e30, F32 e31, F32 e32, F32 e33)
+	{
+		{
+			mMat[0] = e00;
+			mMat[4] = e01;
+			mMat[8] = e02;
+			mMat[12] = e03;
+
+			mMat[1] = e10;
+			mMat[5] = e11;
+			mMat[9] = e12;
+			mMat[13] = e13;
+
+			mMat[2] = e20;
+			mMat[6] = e21;
+			mMat[10] = e22;
+			mMat[14] = e23;
+
+			mMat[3] = e30;
+			mMat[7] = e31;
+			mMat[11] = e32;
+			mMat[15] = e33;
+		}
+	}
 
 	Matrix4 Matrix4::operator+(const Matrix4 & other) const
 	{
@@ -81,6 +108,16 @@ namespace Palette3D
 		
 		return v;
 	}
+	Vec3 Matrix4::operator*(const Vec3 & o) const
+	{
+		Vec3 v;
+		v.x = mMat[0] * o.x + mMat[4] * o.y + mMat[8] * o.z + mMat[12];
+		v.y = mMat[1] * o.x + mMat[5] * o.y + mMat[9] * o.z + mMat[13];
+		v.z = mMat[2] * o.x + mMat[6] * o.y + mMat[10] * o.z + mMat[14];
+		
+
+		return v;
+	}
 	bool Matrix4::operator!=(const Matrix4 & other) const
 	{
 		return !(*this == other);
@@ -90,10 +127,10 @@ namespace Palette3D
 		for (int i = 0; i<16; i++)
 		{
 			
-				if (mMat[i]!= other.mMat[i])
-				{
-					return false;
-				}
+			if (mMat[i]!= other.mMat[i])
+			{
+				return false;
+			}
 			
 		}
 		return true;
@@ -113,31 +150,31 @@ namespace Palette3D
 	F32 Matrix4::determinant() const
 	{
 		/*
-		----------------------------------
-		| a(0,0)  b(0,1)  c(0,2)  d(0,3) |
-		| e(1,0)  f(1,1)  g(1,2)  h(1,3) |   det =  a(  f(kp - lo) - g(jp - ln) + h(jo - kn)  ) 
-		| i(2,0)  j(2,1)  k(2,2)  l(2,3) |        - b(  e(kp - lo) - g(ip - lm) + h(io - km)  ) 
-		| m(3,0)  n(3,1)  o(3,2)  p(3,3) |        + c(  e(jp - ln) - f(ip - lm) + h(in - jm)  ) 
-		----------------------------------        - d(  e(jo - kn) - f(io - km) + g(in - jm)  )  
+		----------------------------
+		| a(0)  b(4)  c(8)   d(12) |
+		| e(1)  f(5)  g(9)   h(13) |   det =  a(  f(kp - lo) - g(jp - ln) + h(jo - kn)  ) 
+		| i(2)  j(6)  k(10)  l(14) |        - b(  e(kp - lo) - g(ip - lm) + h(io - km)  ) 
+		| m(3)  n(7)  o(11)  p(15) |        + c(  e(jp - ln) - f(ip - lm) + h(in - jm)  ) 
+		----------------------------        - d(  e(jo - kn) - f(io - km) + g(in - jm)  )  
 		*/
 		
 		
-			 //a
+			 //a * f(kp - lo) - g(jp - ln) + h(jo - kn)
 		return mMat[0] * ((mMat[5] * (mMat[10] * mMat[15] - mMat[14] * mMat[11]))  
 			                -(mMat[9] * (mMat[6] * mMat[15] - mMat[14] * mMat[7]))  
 							+(mMat[13] * (mMat[6] * mMat[11] - mMat[10] * mMat[7])))  
 			
-			//b
+			//b *  e(kp - lo) - g(ip - lm) + h(io - km) 
 			- mMat[4] * ((mMat[1] * (mMat[10] * mMat[15] - mMat[14] * mMat[11]))  
 						   -(mMat[9] * (mMat[2] * mMat[15] - mMat[14] * mMat[3]))  
 						   +(mMat[13] * (mMat[2] * mMat[11] - mMat[10] * mMat[3]))) 
 			
-			//c
+			//c *  e(jp - ln) - f(ip - lm) + h(in - jm)
 			+ mMat[8] * ((mMat[1] * (mMat[6] * mMat[15] - mMat[14] * mMat[7]))
 						   -(mMat[5] * (mMat[2] * mMat[15] - mMat[14] * mMat[3]))
 						   +(mMat[13] * (mMat[2] * mMat[7] - mMat[6] * mMat[3])))
 			
-			//d
+			//d * e(jo - kn) - f(io - km) + g(in - jm) 
 			- mMat[12] * ((mMat[1] * (mMat[6] * mMat[11] - mMat[10] * mMat[7]))
 						   -(mMat[5] * (mMat[2] * mMat[11] - mMat[10] * mMat[3]))
 						   +(mMat[9] * (mMat[2] * mMat[7] - mMat[6] * mMat[3])));
@@ -281,6 +318,35 @@ namespace Palette3D
 
 		return tmp;
 
+	}
+	Matrix4 Matrix4::ortho(I32 left, I32 right, I32 bottom, I32 top, F32 near, F32 far)
+	{
+
+		Matrix4 m = Matrix4::IDENTITY;
+		m.set(0, 0, 2.f / (right - left));
+		m.set(1, 1, 2.f / (top - bottom));
+		m.set(2, 2, -2.f / (far - near));
+		m.set(3, 0, -(right + left) / (right - left));
+		m.set(3, 1, -(top + bottom) / (top - bottom));
+		m.set(3, 2, -(far + near) / (far - near));
+		return m;
+		
+	}
+	Matrix4 Matrix4::perspective(F32 fov, F32 aspect, F32 near, F32 far)
+	{
+		assert(aspect != 0);
+		assert(near != far);
+		F32 rad = (F32)fov * PI / 180.0f;
+		F32 tanhalf = tan(rad * 0.5f);
+
+		Matrix4 m = Matrix4::IDENTITY;
+		m.set(0, 0, 1 / (aspect * tanhalf));
+		m.set(1, 1, 1 / (tanhalf));
+		m.set(2, 2, -(far + near) / (far - near));
+		m.set(2, 3, -1);
+		m.set(3, 2, (2 * far * near)/( far - near));
+
+		return m;
 	}
 	std::ostream & operator<<(std::ostream & os, const Matrix4 & m)
 	{
