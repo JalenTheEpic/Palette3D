@@ -40,7 +40,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -99,8 +99,11 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)..\include\;$(SolutionDir)..\dependencies\GLFW\include\x86\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
       <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>$(IntDir)trash</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)output\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <EntryPointSymbol>
@@ -108,6 +111,9 @@
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>vulkan-1.lib;glew32s.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <BuildLog>
+      <Path>trash\$(IntDir)$(MSBuildProjectName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -117,6 +123,9 @@
       <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\dependencies\GLFW\include\x86\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>$(IntDir)trash</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)output\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <EntryPointSymbol>
@@ -124,6 +133,9 @@
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>vulkan-1.lib;glew32s.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <BuildLog>
+      <Path>trash\$(IntDir)$(MSBuildProjectName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -134,14 +146,20 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)..\include\;$(SolutionDir)..\dependencies\GLFW\include\x86\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
       <PreprocessorDefinitions>GLEW_STATIC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>$(IntDir)trash</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)output\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>vulkan-1.lib;glew32s.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <BuildLog>
+      <Path>trash\$(IntDir)$(MSBuildProjectName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -153,12 +171,18 @@
       <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\dependencies\GLFW\include\x86\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PreprocessorDefinitions>GLEW_STATIC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>$(IntDir)trash</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)output\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>vulkan-1.lib;glew32s.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <BuildLog>
+      <Path>trash\$(IntDir)$(MSBuildProjectName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\core\atomic\Types.h" />

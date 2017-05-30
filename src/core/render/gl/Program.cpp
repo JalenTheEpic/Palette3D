@@ -105,6 +105,30 @@ namespace Palette3D
 		mUniforms[name] = glGetUniformLocation(mProg, name);
 	}
 
+	void Program::setUniform(GLchar * name, Matrix3 m)
+	{
+
+		check();
+		GLfloat mgl[9];
+		size_t x = 0;
+		for (size_t i = 0; i < 3; i++)
+		{
+			for (size_t j = 0; j < 3; j++)
+			{
+				mgl[x] = m[j][i];
+				x++;
+			}
+		}
+		glUniformMatrix3fv(mUniforms[name], 1, GL_FALSE, mgl);
+	}
+
+	void Program::setUniform(GLchar * name, Matrix4 m)
+	{
+		check();
+		glUniformMatrix4fv(mUniforms[name], 1, GL_FALSE, m.mMat);
+
+	}
+
 	
 
 }

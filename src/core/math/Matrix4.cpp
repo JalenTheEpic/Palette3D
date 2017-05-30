@@ -326,9 +326,9 @@ namespace Palette3D
 		m.set(0, 0, 2.f / (right - left));
 		m.set(1, 1, 2.f / (top - bottom));
 		m.set(2, 2, -2.f / (far - near));
-		m.set(3, 0, -(right + left) / (right - left));
-		m.set(3, 1, -(top + bottom) / (top - bottom));
-		m.set(3, 2, -(far + near) / (far - near));
+		m.set(3, 0, (F32)-(right + left) / (right - left));
+		m.set(3, 1, -(F32)(top + bottom) / (top - bottom));
+		m.set(3, 2, -(F32)(far + near) / (far - near));
 		return m;
 		
 	}
