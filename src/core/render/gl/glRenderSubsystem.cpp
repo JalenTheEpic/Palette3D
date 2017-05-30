@@ -1,14 +1,7 @@
 #include <core\render\gl\glRenderSubsystem.h>
 
-#define GLFW_DLL
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <core\render\gl\Program.h>
-#include <core\render\gl\square.h>
-#include <core\render\gl\Cube.h>
+
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {

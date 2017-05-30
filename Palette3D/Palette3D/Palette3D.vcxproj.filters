@@ -141,6 +141,9 @@
     <ClInclude Include="..\..\include\core\render\gl\Cube.h">
       <Filter>Header Files\Core\Render\GL</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\core\render\gl\P3DGL.h">
+      <Filter>Header Files\Core\Render\GL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
