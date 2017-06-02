@@ -1,6 +1,7 @@
 #include <core\render\gl\glRenderSubsystem.h>
 #include <time.h>
-
+#include <vector>
+#include <game\camera\Camera.h>
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
@@ -64,15 +65,25 @@ namespace Palette3D
 		prog.addUniform("view");
 		prog.addUniform("model");
 
-		//our temporary "camera"
-		Matrix4 p = Matrix4::perspective(45.0f, (float)800 / (float)600, 0.1f, 100.0f);
-		Matrix4 v = Matrix4::translate(0,0,-5);
+		
+		Camera c(Vec3(0,0,-5));
+
+		
+		Matrix4 p = Matrix4::perspective(45.0f, (F32)800 / (F32)600, 0.1f, 100.0f);
+		Matrix4 v = c.lookAt();
 		prog.setUniform("projection", p);
 		prog.setUniform("view", v);
 		UnitSquare square;
 		UnitCube cube;
 		UnitCube cube2;
 		UnitCube cube3;
+		UnitCube cube4;
+		
+		cube.pos = Vec3(-3,0,3);
+		cube2.pos = Vec3(-1, 0, 3);
+		cube3.pos = Vec3(1, 0, 3);
+		cube4.pos = Vec3(3, 0, 3);
+
 		
 		
 
@@ -97,11 +108,14 @@ namespace Palette3D
 			cube.update(dt);
 			cube.draw(prog);
 
-			//cube2.update(dt);
-			//cube2.draw(prog);
+			cube2.update(-dt);
+			cube2.draw(prog);
 
-			//cube3.update(dt);
-			//cube3.draw(prog);
+			cube3.update(dt);
+			cube3.draw(prog);
+
+			cube4.update(-dt);
+			cube4.draw(prog);
 			// Swap the buffers
 			glfwSwapBuffers(window);
 		

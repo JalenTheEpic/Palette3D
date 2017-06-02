@@ -6,6 +6,8 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #ifndef _CORE_MATH_MATRIX4_
 #define _CORE_MATH_MATRIX4_
 
+#define PI 3.14159265358979323846f
+#define TORADIAN(D)  ( (D) * PI / 180.0f)
 #include <iostream>
 #include <core/math/Vec3.h>
 #include <core/math/Vec4.h>
