@@ -46,13 +46,22 @@ namespace Palette3D
 
 		/// Methods.
 	public:
-		Vec4 cross(const Vec4& other);
-		F32 dot(const Vec4& other);
+		Vec4 cross(const Vec4& other) const;
+
+		///Project this vector on to the other
+		Vec4 project(const Vec4& other)const;
+
+		///Gets the perpendicular component of this with respect to other
+		Vec4 projectPerp(const Vec4& other)const;
+
+
+
+		F32 dot(const Vec4& other) const;
 		F32 magnitude() const;
 		F32 squaredMagnitude() const;
 		F32 distance(const Vec4& other) const;
 		F32 squaredDistance(const Vec4& other) const;
-		Vec4 normalize();
+		Vec4 normalize() const;
 		inline Vec2 xy() { return Vec2(this->x, this->y); }
 		inline Vec3 xyz() { return Vec3(this->x, this->y, this->z); }
 	};

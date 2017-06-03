@@ -16,7 +16,7 @@ namespace Palette3D
 		);
 	}*/
 	
-	Vec4 Vec4::cross(const Vec4 & o)
+	Vec4 Vec4::cross(const Vec4 & o) const
 	{
 		if (this->w != 0 || o.w != 0)
 			//should we error here?
@@ -24,9 +24,19 @@ namespace Palette3D
 			this->y*o.z - o.y*this->z,
 			o.x*this->z - this->x*o.z,
 			this->x*o.y - o.x*this->y,
-			0.0f);
+			1.0f);
 	}
-	F32 Vec4::dot(const Vec4 & other)
+	Vec4 Vec4::project(const Vec4 & other) const
+	{
+		Vec4 p;
+		p =other * (this->dot(other) / other.squaredMagnitude());
+		return p;
+	}
+	Vec4 Vec4::projectPerp(const Vec4 & other) const
+	{
+		return *this -  this->project(other);
+	}
+	F32 Vec4::dot(const Vec4 & other) const
 	{
 		return this->x * other.x + this->y * other.y + this->z * other.z + this->w * other.w;
 	}
@@ -46,7 +56,7 @@ namespace Palette3D
 	{
 		return static_cast<F32>(powf(other.x - this->x, 2) + powf(other.y - this->y, 2) + powf(other.z - this->z, 2) + powf(other.w - this->w, 2));;
 	}
-	Vec4 Vec4::normalize()
+	Vec4 Vec4::normalize() const
 	{
 		F32 mag = magnitude();
 		return Vec4(x/mag,y/mag,z/mag);
