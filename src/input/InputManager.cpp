@@ -16,17 +16,27 @@ namespace Palette3D
 		InputManager();
 		~InputManager();
 
+
+		void Update();
+
+		F32 getAxis();
+		bool getKey();
+		bool getKeyDown();
+		bool getKeyUp();
+
+
+		bool getMouseButton();
+		bool getMouseButtonDown();
+		bool getMouseButtonUp();
+
 	private:
 		std::map<std::string, F32> mAxisValues;
 	};
 
-	InputManager::InputManager()
-	{
-	}
+	
 
-	InputManager::~InputManager()
-	{
-	}
+
+	
 
 
 }
