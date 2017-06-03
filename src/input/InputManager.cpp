@@ -1,42 +1,31 @@
 #include <input\InputManager.h>
-#include <templates\Singleton.h>
-#include <map>
-#include <core/atomic/Types.h>
-#define INPUT_MANAGER Palette3D::InputManager::getInstance()
+
 
 namespace Palette3D
 {
+	InputManager * InputManager::mspInstance = nullptr;
 
 
 
 
-	class InputManager : public Singleton<InputManager>
+
+
+
+
+
+	InputManager::InputManager()
 	{
-	public:
-		InputManager();
-		~InputManager();
+		//glfwSetKeyCallback(window, InputManager::keyCallback);
+	}
 
+	void InputManager::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
+	{
+		
 
-		void Update();
+		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+			glfwSetWindowShouldClose(window, GL_TRUE);
 
-		F32 getAxis();
-		bool getKey();
-		bool getKeyDown();
-		bool getKeyUp();
-
-
-		bool getMouseButton();
-		bool getMouseButtonDown();
-		bool getMouseButtonUp();
-
-	private:
-		std::map<std::string, F32> mAxisValues;
-	};
-
-	
-
-
-	
-
+		
+	}
 
 }
