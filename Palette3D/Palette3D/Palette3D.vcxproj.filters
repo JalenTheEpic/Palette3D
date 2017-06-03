@@ -76,6 +76,12 @@
     <Filter Include="Source Files\Input">
       <UniqueIdentifier>{2247cf78-f102-47e9-b688-61106cb31446}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Window">
+      <UniqueIdentifier>{8b6d6196-240c-4e28-92e9-cafea4f8f16f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Window">
+      <UniqueIdentifier>{adb05bb2-a289-4d96-9624-db4b5c6880d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\core\math\Matrix3.h">
@@ -129,9 +135,6 @@
     <ClInclude Include="..\..\include\core\render\vulkan\VulkanDevice.h">
       <Filter>Header Files\Core\Render\Vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\core\window\WindowManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\core\render\gl\glRenderSubsystem.h">
       <Filter>Header Files\Core\Render\GL</Filter>
     </ClInclude>
@@ -152,6 +155,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\input\InputManager.h">
       <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\window\WindowManager.h">
+      <Filter>Header Files\Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -188,9 +194,6 @@
     <ClCompile Include="..\..\src\core\render\vulkan\VulkanLayerAndExtension.cpp">
       <Filter>Source Files\Core\Render\Vulkan</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\window\WindowManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\game\camera\Camera.cpp">
       <Filter>Source Files\Game\Camera</Filter>
     </ClCompile>
@@ -211,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\input\InputManager.cpp">
       <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\window\WindowManager.cpp">
+      <Filter>Source Files\Window</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

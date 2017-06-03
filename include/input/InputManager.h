@@ -13,7 +13,7 @@ namespace Palette3D
 	{
 	public:
 		InputManager();
-		~InputManager();
+		~InputManager() {}
 
 
 		void update();

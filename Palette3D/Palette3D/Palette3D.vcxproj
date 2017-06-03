@@ -205,11 +205,11 @@
     <ClInclude Include="..\..\include\core\render\vulkan\VulkanDevice.h" />
     <ClInclude Include="..\..\include\core\render\vulkan\VulkanInstance.h" />
     <ClInclude Include="..\..\include\core\render\vulkan\VulkanLayerAndExtension.h" />
-    <ClInclude Include="..\..\include\core\window\WindowManager.h" />
     <ClInclude Include="..\..\include\debugging\Exception.h" />
     <ClInclude Include="..\..\include\game\camera\Camera.h" />
     <ClInclude Include="..\..\include\input\InputManager.h" />
     <ClInclude Include="..\..\include\templates\Singleton.h" />
+    <ClInclude Include="..\..\include\window\WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\core\render\gl\Program.h" />
@@ -227,10 +227,10 @@
     <ClCompile Include="..\..\src\core\render\vulkan\VulkanDevice.cpp" />
     <ClCompile Include="..\..\src\core\render\vulkan\VulkanInstance.cpp" />
     <ClCompile Include="..\..\src\core\render\vulkan\VulkanLayerAndExtension.cpp" />
-    <ClCompile Include="..\..\src\core\window\WindowManager.cpp" />
     <ClCompile Include="..\..\src\game\camera\Camera.cpp" />
     <ClCompile Include="..\..\src\input\InputManager.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\window\WindowManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
