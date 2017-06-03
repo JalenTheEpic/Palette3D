@@ -66,7 +66,7 @@ namespace Palette3D
 		prog.addUniform("model");
 
 		
-		Camera c(Vec3(0,0,-5));
+		Camera c(Vec3(0,0,-5), Vec3(-8,0,3));
 
 		
 		Matrix4 p = Matrix4::perspective(45.0f, (F32)800 / (F32)600, 0.1f, 100.0f);

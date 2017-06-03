@@ -70,6 +70,12 @@
     <Filter Include="Source Files\Game\Camera">
       <UniqueIdentifier>{b877453f-7db9-4a9c-ac5d-90cf34b6a655}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{ff5807d8-befe-4ad9-8463-fbded18f6f9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{2247cf78-f102-47e9-b688-61106cb31446}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\core\math\Matrix3.h">
@@ -144,6 +150,9 @@
     <ClInclude Include="..\..\include\core\render\gl\P3DGL.h">
       <Filter>Header Files\Core\Render\GL</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\input\InputManager.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -199,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\core\render\gl\Texture.cpp">
       <Filter>Source Files\Core\Render\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\input\InputManager.cpp">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

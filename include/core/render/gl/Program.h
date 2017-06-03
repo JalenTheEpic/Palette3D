@@ -1,3 +1,4 @@
+
 /*
 Palette3D
 Licensed under the terms of the MIT License (see LICENSE.txt)
@@ -28,7 +29,7 @@ namespace Palette3D
 		
 		
 		
-		inline void check() {if (mspActive != this) use();}
+		inline void check() {if (mspActive != this) use(); }
 		inline void setUniform(GLchar * name, Vec2 &v) { check(); glUniform2f(mUniforms[name], v.x, v.y); };
 		inline void setUniform(GLchar * name, Vec3 &v) { check(); glUniform3f(mUniforms[name], v.x, v.y, v.z); };
 		inline void setUniform(GLchar * name, Vec4 &v) { check(); glUniform4f(mUniforms[name], v.x, v.y, v.z, v.w); };
