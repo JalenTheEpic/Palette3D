@@ -47,8 +47,8 @@ namespace Palette3D
 		/// {
 		///     static int Main() 
 		///     {
-		///         Palette3D::Matrix3 m(1.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 1.f);
-		///			//|1, 0, 0|
+		///         Palette3D::Matrix3 m(1.f, 2.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 1.f);
+		///			//|1, 2, 0|
 		///			//|0, 1, 0|
 		///			//|0, 0, 1|
 		///     }

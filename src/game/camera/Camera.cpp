@@ -16,10 +16,11 @@ namespace Palette3D
 
 		mWorldUp = worldUp;
 
-		mRight = (worldUp.cross(mDirection)).normalize();
+		mRight = (mDirection.cross(worldUp)).normalize();
 
 
 		mUp = mDirection.cross(mRight);
+		std::cout <<mDirection <<mUp << mRight;
 
 	}
 

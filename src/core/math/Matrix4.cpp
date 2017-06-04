@@ -17,35 +17,35 @@ namespace Palette3D
 	Matrix4::Matrix4(F32 e00, F32 e01, F32 e02, F32 e03, F32 e10, F32 e11, F32 e12, F32 e13, F32 e20, F32 e21, F32 e22, F32 e23, F32 e30, F32 e31, F32 e32, F32 e33)
 	{
 		{
-			mMat[0] = e00;
-			mMat[4] = e01;
-			mMat[8] = e02;
-			mMat[12] = e03;
+			this->mMat[0] = e00;
+			this->mMat[4] = e01;
+			this->mMat[8] = e02;
+			this->mMat[12] = e03;
 
-			mMat[1] = e10;
-			mMat[5] = e11;
-			mMat[9] = e12;
-			mMat[13] = e13;
+			this->mMat[1] = e10;
+			this->mMat[5] = e11;
+			this->mMat[9] = e12;
+			this->mMat[13] = e13;
 
-			mMat[2] = e20;
-			mMat[6] = e21;
-			mMat[10] = e22;
-			mMat[14] = e23;
+			this->mMat[2] = e20;
+			this->mMat[6] = e21;
+			this->mMat[10] = e22;
+			this->mMat[14] = e23;
 
-			mMat[3] = e30;
-			mMat[7] = e31;
-			mMat[11] = e32;
-			mMat[15] = e33;
+			this->mMat[3] = e30;
+			this->mMat[7] = e31;
+			this->mMat[11] = e32;
+			this->mMat[15] = e33;
 		}
 	}
 
 	Matrix4 Matrix4::operator+(const Matrix4 & other) const
 	{
 		return Matrix4(
-			mMat[0] + other.mMat[0], mMat[4] + other.mMat[4], mMat[8] + other.mMat[8], mMat[12] + other.mMat[12],
-			mMat[1] + other.mMat[1], mMat[5] + other.mMat[5], mMat[9] + other.mMat[9], mMat[13] + other.mMat[13],
-			mMat[2] + other.mMat[2], mMat[6] + other.mMat[6], mMat[10] + other.mMat[10], mMat[14] + other.mMat[14],
-			mMat[3] + other.mMat[3], mMat[7] + other.mMat[7], mMat[11] + other.mMat[11], mMat[15] + other.mMat[15]);
+			this->mMat[0] + other.mMat[0], this->mMat[4] + other.mMat[4], this->mMat[8] + other.mMat[8], this->mMat[12] + other.mMat[12],
+			this->mMat[1] + other.mMat[1], this->mMat[5] + other.mMat[5], this->mMat[9] + other.mMat[9], this->mMat[13] + other.mMat[13],
+			this->mMat[2] + other.mMat[2], this->mMat[6] + other.mMat[6], this->mMat[10] + other.mMat[10], this->mMat[14] + other.mMat[14],
+			this->mMat[3] + other.mMat[3], this->mMat[7] + other.mMat[7], this->mMat[11] + other.mMat[11], this->mMat[15] + other.mMat[15]);
 	}
 	void Matrix4::operator+=(const Matrix4 & other)
 	{
@@ -54,10 +54,10 @@ namespace Palette3D
 	Matrix4 Matrix4::operator-(const Matrix4 & other) const
 	{
 		return Matrix4(
-			mMat[0] - other.mMat[0], mMat[4] - other.mMat[4], mMat[8] - other.mMat[8], mMat[12] - other.mMat[12],
-			mMat[1] - other.mMat[1], mMat[5] - other.mMat[5], mMat[9] - other.mMat[9], mMat[13] - other.mMat[13],
-			mMat[2] - other.mMat[2], mMat[6] - other.mMat[6], mMat[10] - other.mMat[10], mMat[14] - other.mMat[14],
-			mMat[3] - other.mMat[3], mMat[7] - other.mMat[7], mMat[11] - other.mMat[11], mMat[15] - other.mMat[15]);
+			this->mMat[0] - other.mMat[0], this->mMat[4] - other.mMat[4], this->mMat[8] - other.mMat[8], this->mMat[12] - other.mMat[12],
+			this->mMat[1] - other.mMat[1], this->mMat[5] - other.mMat[5], this->mMat[9] - other.mMat[9], this->mMat[13] - other.mMat[13],
+			this->mMat[2] - other.mMat[2], this->mMat[6] - other.mMat[6], this->mMat[10] - other.mMat[10], this->mMat[14] - other.mMat[14],
+			this->mMat[3] - other.mMat[3], this->mMat[7] - other.mMat[7], this->mMat[11] - other.mMat[11], this->mMat[15] - other.mMat[15]);
 	}
 	void Matrix4::operator-=(const Matrix4 & other)
 	{
@@ -66,10 +66,10 @@ namespace Palette3D
 	Matrix4 Matrix4::operator*(F32 scalar) const
 	{
 		return Matrix4
-			(mMat[0] * scalar, mMat[4] * scalar, mMat[8] * scalar, mMat[12] * scalar,
-			 mMat[1] * scalar, mMat[5] * scalar, mMat[9] * scalar, mMat[13] * scalar,
-			 mMat[2] * scalar, mMat[6] * scalar, mMat[10] * scalar, mMat[14] * scalar,
-			 mMat[3] * scalar, mMat[7] * scalar, mMat[11] * scalar, mMat[15] * scalar);
+			(this->mMat[0] * scalar, this->mMat[4] * scalar, this->mMat[8] * scalar, this->mMat[12] * scalar,
+			 this->mMat[1] * scalar, this->mMat[5] * scalar, this->mMat[9] * scalar, this->mMat[13] * scalar,
+			 this->mMat[2] * scalar, this->mMat[6] * scalar, this->mMat[10] * scalar, this->mMat[14] * scalar,
+			 this->mMat[3] * scalar, this->mMat[7] * scalar, this->mMat[11] * scalar, this->mMat[15] * scalar);
 	}
 	void Matrix4::operator*=(F32 scalar)
 	{
@@ -77,14 +77,28 @@ namespace Palette3D
 	}
 	Matrix4 Matrix4::operator*(const Matrix4 & o) const
 	{
-		Matrix4 tmp;
-		for (int i = 0; i<4; i++)
-		{
-			for (int j = 0; j<4; j++)
-			{
-				tmp.set(i,j, get(i,0) * o.get(0 ,j) + get(i,1) * o.get(1 ,j) + get(i,2) * o.get(2,j) + get(i,3) * o.get(3,j));
-			}
-		}
+		Matrix4 tmp = Matrix4::IDENTITY;
+		
+		tmp.mMat[0] = this->mMat[0] * o.mMat[0] + this->mMat[4] * o.mMat[1] + this->mMat[8] * o.mMat[2] + this->mMat[12] * o.mMat[3];
+		tmp.mMat[4] = this->mMat[0] * o.mMat[4] + this->mMat[4] * o.mMat[5] + this->mMat[8] * o.mMat[6] + this->mMat[12] * o.mMat[7];
+		tmp.mMat[8] = this->mMat[0] * o.mMat[8] + this->mMat[4] * o.mMat[9] + this->mMat[8] * o.mMat[10] + this->mMat[12] * o.mMat[11];
+		tmp.mMat[12] = this->mMat[0] * o.mMat[12] + this->mMat[4] * o.mMat[13] + this->mMat[8] * o.mMat[14] + this->mMat[12] * o.mMat[15];
+
+		tmp.mMat[1] = this->mMat[1] * o.mMat[0] + this->mMat[5] * o.mMat[1] + this->mMat[9] * o.mMat[2] + this->mMat[13] * o.mMat[3];
+		tmp.mMat[5] = this->mMat[1] * o.mMat[4] + this->mMat[5] * o.mMat[5] + this->mMat[9] * o.mMat[6] + this->mMat[13] * o.mMat[7];
+		tmp.mMat[9] = this->mMat[1] * o.mMat[8] + this->mMat[5] * o.mMat[9] + this->mMat[9] * o.mMat[10] + this->mMat[13] * o.mMat[11];
+		tmp.mMat[13] = this->mMat[1] * o.mMat[12] + this->mMat[5] * o.mMat[13] + this->mMat[9] * o.mMat[14] + this->mMat[13] * o.mMat[15];
+
+		tmp.mMat[2] = this->mMat[2] * o.mMat[0] + this->mMat[6] * o.mMat[1] + this->mMat[10] * o.mMat[2] + this->mMat[14] * o.mMat[3];
+		tmp.mMat[6] = this->mMat[2] * o.mMat[4] + this->mMat[6] * o.mMat[5] + this->mMat[10] * o.mMat[6] + this->mMat[14] * o.mMat[7];
+		tmp.mMat[10] = this->mMat[2] * o.mMat[8] + this->mMat[6] * o.mMat[9] + this->mMat[10] * o.mMat[10] + this->mMat[14] * o.mMat[11];
+		tmp.mMat[14] = this->mMat[2] * o.mMat[12] + this->mMat[6] * o.mMat[13] + this->mMat[10] * o.mMat[14] + this->mMat[14] * o.mMat[15];
+
+		tmp.mMat[3] = this->mMat[3] * o.mMat[0] + this->mMat[7] * o.mMat[1] + this->mMat[11] * o.mMat[2] + this->mMat[15] * o.mMat[3];
+		tmp.mMat[7] = this->mMat[3] * o.mMat[4] + this->mMat[7] * o.mMat[5] + this->mMat[11] * o.mMat[6] + this->mMat[15] * o.mMat[7];
+		tmp.mMat[11] = this->mMat[3] * o.mMat[8] + this->mMat[7] * o.mMat[9] + this->mMat[11] * o.mMat[10] + this->mMat[15] * o.mMat[11];
+		tmp.mMat[15] = this->mMat[3] * o.mMat[12] + this->mMat[7] * o.mMat[13] + this->mMat[11] * o.mMat[14] + this->mMat[15] * o.mMat[15];
+
 		return tmp;
 	}
 	void Matrix4::operator*=(const Matrix4 & other)
@@ -93,27 +107,27 @@ namespace Palette3D
 	}
 	Matrix4 Matrix4::operator-() const
 	{
-		return Matrix4( -mMat[0], -mMat[4], -mMat[8], -mMat[12],
-						-mMat[1], -mMat[5], -mMat[9], -mMat[13],
-						-mMat[2], -mMat[6], -mMat[10], -mMat[14],
-						-mMat[3], -mMat[7], -mMat[11], -mMat[15]);
+		return Matrix4( -this->mMat[0], -this->mMat[4], -this->mMat[8], -this->mMat[12],
+						-this->mMat[1], -this->mMat[5], -this->mMat[9], -this->mMat[13],
+						-this->mMat[2], -this->mMat[6], -this->mMat[10], -this->mMat[14],
+						-this->mMat[3], -this->mMat[7], -this->mMat[11], -this->mMat[15]);
 	}
 	Vec4 Matrix4::operator*(const Vec4 & o) const
 	{
 		Vec4 v;
-		v.x = mMat[0] * o.x + mMat[4] * o.y + mMat[8] * o.z + mMat[12] * o.w;
-		v.y = mMat[1] * o.x + mMat[5] * o.y + mMat[9] * o.z + mMat[13] * o.w;
-		v.z = mMat[2] * o.x + mMat[6] * o.y + mMat[10] * o.z + mMat[14] * o.w;
-		v.w = mMat[3] * o.x + mMat[7] * o.y + mMat[11] * o.z + mMat[15] * o.w;
+		v.x = this->mMat[0] * o.x + this->mMat[4] * o.y + this->mMat[8] * o.z + this->mMat[12] * o.w;
+		v.y = this->mMat[1] * o.x + this->mMat[5] * o.y + this->mMat[9] * o.z + this->mMat[13] * o.w;
+		v.z = this->mMat[2] * o.x + this->mMat[6] * o.y + this->mMat[10] * o.z + this->mMat[14] * o.w;
+		v.w = this->mMat[3] * o.x + this->mMat[7] * o.y + this->mMat[11] * o.z + this->mMat[15] * o.w;
 		
 		return v;
 	}
 	Vec3 Matrix4::operator*(const Vec3 & o) const
 	{
 		Vec3 v;
-		v.x = mMat[0] * o.x + mMat[4] * o.y + mMat[8] * o.z + mMat[12];
-		v.y = mMat[1] * o.x + mMat[5] * o.y + mMat[9] * o.z + mMat[13];
-		v.z = mMat[2] * o.x + mMat[6] * o.y + mMat[10] * o.z + mMat[14];
+		v.x = this->mMat[0] * o.x + this->mMat[4] * o.y + this->mMat[8] * o.z + this->mMat[12];
+		v.y = this->mMat[1] * o.x + this->mMat[5] * o.y + this->mMat[9] * o.z + this->mMat[13];
+		v.z = this->mMat[2] * o.x + this->mMat[6] * o.y + this->mMat[10] * o.z + this->mMat[14];
 		
 
 		return v;
@@ -127,7 +141,7 @@ namespace Palette3D
 		for (int i = 0; i<16; i++)
 		{
 			
-			if (mMat[i]!= other.mMat[i])
+			if (this->mMat[i]!= other.mMat[i])
 			{
 				return false;
 			}
@@ -185,11 +199,14 @@ namespace Palette3D
 
 	F32 Matrix4::get(size_t row, size_t col) const
 	{
-		return mMat[row * 4 + col];
+		assert(row<4 && col <4);
+		return mMat[col* 4 + row];
 	}
 
-	void Matrix4::set(size_t r, size_t c, F32 v) {
-		mMat[r * 4 + c] = v;
+	void Matrix4::set(size_t r, size_t c, F32 v) 
+	{
+		assert(r<4 && c <4);
+		mMat[c * 4 + r] = v;
 	}
 
 	Vec4 Matrix4::getRow(std::size_t row) const
@@ -335,7 +352,7 @@ namespace Palette3D
 	}
 	Matrix4 Matrix4::ortho(I32 left, I32 right, I32 bottom, I32 top, F32 near, F32 far)
 	{
-
+		//fix me
 		Matrix4 m = Matrix4::IDENTITY;
 		m.set(0, 0, 2.f / (right - left));
 		m.set(1, 1, 2.f / (top - bottom));
@@ -350,16 +367,16 @@ namespace Palette3D
 	{
 		assert(aspect != 0);
 		assert(near != far);
-		F32 rad = (F32)fov * PI / 180.0f;
+		F32 rad = TORADIAN(fov);
 		F32 tanhalf = tan(rad * 0.5f);
 
 		Matrix4 m = Matrix4::IDENTITY;
-		m.set(0, 0, 1 / (aspect * tanhalf));
-		m.set(1, 1, 1 / (tanhalf));
+		m.set(0, 0, 1.f/ (aspect * tanhalf));
+		m.set(1, 1, 1.f / (tanhalf));
 		m.set(2, 2, -(far + near) / (far - near));
-		m.set(2, 3, -1);
-		m.set(3, 2, (2 * far * near)/( far - near));
-
+		m.set(3, 2, -1);
+		m.set(2, 3, (2 * far * near)/( far - near));
+		std::cout << m << std::endl;
 		return m;
 	}
 	std::ostream & operator<<(std::ostream & os, const Matrix4 & m)

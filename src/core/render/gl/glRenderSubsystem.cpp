@@ -37,15 +37,14 @@ namespace Palette3D
 		prog.addUniform("model");
 
 		
-		Camera c(Vec3(0,0,-5), Vec3(-8,0,3));
 
 		
 		Matrix4 p = Matrix4::perspective(45.0f, (F32)800 / (F32)600, 0.1f, 100.0f);
 		prog.setUniform("projection", p);
 
 
-		Matrix4 v = c.lookAt();
-		prog.setUniform("view", v);
+	
+		prog.setUniform("view", Matrix4::translate(0,0,-10));
 
 
 		UnitSquare square;
@@ -75,11 +74,28 @@ namespace Palette3D
 			//Proccesses events in queue
 			INPUT_MANAGER->update();
 
+			float radius = 10.0f;
+		
+			if (INPUT_MANAGER->getKey(GLFW_KEY_W))
+				cube.pos -= Vec3(0, 0, 2 * dt);
+			if (INPUT_MANAGER->getKey(GLFW_KEY_S))
+				cube.pos += Vec3(0, 0, 2 * dt);
+			if (INPUT_MANAGER->getKey(GLFW_KEY_A))
+				cube.pos -= Vec3(2*dt, 0, 0);
+			if (INPUT_MANAGER->getKey(GLFW_KEY_D))
+				cube.pos += Vec3(2*dt, 0, 0);
+
+			if (INPUT_MANAGER->getKey(GLFW_KEY_E))
+				cube.pos -= Vec3(0, 2*dt, 0);
+			if (INPUT_MANAGER->getKey(GLFW_KEY_Q))
+				cube.pos += Vec3(0, 2 * dt, 0);
+
+			std::cout << cube.pos << std::endl;
+
+
+			//std::cout << cube.pos << std::endl;
+
 			
-			
-			//camera testing
-			Matrix4 v = c.lookAt();
-			prog.setUniform("view", v);
 			//Draw phase
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
