@@ -2,43 +2,19 @@
 #include <time.h>
 #include <vector>
 #include <game\camera\Camera.h>
-
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
-	
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
-	
-}
+#include <window\WindowManager.h>
+#include <input\InputManager.h>
 
 
 namespace Palette3D
 {
 	GlRenderSubSystem::GlRenderSubSystem()
 	{
-		if (!glfwInit())
-		{
-			//error
-		}
-
-		//GL setup
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
-
-		//Making the window
-		GLFWwindow* window = glfwCreateWindow(800, 600, "Palette3D", nullptr, nullptr);
-		if (window == nullptr)
-		{
-			std::cout << "Failed to create GLFW window" << std::endl;
-			glfwTerminate();
-		}
-
-		//Makes the context of the specified window current for the calling thread.
-		glfwMakeContextCurrent(window);
-
+		WindowManager *  w = new WindowManager(800,600);
+		InputManager * im = new InputManager();
+		if (!im)
+			std::cout << "Error" << std::endl;
+		
 		//This will allow us to use experimental GL features
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)
@@ -48,15 +24,10 @@ namespace Palette3D
 
 		glEnable(GL_DEPTH_TEST);
 
-		//Retrieves the size of the framebuffer of the window.
-		int width, height;
-		glfwGetFramebufferSize(window, &width, &height);
-
-		//Sets our viewport to that framebuffer size.
-		glViewport(0, 0, width, height);
+		
 
 		//This allows us to handle inputs 
-		glfwSetKeyCallback(window, key_callback);
+		
 
 		Program prog("..\\..\\Shaders\\test.vert","..\\..\\Shaders\\test.frag");
 
@@ -89,7 +60,7 @@ namespace Palette3D
 
 		F32 dt = 0, prevTime= 0, currentTime = 0;
 		
-		while (!glfwWindowShouldClose(window))
+		while (!glfwWindowShouldClose(WINDOW_MANAGER->getWindowPtr()))
 		{
 			
 			// Calculate delta time
@@ -98,7 +69,7 @@ namespace Palette3D
 			
 			prevTime = currentTime;
 			//Proccesses events in queue
-			glfwPollEvents();
+			INPUT_MANAGER->update();
 
 			
 
@@ -117,7 +88,7 @@ namespace Palette3D
 			cube4.update(-dt);
 			cube4.draw(prog);
 			// Swap the buffers
-			glfwSwapBuffers(window);
+			glfwSwapBuffers(WINDOW_MANAGER->getWindowPtr());
 		
 		}
 

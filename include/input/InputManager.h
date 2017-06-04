@@ -4,6 +4,7 @@
 #include <map>
 #include <core/atomic/Types.h>
 #include <GLFW\glfw3.h>
+#include <core\math\Math.h>
 
 #define INPUT_MANAGER Palette3D::InputManager::getInstance()
 
@@ -18,7 +19,9 @@ namespace Palette3D
 
 		void update();
 
-		void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
+		void sendGLFWEvent(int key, int scancode, int action, int mode);
+
+		Vec2 getMousePosition();
 
 
 		F32 getAxis();
@@ -37,6 +40,8 @@ namespace Palette3D
 		//Pressed this update frame: 0x02
 		//Released this update frame: 0x04
 		std::map<I16, I8> mKeys;
+
+		Vec2 mMousePos;
 
 	
 
