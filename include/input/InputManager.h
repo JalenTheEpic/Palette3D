@@ -2,6 +2,7 @@
 #define _INPUT_INPUTMANAGER_
 #include <templates\Singleton.h>
 #include <map>
+#include <vector>
 #include <core/atomic/Types.h>
 #include <GLFW\glfw3.h>
 #include <core\math\Math.h>
@@ -19,28 +20,33 @@ namespace Palette3D
 
 		void update();
 
-		void sendGLFWEvent(int key, int scancode, int action, int mode);
+		void sendGLFWKeyEvent(I32 key, I32 scancode, I32 action, I32 mode);
 
 		Vec2 getMousePosition();
 
-
+		void createAxis(std::string axisname, I32 scancode);
 		F32 getAxis();
-		bool getKey();
-		bool getKeyDown();
-		bool getKeyUp();
+		bool getKey(I32 key);
+		bool getKeyDown(I32 key);
+		bool getKeyUp(I32 key);
 
 
-		bool getMouseButton();
-		bool getMouseButtonDown();
-		bool getMouseButtonUp();
+		bool getMouseButton(I32 button);
+		bool getMouseButtonDown(I32 button);
+		bool getMouseButtonUp(I32 button);
 
 	private:
-		//map<KeyCode, State>  Key -> 0000 0000 
-		//Currently down bit: 0x01 
-		//Pressed this update frame: 0x02
-		//Released this update frame: 0x04
-		std::map<I16, I8> mKeys;
+		//map of keys
+		std::map<I32, bool> mKeys;
+		
+		//Keys that went down or up this update frame
+		//make these maps too?
+		std::vector<I32> mKeysDown;
+		std::vector<I32> mKeysUp;
 
+		//Idea from unity
+		//Not implemented
+		std::map<std::string, F32> mAxis;
 		Vec2 mMousePos;
 
 	
@@ -48,6 +54,10 @@ namespace Palette3D
 
 	};
 }
+
+
+
+
 
 
 

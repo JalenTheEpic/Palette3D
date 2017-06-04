@@ -41,9 +41,13 @@ namespace Palette3D
 
 		
 		Matrix4 p = Matrix4::perspective(45.0f, (F32)800 / (F32)600, 0.1f, 100.0f);
-		Matrix4 v = c.lookAt();
 		prog.setUniform("projection", p);
+
+
+		Matrix4 v = c.lookAt();
 		prog.setUniform("view", v);
+
+
 		UnitSquare square;
 		UnitCube cube;
 		UnitCube cube2;
@@ -72,10 +76,17 @@ namespace Palette3D
 			INPUT_MANAGER->update();
 
 			
-
+			
+			//camera testing
+			Matrix4 v = c.lookAt();
+			prog.setUniform("view", v);
 			//Draw phase
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+			
+
+
 			cube.update(dt);
 			cube.draw(prog);
 
