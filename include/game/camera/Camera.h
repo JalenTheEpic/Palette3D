@@ -5,10 +5,11 @@
 
 namespace Palette3D
 {
-
+	/////////////////////////////////////////FINISH ME///////////////////////////////////////////////
 	class Camera 
 	{
-	private:
+		//only public for now
+	public:
 		// Camera Attributes
 		Vec3 mPosition;
 		Vec3 mFront;
