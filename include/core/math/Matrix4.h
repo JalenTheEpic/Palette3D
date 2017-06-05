@@ -106,6 +106,9 @@ namespace Palette3D
 
 		static Matrix4 perspective(F32 fov, F32 aspect, F32 near, F32 far);
 
+
+		static Matrix4 lookAt(Vec3 pos, Vec3 target, Vec3 up);
+
 		
 	
 

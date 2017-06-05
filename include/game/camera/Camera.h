@@ -37,7 +37,7 @@ namespace Palette3D
 		
 
 
-		Matrix4 lookAt();
+		Matrix4 getView();
 
 
 

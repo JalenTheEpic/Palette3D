@@ -78,7 +78,7 @@ namespace Palette3D
 	Matrix4 Matrix4::operator*(const Matrix4 & o) const
 	{
 		Matrix4 tmp = Matrix4::IDENTITY;
-		
+		//did this witout loops because I was bored
 		tmp.mMat[0] = this->mMat[0] * o.mMat[0] + this->mMat[4] * o.mMat[1] + this->mMat[8] * o.mMat[2] + this->mMat[12] * o.mMat[3];
 		tmp.mMat[4] = this->mMat[0] * o.mMat[4] + this->mMat[4] * o.mMat[5] + this->mMat[8] * o.mMat[6] + this->mMat[12] * o.mMat[7];
 		tmp.mMat[8] = this->mMat[0] * o.mMat[8] + this->mMat[4] * o.mMat[9] + this->mMat[8] * o.mMat[10] + this->mMat[12] * o.mMat[11];
@@ -376,8 +376,23 @@ namespace Palette3D
 		m.set(2, 2, -(far + near) / (far - near));
 		m.set(3, 2, -1);
 		m.set(2, 3, (2 * far * near)/( far - near));
-		std::cout << m << std::endl;
+		//std::cout << m << std::endl;
 		return m;
+	}
+	Matrix4 Matrix4::lookAt(Vec3 pos, Vec3 target, Vec3 up)
+	{
+		Vec3 dir = (pos - target).normalize();
+		Vec3 right = (up.cross(dir)).normalize();
+		Vec3 camUp = dir.cross(right);
+		Matrix4 m(
+			right.x, right.y, right.z, 0,
+			camUp.x, camUp.y, camUp.z, 0,
+			dir.x, dir.y, dir.z, 0,
+			0, 0, 0, 1);
+
+
+
+		return m * Matrix4::translate(-pos.x, -pos.y, -pos.z);
 	}
 	std::ostream & operator<<(std::ostream & os, const Matrix4 & m)
 	{

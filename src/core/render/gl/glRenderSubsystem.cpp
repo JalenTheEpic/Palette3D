@@ -43,8 +43,8 @@ namespace Palette3D
 		prog.setUniform("projection", p);
 
 
-	
-		prog.setUniform("view", Matrix4::translate(0,0,-10));
+		Camera c(Vec3(0,0,10));
+		prog.setUniform("view", c.lookAt());
 
 
 		UnitSquare square;
@@ -53,12 +53,13 @@ namespace Palette3D
 		UnitCube cube3;
 		UnitCube cube4;
 		
-		cube.pos = Vec3(-3,0,3);
-		cube2.pos = Vec3(-1, 0, 3);
-		cube3.pos = Vec3(1, 0, 3);
-		cube4.pos = Vec3(3, 0, 3);
+		cube.pos = Vec3(-3,0,-10);
+		cube2.pos = Vec3(-1, 0, -10);
+		cube3.pos = Vec3(1, 0, -10);
+		cube4.pos = Vec3(3, 0, -10);
 
 		
+		float radius = 10.0f;
 		
 
 		F32 dt = 0, prevTime= 0, currentTime = 0;
@@ -74,7 +75,7 @@ namespace Palette3D
 			//Proccesses events in queue
 			INPUT_MANAGER->update();
 
-			float radius = 10.0f;
+			
 		
 			if (INPUT_MANAGER->getKey(GLFW_KEY_W))
 				cube.pos -= Vec3(0, 0, 2 * dt);
@@ -90,11 +91,14 @@ namespace Palette3D
 			if (INPUT_MANAGER->getKey(GLFW_KEY_Q))
 				cube.pos += Vec3(0, 2 * dt, 0);
 
-			std::cout << cube.pos << std::endl;
 
-
+			c.mPosition.x = sin(glfwGetTime()) * radius;
+			c.mPosition.z = cos(glfwGetTime()) * radius;
+			prog.setUniform("view", c.getView());
 			//std::cout << cube.pos << std::endl;
 
+
+			
 			
 			//Draw phase
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);

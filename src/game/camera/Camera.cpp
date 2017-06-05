@@ -6,6 +6,7 @@ namespace Palette3D
 
 
 
+	//Soon I'll bake the controls right into the camera simply for testing purposes 
 
 	Camera::Camera(Vec3 pos, Vec3 target, Vec3 worldUp)
 	{
@@ -16,11 +17,11 @@ namespace Palette3D
 
 		mWorldUp = worldUp;
 
-		mRight = (mDirection.cross(worldUp)).normalize();
+		mRight = (worldUp.cross(mDirection)).normalize();
 
 
 		mUp = mDirection.cross(mRight);
-		std::cout <<mDirection <<mUp << mRight;
+		std::cout <<"Pos"<<mPosition << "Dir" <<mDirection << "Up" <<mUp<<"Right" << mRight;
 
 	}
 
@@ -28,15 +29,16 @@ namespace Palette3D
 	{
 	}
 
-	Matrix4 Camera::lookAt()
+	Matrix4 Camera::getView()
 	{
-
-		return Matrix4(
-			mRight.x, mRight.y, mRight.z, 0,
-			mUp.x, mUp.y, mUp.z, 0,
-			mDirection.x, mDirection.y, mDirection.z,0,
-			0,0,0,1
-		) * Matrix4::translate(mPosition.x, mPosition.y, mPosition.z) ;
+		//not done 
+		return Matrix4::lookAt(mPosition, mPosition + mFront, mUp);
 	}
+
+	void updateCameraVectors()
+	{
+	
+	}
+
 
 }
