@@ -44,7 +44,7 @@ namespace Palette3D
 
 
 		Camera c(Vec3(0,0,10));
-		prog.setUniform("view", c.lookAt());
+		prog.setUniform("view", c.getView());
 
 
 		UnitSquare square;
