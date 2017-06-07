@@ -77,23 +77,10 @@ namespace Palette3D
 
 			
 		
-			if (INPUT_MANAGER->getKey(GLFW_KEY_W))
-				cube.pos -= Vec3(0, 0, 2 * dt);
-			if (INPUT_MANAGER->getKey(GLFW_KEY_S))
-				cube.pos += Vec3(0, 0, 2 * dt);
-			if (INPUT_MANAGER->getKey(GLFW_KEY_A))
-				cube.pos -= Vec3(2*dt, 0, 0);
-			if (INPUT_MANAGER->getKey(GLFW_KEY_D))
-				cube.pos += Vec3(2*dt, 0, 0);
-
-			if (INPUT_MANAGER->getKey(GLFW_KEY_E))
-				cube.pos -= Vec3(0, 2*dt, 0);
-			if (INPUT_MANAGER->getKey(GLFW_KEY_Q))
-				cube.pos += Vec3(0, 2 * dt, 0);
 
 
-			c.mPosition.x = sin(glfwGetTime()) * radius;
-			c.mPosition.z = cos(glfwGetTime()) * radius;
+			c.update(dt);
+		
 			prog.setUniform("view", c.getView());
 			//std::cout << cube.pos << std::endl;
 

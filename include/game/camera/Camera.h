@@ -21,20 +21,20 @@ namespace Palette3D
 	
 	public:
 		// Eular Angles
-		float mYaw;
-		float mPitch;
+		F32 mYaw;
+		F32 mPitch;
 		// Camera options
-		float mMovementSpeed;
-		float mMouseSensitivity;
-		float mZoom;
+		F32 mMovementSpeed;
+		F32 mMouseSensitivity = 0.05f;
+		F32 mZoom;
 
 	public:
-		Camera(Vec3 pos = Vec3(0, 0, -3), Vec3 target = Vec3(0, 0, 0), Vec3 worldUp = Vec3(0,1,0));
+		Camera(Vec3 pos = Vec3(0, 0, -3), Vec3 front = Vec3(0, 0, -1), Vec3 worldUp = Vec3(0,1,0));
 		~Camera();
 
 
 		void setPosition();
-		
+		void update(F32 dt);
 
 
 		Matrix4 getView();
