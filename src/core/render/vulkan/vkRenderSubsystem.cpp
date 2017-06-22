@@ -24,6 +24,19 @@ namespace Palette3D
 	void VkRenderSubSystem::initVkInstance()
 	{
 
+		if (mEnableValidationLayers)
+		{
+			if (!checkValidationLayers())
+			{
+
+				THROW_EXCEPTION("One or more validation layers not supported on machine. \n"
+					"Install newest lunarSDK for validation layers please ", ExceptionType::ArgumentException);
+
+			}
+
+		}
+
+
 		//Information about the application.
 		//needed to init the vkInstance
 		VkApplicationInfo appInfo = {};
@@ -34,18 +47,22 @@ namespace Palette3D
 		appInfo.pEngineName = "Palette3d";
 		appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
 		appInfo.apiVersion = VK_API_VERSION_1_0;
+/*
+#if NDEBUG
 
+#else
 
-		/////////////////////FINISH ME/////////////////////////////////////////////////////
-		////getting layer info
+		U32 extensionCount = 0;
+		vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+		std::vector<VkExtensionProperties> ext(extensionCount);
+		vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, ext.data());
+		std::cout << "available extensions:" << std::endl;
 
-		//U32 instanceLayerCount = 0;
-		////Gets the layer count and store it in arg 1
-		//vkEnumerateInstanceLayerProperties(&instanceLayerCount, nullptr);
-		//VkLayerProperties layerProperty;
-		//vkEnumerateInstanceLayerProperties(&instanceLayerCount, &layerProperty);
-		//////////////////////////////////////////////////////////////////////////////////
-
+		for (const auto& extension : ext) {
+			std::cout << "\t" << extension.extensionName << std::endl;
+		}
+#endif
+*/
 
 		//Creation info. 
 		//needed to init the vkInstance
@@ -58,18 +75,20 @@ namespace Palette3D
 		createInfo.pApplicationInfo = &appInfo;
 
 		//Glfw handles getting the extensions for us
-		U32 glfwExtensionCount = 0;
-		const char** glfwExtensions;
+		std::vector<const char*> extensions = getExtensions();
+		createInfo.enabledExtensionCount = static_cast<U32>(extensions.size());
+		createInfo.ppEnabledExtensionNames = extensions.data();
 
-		glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-
-		createInfo.enabledExtensionCount = glfwExtensionCount;
-		createInfo.ppEnabledExtensionNames = glfwExtensions;
 
 		//end getting extensions
 
-		createInfo.enabledLayerCount = 0;
-		createInfo.ppEnabledLayerNames = {};
+		if (mEnableValidationLayers) {
+			createInfo.enabledLayerCount = static_cast<uint32_t>(mValidationLayers.size());
+			createInfo.ppEnabledLayerNames = mValidationLayers.data();
+		}
+		else {
+			createInfo.enabledLayerCount = 0;
+		}
 
 
 
@@ -110,6 +129,20 @@ namespace Palette3D
 
 	void VkRenderSubSystem::initDebugCallback()
 	{
+		if (!mEnableValidationLayers) return;
+
+
+		VkDebugReportCallbackCreateInfoEXT createInfo = {};
+		createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT;
+		createInfo.flags = VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT | VK_DEBUG_REPORT_INFORMATION_BIT_EXT;
+		createInfo.pfnCallback = debugCallback;
+
+		if (createDebugReportCallbackEXT(mVkInstance, &createInfo, nullptr, &mCallback) != VK_SUCCESS) 
+		{
+
+			THROW_EXCEPTION("failed to set up debug callback!", ExceptionType::Failure);
+			
+		}
 	}
 
 	void VkRenderSubSystem::choosePhysicalDevice()
@@ -214,6 +247,25 @@ namespace Palette3D
 
 	}
 
+	std::vector<const char*> VkRenderSubSystem::getExtensions()
+	{
+		std::vector<const char*> extensions;
+
+		U32 glfwExtensionCount = 0;
+		const char** glfwExtensions;
+		glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+
+		for ( U16 i = 0; i < glfwExtensionCount; i++) {
+			extensions.push_back(glfwExtensions[i]);
+		}
+
+		if (mEnableValidationLayers) {
+			extensions.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
+		}
+
+		return extensions;
+	}
+
 
 	// !----------UTILITY FUNCTIONS----------!
 	bool VkRenderSubSystem::checkPhysicalDevice(VkPhysicalDevice &device)
@@ -227,6 +279,79 @@ namespace Palette3D
 		return true;
 	}
 
+	bool VkRenderSubSystem::checkValidationLayers()
+	{
+
+		U32 layerCount;
+		vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+
+		std::vector<VkLayerProperties> availableLayers(layerCount);
+		vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
+		/*
+		for (auto layer : availableLayers)
+		{
+			std::cout << layer.layerName <<std::endl;
+
+		}
+		*/
+		
+
+		for (const char* layerName : mValidationLayers)
+		{
+			bool layerFound = false;
+
+			for (const auto& layerProperties : availableLayers) 
+			{
+				if (strcmp(layerName, layerProperties.layerName) == 0) 
+				{
+					layerFound = true;
+					break;
+				}
+			}
+
+			if (!layerFound) 
+			{
+				return false;
+			}
+		}
+
+		return true;
+
+	}
+
+	VKAPI_ATTR VkBool32 VKAPI_CALL VkRenderSubSystem::debugCallback(
+		VkDebugReportFlagsEXT flags, 
+		VkDebugReportObjectTypeEXT objType, 
+		uint64_t obj, 
+		size_t location, 
+		int32_t code, 
+		const char * layerPrefix, 
+		const char * msg, 
+		void * userData)
+	{
+		std::cerr << "validation layer: " << msg << std::endl;
+		return VK_FALSE;
+	}
+
+	VkResult VkRenderSubSystem::createDebugReportCallbackEXT(VkInstance instance, const VkDebugReportCallbackCreateInfoEXT * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkDebugReportCallbackEXT * pCallback)
+	{
+		auto func = (PFN_vkCreateDebugReportCallbackEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugReportCallbackEXT");
+		if (func != nullptr) {
+			return func(instance, pCreateInfo, pAllocator, pCallback);
+		}
+		else {
+			return VK_ERROR_EXTENSION_NOT_PRESENT;
+		}
+	}
+
+	void VkRenderSubSystem::destroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCallbackEXT callback, const VkAllocationCallbacks * pAllocator)
+	{
+		auto func = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugReportCallbackEXT");
+		if (func != nullptr) {
+			func(instance, callback, pAllocator);
+		}
+	}
+
 
 
 
@@ -237,7 +362,8 @@ namespace Palette3D
 	{
 		initWindow();
 		initVkInstance();
-
+		initDebugCallback();
+		
 		initVkSurface();
 		bindWindow();
 
@@ -248,10 +374,13 @@ namespace Palette3D
 	VkRenderSubSystem::~VkRenderSubSystem()
 	{
 		
+		destroyDebugReportCallbackEXT(mVkInstance, mCallback, nullptr);
 		vkDestroyDevice(mLogicalDevice, nullptr);
 		vkDestroyInstance(mVkInstance, nullptr);
 		glfwDestroyWindow(mpWindow);
 
+
+		while (1) {}
 		glfwTerminate();
 	}
 

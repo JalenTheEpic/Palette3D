@@ -28,26 +28,55 @@ namespace Palette3D
 		VkDevice mLogicalDevice;
 		VkQueue mGraphicsQueue;
 		VkSurfaceKHR mSurface;
+		VkDebugReportCallbackEXT mCallback;
+
+		const std::vector<const char*> mValidationLayers = {
+			"VK_LAYER_LUNARG_standard_validation"
+		};
+
+#ifdef NDEBUG
+		const bool mEnableValidationLayers = false;
+#else
+		const bool mEnableValidationLayers = true;
+#endif
 
 		// !----------INIT FUNCTIONS----------!
-		//Initializes Vulkan. Calls other functions in this section
+		//Initializes Vulkan. 
 		void initWindow();
 		void initVulkan();
 		void initVkInstance();
 		void initDebugCallback();
-		void checkValidationLayers();
+		
 		void choosePhysicalDevice();
 		void initLogicalDevice();
 		
 		void initCommandBuffer();
 		void initVkSurface();
 		void bindWindow();
+
+		std::vector<const char*> getExtensions();
+
 		// !----------UTILITY FUNCTIONS----------!
 		//checks if the device has the functionality we want
 		//TODO:: FINISH THIS
 		bool checkPhysicalDevice(VkPhysicalDevice &device);
+		bool checkValidationLayers();
 
 
+		static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
+			VkDebugReportFlagsEXT flags,
+			VkDebugReportObjectTypeEXT objType,
+			uint64_t obj,
+			size_t location,
+			int32_t code,
+			const char* layerPrefix,
+			const char* msg,
+			void* userData);
+
+		VkResult createDebugReportCallbackEXT(VkInstance instance, const VkDebugReportCallbackCreateInfoEXT* pCreateInfo,
+			const VkAllocationCallbacks* pAllocator, VkDebugReportCallbackEXT* pCallback);
+
+		void destroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCallbackEXT callback, const VkAllocationCallbacks* pAllocator);
 		
 
 	public:

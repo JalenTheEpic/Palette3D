@@ -8,11 +8,11 @@ int main()
 {
 	
 	
-	//Palette3D::VkRenderSubSystem r;
-	//r.debugRun();
+	Palette3D::VkRenderSubSystem r;
+	r.debugRun();
 	
 
-	GlRenderSubSystem g;
+	//GlRenderSubSystem g;
 	
 
 	return 0;

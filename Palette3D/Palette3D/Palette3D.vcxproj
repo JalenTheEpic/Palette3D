@@ -201,7 +201,7 @@
     <ClInclude Include="..\..\include\core\render\gl\Texture.h" />
     <ClInclude Include="..\..\include\core\render\Render.h" />
     <ClInclude Include="..\..\include\core\render\RenderManager.h" />
-    <ClInclude Include="..\..\include\core\render\vkRenderSubsystem.h" />
+    <ClInclude Include="..\..\include\core\render\vulkan\vkRenderSubsystem.h" />
     <ClInclude Include="..\..\include\core\render\vulkan\VulkanDevice.h" />
     <ClInclude Include="..\..\include\core\render\vulkan\VulkanInstance.h" />
     <ClInclude Include="..\..\include\core\render\vulkan\VulkanLayerAndExtension.h" />

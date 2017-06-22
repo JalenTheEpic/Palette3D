@@ -114,9 +114,6 @@
     <ClInclude Include="..\..\include\core\render\RenderManager.h">
       <Filter>Header Files\Core\Render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\core\render\vkRenderSubsystem.h">
-      <Filter>Header Files\Core\Render</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\core\atomic\Types.h">
       <Filter>Header Files\Core\Atomic</Filter>
     </ClInclude>
@@ -158,6 +155,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\window\WindowManager.h">
       <Filter>Header Files\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\core\render\vulkan\vkRenderSubsystem.h">
+      <Filter>Header Files\Core\Render\Vulkan</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
