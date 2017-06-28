@@ -27,6 +27,7 @@ namespace Palette3D
 		VkPhysicalDevice mPhysicalDevice;
 		VkDevice mLogicalDevice;
 		VkQueue mGraphicsQueue;
+		VkQueue mPresentQueue;
 		VkSurfaceKHR mSurface;
 		VkDebugReportCallbackEXT mCallback;
 
@@ -34,6 +35,9 @@ namespace Palette3D
 			"VK_LAYER_LUNARG_standard_validation"
 		};
 
+		const std::vector<const char*> mDeviceExtensions = {
+			VK_KHR_SWAPCHAIN_EXTENSION_NAME
+		};
 #ifdef NDEBUG
 		const bool mEnableValidationLayers = false;
 #else

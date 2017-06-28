@@ -192,6 +192,7 @@ namespace Palette3D
 			if (graphicsQueueIndex > queueFamilyPropertyCount)
 				THROW_EXCEPTION("NO GRAPHICS QUEUE FOUND",ExceptionType::IndexOutOfRange);
 		}
+		F32 priority = 1.f;
 
 		//Creating a single graphics queue family
 		VkDeviceQueueCreateInfo queueCreateInfo = {};
@@ -200,7 +201,9 @@ namespace Palette3D
 		queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
 		queueCreateInfo.queueFamilyIndex = graphicsQueueIndex;
 		queueCreateInfo.queueCount = 1;
-		F32 priority = 1.f;
+		//we need to make a present queue later but for now since my card
+		//has it all in the same queue family I'm not gonna do all that
+		
 		queueCreateInfo.pQueuePriorities = &priority;
 #pragma endregion
 
@@ -212,13 +215,14 @@ namespace Palette3D
 #pragma endregion
 
 		VkDeviceCreateInfo deviceCreateInfo = {};
-		deviceCreateInfo.enabledExtensionCount = 0;
+		
 		//deviceCreateInfo.enabledLayerCount = 0;
 		deviceCreateInfo.flags = 0;
 		deviceCreateInfo.pEnabledFeatures = &deviceFeatures; //ptr to a VkPhysicalDeviceFeatures struct
 		deviceCreateInfo.pNext = nullptr;
 
-		deviceCreateInfo.ppEnabledLayerNames = {}; //will use later for debugging
+		deviceCreateInfo.enabledExtensionCount = static_cast<uint32_t>(mDeviceExtensions.size());
+		deviceCreateInfo.ppEnabledExtensionNames = mDeviceExtensions.data();
 		deviceCreateInfo.pQueueCreateInfos = &queueCreateInfo;
 		deviceCreateInfo.queueCreateInfoCount = 1;
 		deviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
@@ -235,7 +239,10 @@ namespace Palette3D
 
 	void VkRenderSubSystem::initVkSurface()
 	{
-		
+		if (glfwCreateWindowSurface(mVkInstance, mpWindow, nullptr, &mSurface) != VK_SUCCESS) 
+		{
+			throw std::runtime_error("failed to create window surface!");
+		}
 	}
 
 	void VkRenderSubSystem::bindWindow()
@@ -376,6 +383,7 @@ namespace Palette3D
 		
 		destroyDebugReportCallbackEXT(mVkInstance, mCallback, nullptr);
 		vkDestroyDevice(mLogicalDevice, nullptr);
+		vkDestroySurfaceKHR(mVkInstance, mSurface, nullptr);
 		vkDestroyInstance(mVkInstance, nullptr);
 		glfwDestroyWindow(mpWindow);
 
