@@ -12,7 +12,7 @@ namespace Palette3D
 		glfwInit();
 
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-		mpWindow = glfwCreateWindow(800, 600, "Vulkan window", nullptr, nullptr);
+		mpWindow = glfwCreateWindow(WIDTH, HEIGHT, "Vulkan window", nullptr, nullptr);
 	}
 
 	void VkRenderSubSystem::initVulkan()
@@ -158,14 +158,25 @@ namespace Palette3D
 		result = vkEnumeratePhysicalDevices(mVkInstance, &deviceCount, physicalDevices.data());
 		assert(result == VK_SUCCESS);
 
-		
+	
 
-		//for now since my computer only has 1 gpu we'll just hard code this in
-		mPhysicalDevice = physicalDevices[0];
+		for (const auto& device : physicalDevices) 
+		{
+			if (checkPhysicalDevice(device)) 
+			{
+				mPhysicalDevice = device;
+				break;
+			}
+		}
 
+		if (mPhysicalDevice == VK_NULL_HANDLE) 
+		{
+			THROW_EXCEPTION("failed to find a suitable physical device", ExceptionType::Failure);
+		}
+	}
 
 	
-	}
+	
 
 	void VkRenderSubSystem::initLogicalDevice()
 	{
@@ -237,12 +248,71 @@ namespace Palette3D
 		
 	}
 
+	void VkRenderSubSystem::initSwapChain()
+	{
+		SwapChainSupportDetails swapChainSupport = querySwapChainSupport(mPhysicalDevice);
+
+		VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.formats);
+		mSwapChainImageFormat = surfaceFormat.format;
+		VkPresentModeKHR presentMode = chooseSwapPresentMode(swapChainSupport.presentModes);
+		VkExtent2D mSwapChainExtent = chooseSwapExtent(swapChainSupport.capabilities);
+
+		U32 imageCount = swapChainSupport.capabilities.minImageCount + 1;
+		if (swapChainSupport.capabilities.maxImageCount > 0 && imageCount > swapChainSupport.capabilities.maxImageCount) {
+			imageCount = swapChainSupport.capabilities.maxImageCount;
+		}
+
+
+		VkSwapchainCreateInfoKHR createInfo = {};
+		createInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
+		createInfo.surface = mSurface;
+		createInfo.minImageCount = imageCount;
+		createInfo.imageFormat = surfaceFormat.format;
+		createInfo.imageColorSpace = surfaceFormat.colorSpace;
+		createInfo.imageExtent = mSwapChainExtent;
+		createInfo.imageArrayLayers = 1;
+		createInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT; //VK_IMAGE_USAGE_TRANSFER_DST_BIT <<for post proccessing later
+
+
+		//this probably won't work on amd cards 
+		createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
+		createInfo.queueFamilyIndexCount = 0; // Optional
+		createInfo.pQueueFamilyIndices = nullptr; // Optional
+
+		createInfo.preTransform = swapChainSupport.capabilities.currentTransform;
+		createInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
+
+		createInfo.presentMode = presentMode;
+		createInfo.clipped = VK_TRUE;
+
+		createInfo.oldSwapchain = VK_NULL_HANDLE;
+		if (vkCreateSwapchainKHR(mLogicalDevice, &createInfo, nullptr, &mSwapChain) != VK_SUCCESS) 
+		{
+			throw std::runtime_error("failed to create swap chain!");
+		}
+
+		vkGetSwapchainImagesKHR(mLogicalDevice, mSwapChain, &imageCount, nullptr);
+		mSwapChainImages.resize(imageCount);
+		vkGetSwapchainImagesKHR(mLogicalDevice, mSwapChain, &imageCount, mSwapChainImages.data());
+	}
+
 	void VkRenderSubSystem::initVkSurface()
 	{
+		
 		if (glfwCreateWindowSurface(mVkInstance, mpWindow, nullptr, &mSurface) != VK_SUCCESS) 
 		{
 			throw std::runtime_error("failed to create window surface!");
 		}
+		//VkBool32 supports = VK_TRUE;
+
+		//also will only work for some computers
+		//vkGetPhysicalDeviceSurfaceSupportKHR(mPhysicalDevice, 0, mSurface, &supports);
+
+		/*if (supports == VK_FALSE)
+		{
+			THROW_EXCEPTION("No surface support", ExceptionType::Failure);
+		}
+		*/
 	}
 
 	void VkRenderSubSystem::bindWindow()
@@ -262,11 +332,13 @@ namespace Palette3D
 		const char** glfwExtensions;
 		glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
 
-		for ( U16 i = 0; i < glfwExtensionCount; i++) {
+		for ( U16 i = 0; i < glfwExtensionCount; i++) 
+		{
 			extensions.push_back(glfwExtensions[i]);
 		}
 
-		if (mEnableValidationLayers) {
+		if (mEnableValidationLayers) 
+		{
 			extensions.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
 		}
 
@@ -275,13 +347,17 @@ namespace Palette3D
 
 
 	// !----------UTILITY FUNCTIONS----------!
-	bool VkRenderSubSystem::checkPhysicalDevice(VkPhysicalDevice &device)
+	bool VkRenderSubSystem::checkPhysicalDevice(VkPhysicalDevice device)
 	{
 
 		VkPhysicalDeviceProperties deviceProperties;
 		VkPhysicalDeviceFeatures deviceFeatures;
 		vkGetPhysicalDeviceProperties(device, &deviceProperties);
 		vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
+
+		//TODO::FINISH THIS
+		//I need to check the device to make sure it has support for everything we need
+		//I already know that my gpu has what we need so I'll fninish this later when needed
 
 		return true;
 	}
@@ -324,6 +400,99 @@ namespace Palette3D
 
 		return true;
 
+	}
+
+	bool VkRenderSubSystem::checkDeviceExtensionSupport(VkPhysicalDevice device)
+	{
+		uint32_t extensionCount;
+		vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
+
+		std::vector<VkExtensionProperties> availableExtensions(extensionCount);
+		vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.data());
+
+		std::set<std::string> requiredExtensions(mDeviceExtensions.begin(), mDeviceExtensions.end());
+
+		for (const auto& extension : availableExtensions) 
+		{
+			requiredExtensions.erase(extension.extensionName);
+		}
+
+		return requiredExtensions.empty();
+	}
+
+	SwapChainSupportDetails VkRenderSubSystem::querySwapChainSupport(VkPhysicalDevice device)
+	{
+		SwapChainSupportDetails details;
+		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, mSurface, &details.capabilities);
+
+		uint32_t formatCount;
+		vkGetPhysicalDeviceSurfaceFormatsKHR(device, mSurface, &formatCount, nullptr);
+
+		if (formatCount != 0) {
+			details.formats.resize(formatCount);
+			vkGetPhysicalDeviceSurfaceFormatsKHR(device, mSurface, &formatCount, details.formats.data());
+		}
+
+
+		uint32_t presentModeCount;
+		vkGetPhysicalDeviceSurfacePresentModesKHR(device, mSurface, &presentModeCount, nullptr);
+
+		if (presentModeCount != 0) 
+		{
+			details.presentModes.resize(presentModeCount);
+			vkGetPhysicalDeviceSurfacePresentModesKHR(device, mSurface, &presentModeCount, details.presentModes.data());
+		}
+		return details;
+	}
+
+	VkSurfaceFormatKHR VkRenderSubSystem::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats)
+	{
+		if (availableFormats.size() == 1 && availableFormats[0].format == VK_FORMAT_UNDEFINED)
+		{
+			return { VK_FORMAT_B8G8R8A8_UNORM, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR };
+		}
+
+
+		for (const auto& availableFormat : availableFormats) 
+		{
+			if (availableFormat.format == VK_FORMAT_B8G8R8A8_UNORM && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) 
+			{
+				return availableFormat;
+			}
+		}
+
+		return availableFormats[0];
+	}
+
+	VkPresentModeKHR VkRenderSubSystem::chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes)
+	{
+		VkPresentModeKHR bestMode = VK_PRESENT_MODE_FIFO_KHR;
+
+		for (const auto& availablePresentMode : availablePresentModes) {
+			if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
+				return availablePresentMode;
+			}
+			else if (availablePresentMode == VK_PRESENT_MODE_IMMEDIATE_KHR) {
+				bestMode = availablePresentMode;
+			}
+		}
+
+		return bestMode;
+	}
+
+	VkExtent2D VkRenderSubSystem::chooseSwapExtent(const VkSurfaceCapabilitiesKHR & capabilities)
+	{
+		if (capabilities.currentExtent.width != std::numeric_limits<U32>::max()) {
+			return capabilities.currentExtent;
+		}
+		else {
+			VkExtent2D actualExtent = { WIDTH, HEIGHT };
+
+			actualExtent.width = std::max(capabilities.minImageExtent.width, std::min(capabilities.maxImageExtent.width, actualExtent.width));
+			actualExtent.height = std::max(capabilities.minImageExtent.height, std::min(capabilities.maxImageExtent.height, actualExtent.height));
+
+			return actualExtent;
+		}
 	}
 
 	VKAPI_ATTR VkBool32 VKAPI_CALL VkRenderSubSystem::debugCallback(
@@ -376,19 +545,22 @@ namespace Palette3D
 
 		choosePhysicalDevice();
 		initLogicalDevice();
+		initSwapChain();
+
+		
 	}
 
 	VkRenderSubSystem::~VkRenderSubSystem()
 	{
 		
 		destroyDebugReportCallbackEXT(mVkInstance, mCallback, nullptr);
+		vkDestroySwapchainKHR(mLogicalDevice, mSwapChain, nullptr);
 		vkDestroyDevice(mLogicalDevice, nullptr);
 		vkDestroySurfaceKHR(mVkInstance, mSurface, nullptr);
 		vkDestroyInstance(mVkInstance, nullptr);
 		glfwDestroyWindow(mpWindow);
 
 
-		while (1) {}
 		glfwTerminate();
 	}
 

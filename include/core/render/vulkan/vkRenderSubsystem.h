@@ -14,11 +14,21 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #include <vector>
 #include <iostream>
 #include <bitset>
+#include <set>
+#include <algorithm>
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
-
+#define	WIDTH 800
+#define HEIGHT 600
 namespace Palette3D 
 {
+
+	struct SwapChainSupportDetails {
+		VkSurfaceCapabilitiesKHR capabilities;
+		std::vector<VkSurfaceFormatKHR> formats;
+		std::vector<VkPresentModeKHR> presentModes;
+	};
+
 	class VkRenderSubSystem 
 	{
 	private:
@@ -30,6 +40,14 @@ namespace Palette3D
 		VkQueue mPresentQueue;
 		VkSurfaceKHR mSurface;
 		VkDebugReportCallbackEXT mCallback;
+		VkSwapchainKHR mSwapChain;
+		
+		std::vector<VkImage> mSwapChainImages;
+		VkFormat mSwapChainImageFormat;
+		VkExtent2D mSwapChainExtent;
+
+
+		//SwapChainSupportDetails mSwapChainDetails;
 
 		const std::vector<const char*> mValidationLayers = {
 			"VK_LAYER_LUNARG_standard_validation"
@@ -54,18 +72,26 @@ namespace Palette3D
 		void choosePhysicalDevice();
 		void initLogicalDevice();
 		
+
+		void initSwapChain();
+
 		void initCommandBuffer();
 		void initVkSurface();
 		void bindWindow();
 
+
+
 		std::vector<const char*> getExtensions();
 
 		// !----------UTILITY FUNCTIONS----------!
-		//checks if the device has the functionality we want
-		//TODO:: FINISH THIS
-		bool checkPhysicalDevice(VkPhysicalDevice &device);
+	
+		bool checkPhysicalDevice(VkPhysicalDevice device);
 		bool checkValidationLayers();
-
+		bool checkDeviceExtensionSupport(VkPhysicalDevice device);
+		SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
+		VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
+		VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
+		VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
 		static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 			VkDebugReportFlagsEXT flags,
