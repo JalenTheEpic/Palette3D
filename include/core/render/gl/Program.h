@@ -13,11 +13,9 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #include <fstream>
 #include <sstream>
 #include <core\math\Math.h>
-namespace Palette3D
-{
+namespace Palette3D {
 
-	class Program
-	{
+	class Program {
 	public:
 		Program(std::string vsloc, std::string fsloc);
 		~Program();

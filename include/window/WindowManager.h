@@ -6,14 +6,10 @@
 #include <core\atomic\Types.h>
 
 #define WINDOW_MANAGER Palette3D::WindowManager::getInstance()
-namespace Palette3D
-{
+namespace Palette3D {
 	//this is only for GLFW right now
 	//In the future every function here must work the same way
-	class WindowManager : public Singleton<WindowManager>
-	{
-
-		
+	class WindowManager : public Singleton<WindowManager> {
 
 	public:
 		WindowManager(I32 width, I32 height);

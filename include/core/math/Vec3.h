@@ -6,10 +6,8 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #ifndef _CORE_MATH_VEC3_
 #define _CORE_MATH_VEC3_
 #include <core\math\Vec2.h>
-namespace Palette3D 
-{
-	class Vec3
-	{
+namespace Palette3D {
+	class Vec3 {
 		/// Member variables.
 	public:
 		F32 x;

@@ -3,11 +3,9 @@
 #include <GL\glew.h>
 #include <core\math\Math.h>
 #include <core\render\gl\Texture.h>
-namespace Palette3D
-{
+namespace Palette3D {
 
-	class UnitSquare
-	{
+	class UnitSquare {
 	public:
 		Vec3 pos = Vec3(0,0,0);
 		GLuint VAO;
@@ -15,8 +13,7 @@ namespace Palette3D
 		GLuint EBO;
 		GlTexture tex = GlTexture("..\\..\\Media\\container.jpg");
 		Matrix4 trans = Matrix4::IDENTITY;
-		UnitSquare() 
-		{
+		UnitSquare() {
 
 			//GLfloat vertices[] = {
 			//	0.5f,  0.5f, 0.0f,  // Top Right
@@ -96,8 +93,7 @@ namespace Palette3D
 
 
 
-		void draw(Program & p)
-		{
+		void draw(Program & p) {
 			p.use();
 			p.setUniform("transform", trans);
 			p.setUniform("model", Matrix4::IDENTITY);
@@ -108,8 +104,7 @@ namespace Palette3D
 			glBindVertexArray(0);
 
 		}
-		~UnitSquare()
-		{
+		~UnitSquare() {
 			glDeleteVertexArrays(1, &VAO);
 			glDeleteBuffers(1, &VBO);
 			glDeleteBuffers(1, &EBO);

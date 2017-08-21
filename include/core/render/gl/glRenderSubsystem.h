@@ -13,18 +13,13 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #include <core\render\gl\P3DGL.h>
 #include <iostream>
 
-namespace Palette3D
-{
-	class GlRenderSubSystem
-	{
+namespace Palette3D {
+	class GlRenderSubSystem {
 	private:
 		
 	public:
 		GlRenderSubSystem();
 		~GlRenderSubSystem();
-
-		
-
 
 	};
 

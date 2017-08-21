@@ -13,29 +13,20 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 
 #include <core\atomic\Types.h>
 #include <templates\Singleton.h>
-namespace Palette3D
-{
+namespace Palette3D {
 
-	class RenderManager : public Singleton<RenderManager>
-	{
+	class RenderManager : public Singleton<RenderManager> {
 	private:
 		void initWindow();
 		void initRenderingSubsystem();
 
 	public:
-		RenderManager()
-		{
+		RenderManager() {
 			initWindow();
 			initRenderingSubsystem();
-			
-
-		
-		
 		}
 		~RenderManager();
 		
-
-
 	};
 
 

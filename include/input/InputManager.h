@@ -9,10 +9,8 @@
 
 #define INPUT_MANAGER Palette3D::InputManager::getInstance()
 
-namespace Palette3D
-{
-	class InputManager : public Singleton<InputManager>
-	{
+namespace Palette3D {
+	class InputManager : public Singleton<InputManager> {
 	public:
 		InputManager();
 		~InputManager() {}

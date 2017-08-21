@@ -5,8 +5,7 @@
 
 #define THROW_EXCEPTION(msg, type) throw Palette3D::Exception(__FILE__, __LINE__, (msg), (type))
 
-namespace Palette3D
-{
+namespace Palette3D {
 
 	enum class ExceptionType {
 		InvalidOperation, 
@@ -22,8 +21,7 @@ namespace Palette3D
 		FileNotFound
 		};
 	/// A general purpose exception class to indicate ssurge-related errors
-	class Exception
-	{
+	class Exception {
 		
 
 		/***** ATTRIBUTES *****/
@@ -49,8 +47,7 @@ namespace Palette3D
 		/***** METHODS *****/
 	public:
 		/// Returns an error string
-		std::string getString()
-		{
+		std::string getString() {
 			std::stringstream ss;
 			ss << "'" << mDescription << "' [" << mFile << "@" << mLine << "]";
 			return ss.str();

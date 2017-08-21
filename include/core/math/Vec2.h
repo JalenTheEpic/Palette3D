@@ -9,10 +9,8 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #include <iostream>
 #include "core/atomic/Types.h"
 
-namespace Palette3D 
-{
-	class Vec2
-	{
+namespace Palette3D {
+	class Vec2 {
 		/// Member variables.
 	public:
 		F32 x;

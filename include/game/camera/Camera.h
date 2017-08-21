@@ -3,11 +3,9 @@
 
 #include <core\math\Math.h>
 
-namespace Palette3D
-{
+namespace Palette3D {
 	/////////////////////////////////////////FINISH ME///////////////////////////////////////////////
-	class Camera 
-	{
+	class Camera {
 		//only public for now
 	public:
 		// Camera Attributes

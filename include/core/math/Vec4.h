@@ -8,10 +8,8 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #include <core\math\Vec3.h>
 #include <iostream>
 
-namespace Palette3D
-{
-	class Vec4
-	{
+namespace Palette3D {
+	class Vec4 {
 		/// Member variables.
 	public:
 		F32 x;

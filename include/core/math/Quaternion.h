@@ -7,10 +7,8 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #define _CORE_MATH_QUATERNION_
 #include <core\math\Vec4.h>
 
-namespace Palette3D
-{
-	class Quaternion
-	{
+namespace Palette3D {
+	class Quaternion {
 		/// Member variables.
 	public:
 		F32 w;

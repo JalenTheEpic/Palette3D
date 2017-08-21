@@ -20,8 +20,7 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #define	WIDTH 800
 #define HEIGHT 600
-namespace Palette3D 
-{
+namespace Palette3D {
 
 	struct SwapChainSupportDetails {
 		VkSurfaceCapabilitiesKHR capabilities;
@@ -39,8 +38,7 @@ namespace Palette3D
 	};
 
 
-	class VkRenderSubSystem 
-	{
+	class VkRenderSubSystem {
 	private:
 		
 		VkInstance mVkInstance;
@@ -131,8 +129,7 @@ namespace Palette3D
 
 
 		//!---------- TEMP FUNCTIONS -------------!
-		void debugRun()
-		{
+		void debugRun(){
 			while (!glfwWindowShouldClose(mpWindow)) {
 				glfwPollEvents();
 			}

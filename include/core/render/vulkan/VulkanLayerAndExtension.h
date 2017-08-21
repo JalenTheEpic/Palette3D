@@ -5,11 +5,9 @@
 #include <core\atomic\Types.h>
 #include <debugging\Exception.h>
 #include <assert.h>
-namespace Palette3D
-{
+namespace Palette3D {
 
-	struct LayerProperties
-	{
+	struct LayerProperties {
 		VkLayerProperties properties;
 		std::vector<VkExtensionProperties> extensions;
 	}; 
@@ -27,9 +25,6 @@ namespace Palette3D
 	// Device based extensions
 	VkResult getDeviceExtensionsProperties(VkPhysicalDevice * gpu);
 
-
-
-	
 
 }
 

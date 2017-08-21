@@ -4,11 +4,9 @@
 #include <core\math\Math.h>
 #include <core\render\gl\Texture.h>
 #include <core\render\gl\Program.h>
-namespace Palette3D
-{
+namespace Palette3D {
 
-	class UnitCube
-	{
+	class UnitCube {
 	public:
 		Vec3 pos = Vec3(0,0,0);
 		GLuint VAO;
@@ -16,8 +14,7 @@ namespace Palette3D
 		GLuint EBO;
 		GlTexture tex = GlTexture("..\\..\\Media\\container.jpg");
 		Matrix4 model = Matrix4::IDENTITY;
-		UnitCube() 
-		{
+		UnitCube() {
 
 			//GLfloat vertices[] = {
 			//	0.5f,  0.5f, 0.0f,  // Top Right
@@ -126,17 +123,12 @@ namespace Palette3D
 		}
 
 
-		void update(F32 dt) 
-		{
-			
+		void update(F32 dt) {
 			model *= Matrix4::rotation(90* dt, 0, 0);
 			model.setPos(pos.x,pos.y,pos.z);
 		}
-		void draw(Program & p)
-		{
+		void draw(Program & p) {
 			p.use();
-			
-			
 			tex.bind();
 			glBindVertexArray(VAO);
 			p.setUniform("model", model);
@@ -144,8 +136,7 @@ namespace Palette3D
 			glBindVertexArray(0);
 
 		}
-		~UnitCube()
-		{
+		~UnitCube() {
 			glDeleteVertexArrays(1, &VAO);
 			glDeleteBuffers(1, &VBO);
 			

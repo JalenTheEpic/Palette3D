@@ -9,15 +9,13 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 
 #include <debugging\Exception.h>
 
-namespace Palette3D
-{
+namespace Palette3D {
 	/// Any class that wished to be a Singleton should derive itself
 	/// from this class.  Warning: the derived class must provide a 
 	/// template specialization of msSingleton (to set it to nullptr) -- 
 	/// usually in their derived_class.cpp file.
 	template <class T>
-	class Singleton
-	{
+	class Singleton {
 		// @@@@@ ATTRIBUTES @@@@@ //
 	protected:
 		/// The pointer to the singleton
@@ -26,24 +24,21 @@ namespace Palette3D
 		// @@@@@ CONSTRUCTOR / DESTRUCTOR @@@@@ //
 	public:
 		/// The default constructor
-		explicit Singleton()
-		{
+		explicit Singleton() {
 			if (mspInstance != nullptr)
 				THROW_EXCEPTION("Singleton already exists!", ExceptionType::InvalidOperation);
 			mspInstance = static_cast<T*>(this);
 		}
 
 		/// The destructor.  
-		virtual ~Singleton()
-		{
+		virtual ~Singleton() {
 			mspInstance = nullptr;
 		}
 
 		// @@@@@ METHODS @@@@@ //
 	public:
 		/// Returns a pointer to the one-and-only singleton (throws a ssurge::Exception if no singleton).
-		static T * getInstance()
-		{
+		static T * getInstance() {
 			if (mspInstance == nullptr)
 				THROW_EXCEPTION("Singleton does not exist!", ExceptionType::NullReference);
 			return mspInstance;

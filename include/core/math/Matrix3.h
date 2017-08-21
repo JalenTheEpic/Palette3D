@@ -9,16 +9,14 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 #include <iostream>
 #include <core/math/Vec3.h>
 
-namespace Palette3D 
-{
+namespace Palette3D {
 	//Here so we can friend Matrix 4
 	class Matrix4;
 
 	/// <summary> 
 	/// Class for Matrix 3.
 	/// </summary> 
-	class Matrix3
-	{
+	class Matrix3{
 	protected:
 
 		F32 mMat[3][3]; //[row] [col]
@@ -30,8 +28,7 @@ namespace Palette3D
 		Matrix3() {}
 
 		/// <param name="m">2D F32 array with values to fill matrix</param> 
-		Matrix3(F32 m[3][3])
-		{
+		Matrix3(F32 m[3][3]){
 			memcpy(mMat, m, 9 * sizeof(F32));
 		}
 
@@ -43,10 +40,8 @@ namespace Palette3D
 		/// <example> 
 		/// This sample shows how to call the Matrix 3 constructor.
 		/// <code>
-		/// class TestClass 
-		/// {
-		///     static int Main() 
-		///     {
+		/// class TestClass {
+		///     static int Main() {
 		///         Palette3D::Matrix3 m(1.f, 2.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 1.f);
 		///			//|1, 2, 0|
 		///			//|0, 1, 0|
@@ -57,8 +52,7 @@ namespace Palette3D
 		/// </example>
 		Matrix3(F32 e00, F32 e01, F32 e02,
 				F32 e10, F32 e11, F32 e12,
-				F32 e20, F32 e21, F32 e22) 
-		{
+				F32 e20, F32 e21, F32 e22) {
 			mMat[0][0] = e00;
 			mMat[0][1] = e01;
 			mMat[0][2] = e02;
@@ -70,30 +64,26 @@ namespace Palette3D
 			mMat[2][2] = e22;
 		}
 		
-		~Matrix3()
-		{
+		~Matrix3(){
 			//delete[] mMat;
 		}
 		
 		/// <summary>
 		/// Returns a pointer to a specified row. This is the const overide.
 		/// </summary>
-		inline const F32 * operator[] (size_t row) const 
-		{
+		inline const F32 * operator[] (size_t row) const {
 			return mMat[row];
 		}
 
 		/// <summary>
 		/// Returns a pointer to a specified row. 
 		/// </summary>
-		inline  F32 * operator[] (size_t row) 
-		{
+		inline  F32 * operator[] (size_t row) {
 			return mMat[row];
 		}
 
 
-		inline void operator= (const Matrix3& other) 
-		{
+		inline void operator= (const Matrix3& other) {
 			memcpy(mMat, other.mMat, 9*sizeof(F32));
 		}
 

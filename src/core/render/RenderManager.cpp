@@ -5,8 +5,7 @@ namespace Palette3D
 	template<> RenderManager * Singleton<RenderManager>::mspInstance = nullptr;
 
 
-	void RenderManager::initWindow()
-	{
+	void RenderManager::initWindow() {
 #ifdef P3DVULKAN
 
 #endif // P3DVULKAN
@@ -16,8 +15,7 @@ namespace Palette3D
 #endif // P3DOPENGL
 	}
 
-	void RenderManager::initRenderingSubsystem()
-	{
+	void RenderManager::initRenderingSubsystem() {
 #ifdef P3DVULKAN
 
 #endif // P3DVULKAN

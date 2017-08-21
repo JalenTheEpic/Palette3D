@@ -1,33 +1,27 @@
 #include <core\render\vulkan\vkRenderSubsystem.h>
 
 
-namespace Palette3D
-{
+namespace Palette3D {
 
 
 	// !----------INIT FUNCTIONS----------!
 
-	void VkRenderSubSystem::initWindow()
-	{
+	void VkRenderSubSystem::initWindow() {
 		glfwInit();
 
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 		mpWindow = glfwCreateWindow(WIDTH, HEIGHT, "Vulkan window", nullptr, nullptr);
 	}
 
-	void VkRenderSubSystem::initVulkan()
-	{
+	void VkRenderSubSystem::initVulkan() {
 
 
 	}
 
-	void VkRenderSubSystem::initVkInstance()
-	{
+	void VkRenderSubSystem::initVkInstance() {
 
-		if (mEnableValidationLayers)
-		{
-			if (!checkValidationLayers())
-			{
+		if (mEnableValidationLayers) {
+			if (!checkValidationLayers()) {
 
 				THROW_EXCEPTION("One or more validation layers not supported on machine. \n"
 					"Install newest lunarSDK for validation layers please ", ExceptionType::ArgumentException);
@@ -47,22 +41,22 @@ namespace Palette3D
 		appInfo.pEngineName = "Palette3d";
 		appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
 		appInfo.apiVersion = VK_API_VERSION_1_0;
-/*
-#if NDEBUG
+		/*
+		#if NDEBUG
 
-#else
+		#else
 
-		U32 extensionCount = 0;
-		vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
-		std::vector<VkExtensionProperties> ext(extensionCount);
-		vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, ext.data());
-		std::cout << "available extensions:" << std::endl;
+				U32 extensionCount = 0;
+				vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+				std::vector<VkExtensionProperties> ext(extensionCount);
+				vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, ext.data());
+				std::cout << "available extensions:" << std::endl;
 
-		for (const auto& extension : ext) {
-			std::cout << "\t" << extension.extensionName << std::endl;
-		}
-#endif
-*/
+				for (const auto& extension : ext) {
+					std::cout << "\t" << extension.extensionName << std::endl;
+				}
+		#endif
+		*/
 
 		//Creation info. 
 		//needed to init the vkInstance
@@ -95,8 +89,7 @@ namespace Palette3D
 
 		//Will create the vk instance and store it in the vk instance pointer provided as the 3rd arg
 		//2nd arg is null because we are currently not doing our own memory allocation
-		switch (vkCreateInstance(&createInfo, nullptr, &mVkInstance)) //change this to use assertions?
-		{
+		switch (vkCreateInstance(&createInfo, nullptr, &mVkInstance)) {
 		case VK_ERROR_OUT_OF_HOST_MEMORY:
 			THROW_EXCEPTION("Error: Out of host memory", ExceptionType::OutOfMemory);
 			break;
@@ -127,8 +120,7 @@ namespace Palette3D
 
 	}
 
-	void VkRenderSubSystem::initDebugCallback()
-	{
+	void VkRenderSubSystem::initDebugCallback() {
 		if (!mEnableValidationLayers) return;
 
 
@@ -137,16 +129,14 @@ namespace Palette3D
 		createInfo.flags = VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT | VK_DEBUG_REPORT_INFORMATION_BIT_EXT;
 		createInfo.pfnCallback = debugCallback;
 
-		if (createDebugReportCallbackEXT(mVkInstance, &createInfo, nullptr, &mCallback) != VK_SUCCESS) 
-		{
+		if (createDebugReportCallbackEXT(mVkInstance, &createInfo, nullptr, &mCallback) != VK_SUCCESS){
 
 			THROW_EXCEPTION("failed to set up debug callback!", ExceptionType::Failure);
-			
+
 		}
 	}
 
-	void VkRenderSubSystem::choosePhysicalDevice()
-	{
+	void VkRenderSubSystem::choosePhysicalDevice(){
 		//see how many vulkan supported devices we have
 		U32 deviceCount = 0;
 		VkResult result = vkEnumeratePhysicalDevices(mVkInstance, &deviceCount, nullptr);
@@ -158,30 +148,26 @@ namespace Palette3D
 		result = vkEnumeratePhysicalDevices(mVkInstance, &deviceCount, physicalDevices.data());
 		assert(result == VK_SUCCESS);
 
-	
 
-		for (const auto& device : physicalDevices) 
-		{
-			if (checkPhysicalDevice(device)) 
-			{
+
+		for (const auto& device : physicalDevices){
+			if (checkPhysicalDevice(device)){
 				mPhysicalDevice = device;
 				break;
 			}
 		}
 
-		if (mPhysicalDevice == VK_NULL_HANDLE) 
-		{
+		if (mPhysicalDevice == VK_NULL_HANDLE){
 			THROW_EXCEPTION("failed to find a suitable physical device", ExceptionType::Failure);
 		}
 	}
 
-	
-	
 
-	void VkRenderSubSystem::initLogicalDevice()
-	{
+
+
+	void VkRenderSubSystem::initLogicalDevice(){
 #pragma region Queue_Create
-		
+
 		//Split into a function when more queues will be used
 		//currently only enables the grapics queue
 		U32 queueFamilyPropertyCount = 0;
@@ -191,17 +177,15 @@ namespace Palette3D
 
 		std::vector<VkQueueFamilyProperties> queueFamilyProps(queueFamilyPropertyCount);
 		vkGetPhysicalDeviceQueueFamilyProperties(mPhysicalDevice, &queueFamilyPropertyCount, queueFamilyProps.data());
-		
+
 		U16 graphicsQueueIndex = 0;
-		for (auto queue: queueFamilyProps)
-		{	
-			if (queue.queueFlags & VK_QUEUE_GRAPHICS_BIT)
-			{
+		for (auto queue : queueFamilyProps){
+			if (queue.queueFlags & VK_QUEUE_GRAPHICS_BIT){
 				break;
 			}
 			graphicsQueueIndex++;
 			if (graphicsQueueIndex > queueFamilyPropertyCount)
-				THROW_EXCEPTION("NO GRAPHICS QUEUE FOUND",ExceptionType::IndexOutOfRange);
+				THROW_EXCEPTION("NO GRAPHICS QUEUE FOUND", ExceptionType::IndexOutOfRange);
 		}
 		F32 priority = 1.f;
 
@@ -214,7 +198,7 @@ namespace Palette3D
 		queueCreateInfo.queueCount = 1;
 		//we need to make a present queue later but for now since my card
 		//has it all in the same queue family I'm not gonna do all that
-		
+
 		queueCreateInfo.pQueuePriorities = &priority;
 #pragma endregion
 
@@ -226,7 +210,7 @@ namespace Palette3D
 #pragma endregion
 
 		VkDeviceCreateInfo deviceCreateInfo = {};
-		
+
 		//deviceCreateInfo.enabledLayerCount = 0;
 		deviceCreateInfo.flags = 0;
 		deviceCreateInfo.pEnabledFeatures = &deviceFeatures; //ptr to a VkPhysicalDeviceFeatures struct
@@ -237,19 +221,18 @@ namespace Palette3D
 		deviceCreateInfo.pQueueCreateInfos = &queueCreateInfo;
 		deviceCreateInfo.queueCreateInfoCount = 1;
 		deviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-	
 
 
-		 
-		 VkResult result = vkCreateDevice(mPhysicalDevice, &deviceCreateInfo,nullptr, &mLogicalDevice);
-		 assert(result == VK_SUCCESS);
 
-		 vkGetDeviceQueue(mLogicalDevice,0,0,&mGraphicsQueue);
-		
+
+		VkResult result = vkCreateDevice(mPhysicalDevice, &deviceCreateInfo, nullptr, &mLogicalDevice);
+		assert(result == VK_SUCCESS);
+
+		vkGetDeviceQueue(mLogicalDevice, 0, 0, &mGraphicsQueue);
+
 	}
 
-	void VkRenderSubSystem::initSwapChain()
-	{
+	void VkRenderSubSystem::initSwapChain(){
 		SwapChainSupportDetails swapChainSupport = querySwapChainSupport(mPhysicalDevice);
 
 		VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.formats);
@@ -286,8 +269,7 @@ namespace Palette3D
 		createInfo.clipped = VK_TRUE;
 
 		createInfo.oldSwapchain = VK_NULL_HANDLE;
-		if (vkCreateSwapchainKHR(mLogicalDevice, &createInfo, nullptr, &mSwapChain) != VK_SUCCESS) 
-		{
+		if (vkCreateSwapchainKHR(mLogicalDevice, &createInfo, nullptr, &mSwapChain) != VK_SUCCESS){
 			throw std::runtime_error("failed to create swap chain!");
 		}
 
@@ -296,11 +278,9 @@ namespace Palette3D
 		vkGetSwapchainImagesKHR(mLogicalDevice, mSwapChain, &imageCount, mSwapChainImages.data());
 	}
 
-	void VkRenderSubSystem::initVkSurface()
-	{
-		
-		if (glfwCreateWindowSurface(mVkInstance, mpWindow, nullptr, &mSurface) != VK_SUCCESS) 
-		{
+	void VkRenderSubSystem::initVkSurface(){
+
+		if (glfwCreateWindowSurface(mVkInstance, mpWindow, nullptr, &mSurface) != VK_SUCCESS){
 			throw std::runtime_error("failed to create window surface!");
 		}
 		//VkBool32 supports = VK_TRUE;
@@ -315,30 +295,23 @@ namespace Palette3D
 		*/
 	}
 
-	void VkRenderSubSystem::bindWindow()
-	{
-
-
-	
+	void VkRenderSubSystem::bindWindow(){
 
 
 	}
 
-	std::vector<const char*> VkRenderSubSystem::getExtensions()
-	{
+	std::vector<const char*> VkRenderSubSystem::getExtensions(){
 		std::vector<const char*> extensions;
 
 		U32 glfwExtensionCount = 0;
 		const char** glfwExtensions;
 		glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
 
-		for ( U16 i = 0; i < glfwExtensionCount; i++) 
-		{
+		for (U16 i = 0; i < glfwExtensionCount; i++) {
 			extensions.push_back(glfwExtensions[i]);
 		}
 
-		if (mEnableValidationLayers) 
-		{
+		if (mEnableValidationLayers) {
 			extensions.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
 		}
 
@@ -347,8 +320,7 @@ namespace Palette3D
 
 
 	// !----------UTILITY FUNCTIONS----------!
-	bool VkRenderSubSystem::checkPhysicalDevice(VkPhysicalDevice device)
-	{
+	bool VkRenderSubSystem::checkPhysicalDevice(VkPhysicalDevice device) {
 
 		VkPhysicalDeviceProperties deviceProperties;
 		VkPhysicalDeviceFeatures deviceFeatures;
@@ -362,8 +334,7 @@ namespace Palette3D
 		return true;
 	}
 
-	bool VkRenderSubSystem::checkValidationLayers()
-	{
+	bool VkRenderSubSystem::checkValidationLayers() {
 
 		U32 layerCount;
 		vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
@@ -371,29 +342,24 @@ namespace Palette3D
 		std::vector<VkLayerProperties> availableLayers(layerCount);
 		vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
 		/*
-		for (auto layer : availableLayers)
-		{
+		for (auto layer : availableLayers){
 			std::cout << layer.layerName <<std::endl;
 
 		}
 		*/
-		
 
-		for (const char* layerName : mValidationLayers)
-		{
+
+		for (const char* layerName : mValidationLayers) {
 			bool layerFound = false;
 
-			for (const auto& layerProperties : availableLayers) 
-			{
-				if (strcmp(layerName, layerProperties.layerName) == 0) 
-				{
+			for (const auto& layerProperties : availableLayers) {
+				if (strcmp(layerName, layerProperties.layerName) == 0) {
 					layerFound = true;
 					break;
 				}
 			}
 
-			if (!layerFound) 
-			{
+			if (!layerFound) {
 				return false;
 			}
 		}
@@ -402,8 +368,7 @@ namespace Palette3D
 
 	}
 
-	bool VkRenderSubSystem::checkDeviceExtensionSupport(VkPhysicalDevice device)
-	{
+	bool VkRenderSubSystem::checkDeviceExtensionSupport(VkPhysicalDevice device) {
 		uint32_t extensionCount;
 		vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
 
@@ -412,16 +377,14 @@ namespace Palette3D
 
 		std::set<std::string> requiredExtensions(mDeviceExtensions.begin(), mDeviceExtensions.end());
 
-		for (const auto& extension : availableExtensions) 
-		{
+		for (const auto& extension : availableExtensions) {
 			requiredExtensions.erase(extension.extensionName);
 		}
 
 		return requiredExtensions.empty();
 	}
 
-	SwapChainSupportDetails VkRenderSubSystem::querySwapChainSupport(VkPhysicalDevice device)
-	{
+	SwapChainSupportDetails VkRenderSubSystem::querySwapChainSupport(VkPhysicalDevice device) {
 		SwapChainSupportDetails details;
 		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, mSurface, &details.capabilities);
 
@@ -437,26 +400,22 @@ namespace Palette3D
 		uint32_t presentModeCount;
 		vkGetPhysicalDeviceSurfacePresentModesKHR(device, mSurface, &presentModeCount, nullptr);
 
-		if (presentModeCount != 0) 
-		{
+		if (presentModeCount != 0) {
 			details.presentModes.resize(presentModeCount);
 			vkGetPhysicalDeviceSurfacePresentModesKHR(device, mSurface, &presentModeCount, details.presentModes.data());
 		}
 		return details;
 	}
 
-	VkSurfaceFormatKHR VkRenderSubSystem::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats)
-	{
-		if (availableFormats.size() == 1 && availableFormats[0].format == VK_FORMAT_UNDEFINED)
-		{
+	VkSurfaceFormatKHR VkRenderSubSystem::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) {
+
+		if (availableFormats.size() == 1 && availableFormats[0].format == VK_FORMAT_UNDEFINED) {
 			return { VK_FORMAT_B8G8R8A8_UNORM, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR };
 		}
 
 
-		for (const auto& availableFormat : availableFormats) 
-		{
-			if (availableFormat.format == VK_FORMAT_B8G8R8A8_UNORM && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) 
-			{
+		for (const auto& availableFormat : availableFormats) {
+			if (availableFormat.format == VK_FORMAT_B8G8R8A8_UNORM && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
 				return availableFormat;
 			}
 		}
@@ -464,8 +423,7 @@ namespace Palette3D
 		return availableFormats[0];
 	}
 
-	VkPresentModeKHR VkRenderSubSystem::chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes)
-	{
+	VkPresentModeKHR VkRenderSubSystem::chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) {
 		VkPresentModeKHR bestMode = VK_PRESENT_MODE_FIFO_KHR;
 
 		for (const auto& availablePresentMode : availablePresentModes) {
@@ -480,8 +438,7 @@ namespace Palette3D
 		return bestMode;
 	}
 
-	VkExtent2D VkRenderSubSystem::chooseSwapExtent(const VkSurfaceCapabilitiesKHR & capabilities)
-	{
+	VkExtent2D VkRenderSubSystem::chooseSwapExtent(const VkSurfaceCapabilitiesKHR & capabilities) {
 		if (capabilities.currentExtent.width != std::numeric_limits<U32>::max()) {
 			return capabilities.currentExtent;
 		}
@@ -496,21 +453,19 @@ namespace Palette3D
 	}
 
 	VKAPI_ATTR VkBool32 VKAPI_CALL VkRenderSubSystem::debugCallback(
-		VkDebugReportFlagsEXT flags, 
-		VkDebugReportObjectTypeEXT objType, 
-		uint64_t obj, 
-		size_t location, 
-		int32_t code, 
-		const char * layerPrefix, 
-		const char * msg, 
-		void * userData)
-	{
+		VkDebugReportFlagsEXT flags,
+		VkDebugReportObjectTypeEXT objType,
+		uint64_t obj,
+		size_t location,
+		int32_t code,
+		const char * layerPrefix,
+		const char * msg,
+		void * userData) {
 		std::cerr << "validation layer: " << msg << std::endl;
 		return VK_FALSE;
 	}
 
-	VkResult VkRenderSubSystem::createDebugReportCallbackEXT(VkInstance instance, const VkDebugReportCallbackCreateInfoEXT * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkDebugReportCallbackEXT * pCallback)
-	{
+	VkResult VkRenderSubSystem::createDebugReportCallbackEXT(VkInstance instance, const VkDebugReportCallbackCreateInfoEXT * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkDebugReportCallbackEXT * pCallback) {
 		auto func = (PFN_vkCreateDebugReportCallbackEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugReportCallbackEXT");
 		if (func != nullptr) {
 			return func(instance, pCreateInfo, pAllocator, pCallback);
@@ -534,12 +489,11 @@ namespace Palette3D
 
 
 	// !----------CONSTRUCTORS/DESTRUCTORS----------!
-	VkRenderSubSystem::VkRenderSubSystem()
-	{
+	VkRenderSubSystem::VkRenderSubSystem() {
 		initWindow();
 		initVkInstance();
 		initDebugCallback();
-		
+
 		initVkSurface();
 		bindWindow();
 
@@ -547,12 +501,11 @@ namespace Palette3D
 		initLogicalDevice();
 		initSwapChain();
 
-		
+
 	}
 
-	VkRenderSubSystem::~VkRenderSubSystem()
-	{
-		
+	VkRenderSubSystem::~VkRenderSubSystem() {
+
 		destroyDebugReportCallbackEXT(mVkInstance, mCallback, nullptr);
 		vkDestroySwapchainKHR(mLogicalDevice, mSwapChain, nullptr);
 		vkDestroyDevice(mLogicalDevice, nullptr);

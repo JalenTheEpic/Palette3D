@@ -6,19 +6,15 @@
 #include <input\InputManager.h>
 
 
-namespace Palette3D
-{
-	GlRenderSubSystem::GlRenderSubSystem()
-	{
+namespace Palette3D {
+	GlRenderSubSystem::GlRenderSubSystem() {
 		WindowManager *  w = new WindowManager(800,600);
 		InputManager * im = new InputManager();
-		if (!im)
-			std::cout << "Error" << std::endl;
+		if (!im) std::cout << "Error" << std::endl;
 		
 		//This will allow us to use experimental GL features
 		glewExperimental = GL_TRUE;
-		if (glewInit() != GLEW_OK)
-		{
+		if (glewInit() != GLEW_OK) {
 			//error
 		}
 
@@ -64,8 +60,7 @@ namespace Palette3D
 
 		F32 dt = 0, prevTime= 0, currentTime = 0;
 		
-		while (!glfwWindowShouldClose(WINDOW_MANAGER->getWindowPtr()))
-		{
+		while (!glfwWindowShouldClose(WINDOW_MANAGER->getWindowPtr())) {
 			
 			// Calculate delta time
 			currentTime = glfwGetTime();
@@ -75,17 +70,10 @@ namespace Palette3D
 			//Proccesses events in queue
 			INPUT_MANAGER->update();
 
-			
-		
-
-
 			c.update(dt);
 		
 			prog.setUniform("view", c.getView());
-			//std::cout << cube.pos << std::endl;
-
-
-			
+			//std::cout << cube.pos << std::endl;		
 			
 			//Draw phase
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -110,13 +98,11 @@ namespace Palette3D
 		
 		}
 
-		
-
+	
 		
 	}
 
-	GlRenderSubSystem::~GlRenderSubSystem()
-	{
+	GlRenderSubSystem::~GlRenderSubSystem() {
 		
 		glfwTerminate();
 	}

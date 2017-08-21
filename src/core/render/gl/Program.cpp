@@ -1,13 +1,11 @@
 #include <core\render\gl\Program.h>
 
-namespace Palette3D
-{
+namespace Palette3D {
 
 	
 	const Program * Program::mspActive = nullptr;
 
-	Program::Program(std::string vsloc, std::string fsloc)
-	{
+	Program::Program(std::string vsloc, std::string fsloc) {
 		
 		
 		std::string vSource, fSource; // will store code here
@@ -16,8 +14,7 @@ namespace Palette3D
 		vsFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		fsFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		
-		try
-		{
+		try {
 			vsFile.open(vsloc);
 			fsFile.open(fsloc);
 
@@ -32,8 +29,7 @@ namespace Palette3D
 			vSource = vShaderStream.str();
 			fSource = fShaderStream.str();
 		}
-		catch (std::ifstream::failure e)
-		{
+		catch (std::ifstream::failure e) {
 			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ\n" << e.what()<< std::endl;
 		}
 		
@@ -50,8 +46,7 @@ namespace Palette3D
 		GLint success;
 		GLchar log[512];
 		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
+		if (!success) {
 			glGetShaderInfoLog(vertexShader, 512, NULL, log);
 			std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << log << std::endl;
 		}
@@ -62,8 +57,7 @@ namespace Palette3D
 		glShaderSource(fragmentShader, 1, &fs, NULL);
 		glCompileShader(fragmentShader);
 		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
+		if (!success) {
 			glGetShaderInfoLog(fragmentShader, 512, NULL, log);
 			std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << log << std::endl;
 		}
@@ -86,13 +80,11 @@ namespace Palette3D
 		glDeleteShader(fragmentShader);
 	}
 
-	Program::~Program()
-	{
+	Program::~Program() {
 		glDeleteProgram(mProg);
 	}
 
-	void Program::use() const
-	{
+	void Program::use() const {
 		
 		glUseProgram(0);
 		glUseProgram(mProg);
@@ -100,21 +92,17 @@ namespace Palette3D
 		
 	}
 
-	void Program::addUniform(GLchar * name)
-	{
+	void Program::addUniform(GLchar * name) {
 		mUniforms[name] = glGetUniformLocation(mProg, name);
 	}
 
-	void Program::setUniform(GLchar * name, Matrix3 m)
-	{
+	void Program::setUniform(GLchar * name, Matrix3 m) {
 
 		check();
 		GLfloat mgl[9];
 		size_t x = 0;
-		for (size_t i = 0; i < 3; i++)
-		{
-			for (size_t j = 0; j < 3; j++)
-			{
+		for (size_t i = 0; i < 3; i++) {
+			for (size_t j = 0; j < 3; j++) {
 				mgl[x] = m[j][i];
 				x++;
 			}
@@ -122,8 +110,7 @@ namespace Palette3D
 		glUniformMatrix3fv(mUniforms[name], 1, GL_FALSE, mgl);
 	}
 
-	void Program::setUniform(GLchar * name, Matrix4 m)
-	{
+	void Program::setUniform(GLchar * name, Matrix4 m) {
 		check();
 		glUniformMatrix4fv(mUniforms[name], 1, GL_FALSE, m.mMat);
 

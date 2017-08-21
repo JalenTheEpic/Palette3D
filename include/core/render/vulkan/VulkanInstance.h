@@ -4,8 +4,7 @@
 #include <core/atomic/Types.h>
 #include <debugging\Exception.h>
 #include <GLFW\glfw3.h>
-namespace Palette3D
-{
+namespace Palette3D {
 
 	VkInstance * initVulkanInstance();
 
