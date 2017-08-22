@@ -16,8 +16,7 @@ Licensed under the terms of the MIT License (see LICENSE.txt)
 
 namespace Palette3D{
 	
-	class Matrix4
-	{
+	class Matrix4 {
 	
 		
 		

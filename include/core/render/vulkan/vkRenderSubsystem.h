@@ -29,8 +29,8 @@ namespace Palette3D {
 	};
 
 	struct QueueFamilyIndices {
-		int graphicsFamily = -1;
-		int presentFamily = -1;
+		I32 graphicsFamily = -1;
+		I32 presentFamily = -1;
 
 		bool isComplete() {
 			return graphicsFamily >= 0 && presentFamily >= 0;
@@ -104,9 +104,9 @@ namespace Palette3D {
 		static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 			VkDebugReportFlagsEXT flags,
 			VkDebugReportObjectTypeEXT objType,
-			uint64_t obj,
+			U64 obj,
 			size_t location,
-			int32_t code,
+			I32 code,
 			const char* layerPrefix,
 			const char* msg,
 			void* userData);
